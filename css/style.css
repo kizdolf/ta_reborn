@@ -165,7 +165,8 @@ body{
 .div_grid{
 	width: 220px;
 	height: 220px;
-	float: left;
+	position: absolute;
+	/* top: 5px; */
 	margin: 20px;
 }
 
@@ -205,6 +206,9 @@ body{
 	    -ms-transform: rotate(90deg);
 	     -o-transform: rotate(90deg);
 	        transform: rotate(90deg);*/
+}
+.div_grid a:hover > .huge-hr{
+	border-radius: 20% 10% 20% 10%;
 }
 
 .div_grid a:hover {
@@ -329,7 +333,7 @@ body{
 	position: absolute;
 	z-index: 999;
 	margin-top: -31px;
-	background: rgba(255, 255, 255, 0.5);
+	/*background: rgba(255, 255, 255, 0.5);*/
 	/* background: wheat; */
 }
 
@@ -339,4 +343,67 @@ body{
 	min-width: 350px;
 	margin: auto;
 	width: 50vw;
+}
+
+.prev_vid{
+	display: block;
+	float: left;
+	margin: 0;
+	padding: 0;
+	margin-left: -60px;
+	cursor: pointer;
+	margin-top: 12%;
+}
+
+.next_vid{
+	cursor: pointer;
+	display: block;
+	float: right;
+	margin: 0;
+	padding: 0;
+	margin-right: -60px;
+	-webkit-transform: rotate(180deg);
+	   -moz-transform: rotate(180deg);
+	    -ms-transform: rotate(180deg);
+	     -o-transform: rotate(180deg);
+	        transform: rotate(180deg);
+	margin-top: 12%;
+}
+
+.header_titre{
+	position: absolute;
+	margin-left: 250px;
+	margin-top: 20px;
+}
+
+.header_titre h2{
+	text-align: left;
+	font-family: 'Droid Sans', sans-serif;
+	text-transform: uppercase;
+}
+
+.header_titre h3{
+	text-align: right;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.block_titre{
+}
+
+.block_text{
+	position: relative;
+	top: 165px;
+	left: 250px;
+	width: 50vw;
+}
+
+.huge-hr{
+	-moz-transition: all .5s;
+	-webkit-transition: all .5s; 
+	-o-transition: all .5s; 
+	transition: all .5s;
+	height: 15px;
+	/* border: 5px !important; */
+	background: rgba(97, 97, 97, 0.76);
+	border-radius: 10% 20% 10% 20%;
 }

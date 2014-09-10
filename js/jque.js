@@ -16,9 +16,6 @@ $('#send_msg').click(function(){
 
 $(document).on('click', "#send_msg", function(){
 	$c  = $("recaptcha_resposonse_field");
-	console.log("test");
-	console.log($c);
-
 });
 
 $('.sous_menu').hide();
@@ -68,7 +65,6 @@ $('.menu_ul li a').click(function(){
 
 	$(window).scroll(function(){
 		var st = $(window).scrollTop();
-		console.log(st);
 		$("#header img").css("-webkit-transform", "translateY(" + (st/2) + "px)");
 	});
 

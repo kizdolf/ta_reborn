@@ -25,6 +25,14 @@ angular.module('myApp.controllers', [])
 			$scope.weekly.video = data.data;
 			$scope.weekly.video.frame = tools.iframe($scope.weekly.video.url);
 			$scope.weekly.video.text = $sce.trustAsHtml($scope.weekly.video.text);
+		})
+		.then(function(){
+			console.log($scope.weekly.video);
+			var ids =  $scope.weekly.video.id_artiste + "," +  $scope.weekly.video.id_quartier;
+			getData.related('video', 'id', ids).then(function(data){
+				$scope.weekly.artiste = data.data.artiste;
+				$scope.weekly.quartier = data.data.quartier;
+			});
 		});
 	}
 

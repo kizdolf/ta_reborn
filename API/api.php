@@ -47,8 +47,11 @@ Helpers
 				print_r(json_encode($related));
 				break;
 			case 'video':
-				$quartier = $bdd->get_one_quartier($type_id, $id);
-				$artiste = $bdd->get_one_artiste($type_id, $id);
+				$ids = explode(",", $id);
+				$id_q = $ids[1];
+				$id_a = $ids[0];
+				$quartier = $bdd->get_one_quartier($type_id, $id_q);
+				$artiste = $bdd->get_one_artiste($type_id, $id_a);
 				$related = array("quartier" => $quartier, "artiste" => $artiste);
 				print_r(json_encode($related));
 				break;

@@ -1,0 +1,11 @@
+
+Modifier fichier de conf : admin/conf/bdd_conf.json, partie "init"
+
+Modifier 'base' angualrjs: index.php > head > base
+
+Suivre l'install de piwik : components/piwik/piwik/index.php
+
+Remettre le bon script de tracking : index.php > head > script < body
+
+importer ta.sql dans phpmyadmin
+

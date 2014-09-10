@@ -1,0 +1,13 @@
+<div class="container">
+	<div ng-repeat="quartier in quartiers">
+		<div class="div_grid" ng-if="quartier.nb_videos > 0">
+			<a href="#/quartiers/{{ quartier.name }}" >{{ quartier.name }}<div class="arrow-right"></div></a>
+		<span ng-if="quartier.path_vignette == ''">
+			<img src="{{quartier.imgs[0]}}" class="img_grid">
+		</span>
+		<span ng-if="quartier.path_vignette != ''">
+			<img src="{{quartier.path_vignette}}" class="img_grid">
+		</span>
+		</div>
+	</div>
+</div>

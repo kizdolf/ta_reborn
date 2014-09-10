@@ -1,0 +1,12 @@
+<div>
+	<div ng-repeat="art in artistes" class="div_grid">
+		<h3>{{art.style.name}}</h3>
+		<a href="#/artistes/{{ art.artiste.name }}" >{{ art.artiste.name }}<div class="arrow-right"></div></a>
+		<span ng-if="art.artiste.path_vignette == ''">
+			<img src="img/badges/weekly.png" class="img_grid">
+		</span>
+		<span ng-if="art.artiste.path_vignette != ''">
+			<img src="{{art.artiste.path_vignette}}" class="img_grid">
+		</span>
+	</div>
+</div>

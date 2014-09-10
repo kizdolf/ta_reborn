@@ -1,0 +1,20 @@
+<div ng-controller="contactCtrl" style="height:100%;">
+<div id="wrapper">
+	<h1>contact US</h1>
+	<div ng-bind-html="text"></div>
+	<div id="float_form" class="input-group input-group-lg">
+		<span class="input-group-addon">@</span>
+		<input ng-model="msg.email" type="text" name="mail"  class="form-control" placeholder="Votre mail, qu'on puisse vous répondre!">
+	</div>
+	<div id="float_form" class="input-group input-group-lg">
+		<span class="input-group-addon">Sujet</span>
+		<input ng-model="msg.subject" type="text" name="subject" class="form-control" placeholder="sujet du message">
+	</div><hr>
+		<textarea ng-model="msg.txt" name="text"  rows="15" cols="40" class="form-control"></textarea>
+		<div id="message">{{message}}</div>
+		<div id="captcha" ng-model="msg.captcha"></div>
+		<button class="btn btn-success btn_send" ng-click="send_msg(msg)">{{ txt_btn }}</button>
+	</div>
+</div>
+
+</div>

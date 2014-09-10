@@ -1,0 +1,8 @@
+<div class="container">
+	{{quartier}}
+	<ul>
+		<li ng-repeat="video in quartier.videos">
+			<span ng-bind-html="video.frame"></span>
+		</li>
+	</ul>
+</div>

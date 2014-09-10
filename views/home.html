@@ -1,0 +1,29 @@
+<div ng-controller="headCtrl" style="height:100%;">
+	<div class='team-text'>
+		<div ng-bind-html="weekly.video.text"></div>
+		<img src="img/badges/team.png" alt="logo team" class='team_badge badge-g'>
+	</div>
+	<img src="img/badges/weekly.png" alt="logo weekly" class='weekly_badge badge-g'>
+	<span ng-click="change_video('prev')" class="prev_vid"><img src="img/headers/arr.jpg"></span>
+	<div id="weekly_video" ng-bind-html="weekly.video.frame"></div>
+	<span ng-click="change_video('next')" class="next_vid"><img src="img/headers/arr.jpg"></span>
+	<div class="container container-fluid" id="wrapper">
+		<h2>{{ weekly.artiste.name }}</h2>
+		<h3>{{weekly.video.name}}</h3>
+		<div class="div_grid" >
+			<a href="#/artistes/{{ weekly.artiste.name }}" ><div class="arrow-right"></div></a>
+			<span ng-if="weekly.artiste.path_vignette == ''">
+				<img src="img/badges/weekly.png" class="img_grid">
+			</span>
+			<span ng-if="weekly.artiste.path_vignette != ''">
+				<img src="{{weekly.artiste.path_vignette}}" class="img_grid">
+			</span>
+		</div>
+		<h3><a href="#/quartiers/{{weekly.quartier.name}}">{{weekly.quartier.name}}</a></h3>
+		<span ng-if="weekly.video.category == 1 " id="badge_cat">
+			<img src="img/badges/visiteur.jpg">
+		</span>
+		<div ng-bind-html="weekly.artiste.text"></div>
+	</div>
+
+</div>

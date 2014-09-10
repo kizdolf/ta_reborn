@@ -1,0 +1,77 @@
+{
+	"init":{
+		"server": "127.0.0.1",
+		"user": "root",
+		"password": "root",
+		"dbname": "ta",
+		"port" : "3306"
+	},
+	"querys":{
+		"new":{
+			"quartier" : "INSERT INTO `quartier`(`name`, `path_pics`, `text`, `nb_videos`, `url`, `path_vignette`) VALUES (:name, :path, :text, 0, :url, :path_vignette) "
+			,"artiste" : "INSERT INTO `artiste`(`name`, `path_pics`, `text`, `url`, `itw`, `path_vignette`, `id_style`) VALUES (:name, :path, :text, :url, :itw, :path_vignette, :id_style)"
+			,"video" : "INSERT INTO `video`(`name`, `url`, `id_artiste`, `id_quartier`, `text`, `weekly`, `category`) VALUES (:name, :url, :id_artiste, :id_quartier, :text, :weekly, :category)"
+			,"user" : "INSERT INTO `user`(`ta_login`, `ta_password`, `mail`, `rights`) VALUES (?, ?, ?, ?)"
+			,"style" : "INSERT INTO `style` (`name`) VALUES (?)"
+			,"partner" : "INSERT INTO `partner` (`name`, `desc`, `url`, `path_logo`) VALUES (?, ?, ?, ?)"
+			,"draft" : "INSERT INTO `draft`(`user`, `name`, `txt`) VALUES (?, ?, ?)"
+		},
+		"get":{
+			"all_quartiers_name" : "SELECT `id`, `name` FROM `quartier` WHERE 1"
+			,"all_videos_name" : "SELECT `id`, `name` FROM `video` WHERE 1"
+			,"all_artistes_name" : "SELECT `id`, `name` FROM `artiste` WHERE 1"
+			,"all_videos" : "SELECT * FROM `video` WHERE 1"
+			,"all_users" : "SELECT * FROM `user` WHERE 1"
+			,"nb_videos" : "SELECT `nb_videos` FROM `quartier` WHERE `id`= :id_quartier"
+			,"one_quartier_id" : "SELECT * FROM `quartier` WHERE `id` = ?"
+			,"one_video_id" : "SELECT * FROM `video` WHERE `id` = ?"
+			,"one_artiste_id" : "SELECT * FROM `artiste` WHERE `id` = ?"
+			,"one_artiste_name" : "SELECT * FROM `artiste` WHERE `name` = ?"
+			,"one_user_id" : "SELECT * FROM `user` WHERE `id` = ?"
+			,"one_user_ta_login" : "SELECT * FROM `user` WHERE `ta_login` = ?"
+			,"one_quartier_name" : "SELECT * FROM `quartier` WHERE `name` = ?"
+			,"all_videos_weekly_id" : "SELECT `id` FROM `video` WHERE `weekly` = 1"
+			,"artiste_id" : "SELECT * FROM `artiste` WHERE `id` = :id_artiste"
+			,"all_videos_weekly" : "SELECT * FROM `video` WHERE `weekly` = 1"
+			,"all_videos_from_id_artiste" : "SELECT * FROM `video` WHERE `id_artiste` = ?"
+			,"all_videos_from_id_quartier" : "SELECT * FROM `video` WHERE `id_quartier` = ?"
+			,"quartier_id" : "SELECT * FROM `quartier` WHERE `id` = :id_quartier"
+			,"nb_visits_user_by_name" : "SELECT `nb_visits`, `id` FROM `user` WHERE `ta_login` = ?"
+			,"rights_user_id" : "SELECT `rights` FROM `user` WHERE `id`=? "
+			,"about" : "SELECT `text` FROM `text` WHERE `name` = 'about'"
+			,"short_about" : "SELECT `text` FROM `text` WHERE `name` = 'short_about'"
+			,"team" : "SELECT `text` FROM `text` WHERE `name` = 'team'"
+			,"contact" : "SELECT `text` FROM `text` WHERE `name` = 'contact'"
+			,"videos_id_artistes_cat" : "SELECT `id_artiste` FROM `video` WHERE `category` = ?"
+			,"all_artistes_by_style" : "SELECT `name`, `path_vignette` FROM `artiste` WHERE `id_style` = ?"
+			,"all_styles": "SELECT * FROM `style` WHERE 1"
+			,"all_partners": "SELECT * FROM `partner` WHERE 1"
+			,"all_drafts": "SELECT * FROM `draft` WHERE 1"
+			,"style_by_name": "SELECT `id` FROM `style` WHERE `name` = ?"
+			,"partner_by_name": "SELECT `id` FROM `partner` WHERE `name` = ?"
+			,"one_style_by_id" : "SELECT * FROM `style` WHERE `id` = ?"
+		},
+		"update":{
+			"quartier_nb" : "UPDATE `quartier` SET `nb_videos`= :new_nb WHERE `id` = :id_quartier"
+			,"video_week" : "UPDATE `video` SET `weekly` = '0' WHERE `weekly` = 1"
+			,"one_video_by_id" : "UPDATE `video` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`category`=:category,`name`=:name,`url`=:url,`id_artiste`=:id_artiste,`id_quartier`=:id_quartier,`text`=:text,`weekly`=:weekly WHERE `id`=:id_where"
+			,"one_quartier_by_id" : "UPDATE `quartier` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`name`=:name,`path_pics`=:path_pics,`text`=:text,`nb_videos`=:nb_videos,`url`=:url WHERE `id`=:id_where"
+			,"one_artiste_by_id" : "UPDATE `artiste` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update, `name`=:name,`path_pics`=:path_pics,`text`=:text,`url`=:url,`itw`=:itw, `path_vignette`= :path_vignette,  `id_style` = :id_style WHERE `id`=:id_where"
+			,"one_user_by_id" : "UPDATE `user` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update, `date_last_visit`=:date_last_visit, `ta_login`=:ta_login,`ta_password`=:ta_password,`mail`=:mail,`rights`=:rights,`nb_visits`=:nb_visits WHERE `id`=:id_where"
+			,"user_nb_visits" : "UPDATE `user` SET `nb_visits`= ?, `date_last_visit`= ? WHERE `ta_login`= ?"
+			,"about" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'about'"
+			,"short_about" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'short_about'"
+			,"team" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'team'"
+			,"contact" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'contact'"
+			,"path_vign": "UPDATE `artiste` SET `path_vignette`= :path WHERE `name`= :name"
+		},
+		"user" : {
+			"user_exist" : "SELECT `id` FROM `user` WHERE `ta_login`= :name AND `ta_password` = :hash"
+		},
+		"delete":{
+			"partner_by_id" : "DELETE  FROM `partner` WHERE `id` = ?"
+			,"style_by_id" : "DELETE  FROM `style` WHERE `id` = ?"
+			,"draft_by_id" : "DELETE  FROM `draft` WHERE `id` = ?"
+		}
+	}
+}

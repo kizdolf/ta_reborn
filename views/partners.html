@@ -1,0 +1,14 @@
+<div>
+	<div class="row partner_block" ng-repeat="part in partners">
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<img src="{{ part.path_logo }}" alt="{{part.name}} logo">
+				<div class="caption">
+					<h3>{{part.name}}</h3>
+					<div ng-bind-html="part.desc"></div>
+					<p><a href="{{part.url}}" class="btn btn-primary" role="button">Voir leur site!</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -21,7 +21,7 @@ $(document).on('click', "#send_msg", function(){
 $('.sous_menu').hide();
 
 $('.menu_header').on('mouseenter', function(){
-	$('.sous_menu').show();
+	$('.sous_menu').show("1000");
 });
 
 $('.sous_menu li a').click(function(){
@@ -33,7 +33,13 @@ $('.menu_ul li a').click(function(){
 });
 
 		// PLAYER SOUNDCLOUD		
-
+$timeout = function(){
+	var time = setTimeout(function() {
+			$('#playerSound').addClass('is_hidden');
+			$('#playerSound').hide("slow");	
+		}, 5000);
+	return time;	
+};
 
 	$('#playerSound').hide();
 	$('#playerSound').addClass('is_hidden');
@@ -42,11 +48,21 @@ $('.menu_ul li a').click(function(){
 		if ($('#playerSound').hasClass('is_hidden')) {
 			$('#playerSound').show("slow");
 			$('#playerSound').removeClass('is_hidden');
+			$time = $timeout();
 		}else{
 			$('#playerSound').addClass('is_hidden');
 			$('#playerSound').hide("slow");
+			clearTimeout($time);
 		}
 	});
+
+	$('#playerSound').on('mouseenter', function(){
+		clearTimeout($time);
+	});
+
+	$('#playerSound').on('mouseleave', function(){
+		$time = $timeout();
+	})
 
 	$(window).scroll(
 	{
@@ -66,6 +82,10 @@ $('.menu_ul li a').click(function(){
 	$(window).scroll(function(){
 		var st = $(window).scrollTop();
 		$("#header img").css("-webkit-transform", "translateY(" + (st/2) + "px)");
+		$("#header img").css("transform", "translateY(" + (st/2) + "px)");
+		$("#header img").css("-moz-transform", "translateY(" + (st/2) + "px)");
+		$("#header img").css("-o-transform", "translateY(" + (st/2) + "px)");
+		$("#header img").css("-ms-transform", "translateY(" + (st/2) + "px)");
 	});
 
 	$(document).ready(function(){

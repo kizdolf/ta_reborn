@@ -73,7 +73,7 @@
 				else if (url.indexOf('vimeo') != -1) {
 					var token = url.split("/");
 					token = token[3];
-					var frame = "<iframe src='//player.vimeo.com/video/"+ token+ "' frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>";
+					var frame = "<iframe src='//player.vimeo.com/video/"+ token+ "?title=0&portrait=0&byline=0&badge=0' frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>";
 				}
 				else{
 					return "unsupported source. Contact webmaster.";
@@ -85,7 +85,7 @@
 				SC.initialize({
 					client_id: "8a6b0e256518b81a23f4b8457c34ff6e",
 				});
-				SC.oEmbed(url, {auto_play: false}, document.getElementById(idDOM));
+				SC.oEmbed(url, {auto_play: false, maxheight:110, color:"e45a3f"}, document.getElementById(idDOM));
 
 			};
 		}])

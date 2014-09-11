@@ -3,10 +3,12 @@
 		<div ng-bind-html="weekly.video.text"></div>
 		<img src="img/badges/team.png" alt="logo team" class='team_badge badge-g'>
 	</div>
-	<img ng-show="weekly.video.weekly == 1" src="img/badges/weekly.png" alt="logo weekly" class='weekly_badge badge-g'>
-	<span ng-click="change_video('prev')" class="prev_vid"><img src="img/headers/arr.jpg"></span>
-	<span ng-click="change_video('next')" class="next_vid"><img src="img/headers/arr.jpg"></span>
-	<div id="weekly_video" ng-bind-html="weekly.video.frame"></div>
+	<div id="main_frame">
+		<img ng-show="weekly.video.weekly == 1" src="img/badges/weekly.png" alt="logo weekly" class='weekly_badge badge-g'>
+		<span ng-click="change_video('prev')" class="prev_vid arr_pn"><img class='img100' src="img/headers/arr.jpg"></span>
+		<span ng-click="change_video('next')" class="next_vid arr_pn"><img class='img100' src="img/headers/arr.jpg"></span>
+		<div id="weekly_video" ng-bind-html="weekly.video.frame"></div>
+	</div>
 	<div class="container container-fluid block_titre" id="wrapper" >
 		<div class="div_grid" >
 			<a href="#/artistes/{{ weekly.artiste.name }}" ><div class="arrow-right"></div></a>

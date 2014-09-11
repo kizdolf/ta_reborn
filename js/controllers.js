@@ -46,6 +46,10 @@ angular.module('myApp.controllers', [])
 
 	getData.related('artiste', 'name', $routeParams.id).then(function(data){
 		$scope.artiste = data.data;
+		$scope.artiste.artiste.text = $sce.trustAsHtml($scope.artiste.artiste.text);
+		for (var i in $scope.artiste.videos){
+			$scope.artiste.videos[i].frame = tools.iframe($scope.artiste.videos[i].url);
+		}
 		tools.soundcloud(data.data.artiste.itw, "lol");
 	});
 }])

@@ -112,7 +112,7 @@
 </nav>
 <div class="container container-fluid">
 
-<div ng-view style="height:100%;"></div>
+<div ng-view  class="page {{ pageClass }}"></div>
 
 
 <!-- <div id="container-fluid" >
@@ -126,7 +126,8 @@
 
   <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
   <script src="components/angular.min.js"></script>
-  <script src="components/angular_routes.js"></script>
+  <script src="components/angular-route.min.js"></script>
+  <script src="components/angular-animate.min.js"></script>
   <script src="components/jquery.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>

@@ -7,6 +7,8 @@ angular.module('myApp.controllers', [])
 
 	$scope.title = "Welcome at Toulouse Acoustics";
 
+	$scope.pageClass = 'page-home';
+
 	getData.weekly().then(function(data){
 		$scope.weekly = data.data;
 		$scope.weekly.video.frame = tools.iframe($scope.weekly.video.url);
@@ -44,6 +46,8 @@ angular.module('myApp.controllers', [])
 
 .controller('artisteCtrl', ['tools', 'getData', '$scope', '$routeParams', '$http', '$sce', function(tools, getData, $scope, $routeParams, $http, $sce){
 
+	$scope.pageClass = 'page-artiste';
+
 	getData.related('artiste', 'name', $routeParams.id).then(function(data){
 		$scope.artiste = data.data;
 		$scope.artiste.artiste.text = $sce.trustAsHtml($scope.artiste.artiste.text);
@@ -56,13 +60,14 @@ angular.module('myApp.controllers', [])
 
 
 .controller('artistesCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
-
+	$scope.pageClass = 'page-artistes';
 	getData.artistes_by('style').then(function(data){
 		$scope.artistes = data.data;
 	});
 }])
 
 .controller('locauxCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
+	$scope.pageClass = 'page-locaux';
 
 	getData.art_cat(0).then(function(data){
 		$scope.artistes = data.data;
@@ -70,6 +75,7 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('visiteursCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
+	$scope.pageClass = 'page-visiteurs';
 
 	getData.art_cat(1).then(function(data){
 		$scope.artistes = data.data;
@@ -77,6 +83,7 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('quartierCtrl', ['tools', 'getData', '$scope', '$routeParams', '$http', '$sce', function(tools, getData, $scope, $routeParams, $http, $sce){
+	$scope.pageClass = 'page-quartier';
 
 	getData.related('quartier', 'name', $routeParams.id).then(function(data){
 		$scope.quartier = data.data;
@@ -88,6 +95,7 @@ angular.module('myApp.controllers', [])
 
 .controller('quartiersCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
 
+	$scope.pageClass = 'page-quartiers';
 	getData.quartiers('').then(function(data){
 
 		$scope.quartiers = data.data;
@@ -111,6 +119,7 @@ angular.module('myApp.controllers', [])
 
 .controller('picsCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
 
+	$scope.pageClass = 'page-pics';
 	$('#pics_viewer').hide();
 
 	getData.artistes('').then(function(data){
@@ -158,12 +167,14 @@ angular.module('myApp.controllers', [])
 }])
 
 .controller('aboutCtrl', ['getData', '$scope', '$sce', function(getData, $scope, $sce){
+	$scope.pageClass = 'page-about';
 	getData.about().then(function(data){
 		$scope.text = $sce.trustAsHtml(data.data.text);
 	});
 }])
 
 .controller('contactCtrl', ['$http', 'getData', '$scope', '$sce', function($http, getData, $scope, $sce){
+	$scope.pageClass = 'page-contact';
 	
 	$scope.txt_btn = "Envoyer le message.";
 
@@ -218,7 +229,7 @@ angular.module('myApp.controllers', [])
 
 .controller('partnersCtrl', ['$http', 'getData', '$scope', '$sce', function($http, getData, $scope, $sce){
 
-	console.log("coucou");
+	$scope.pageClass = 'page-partners';
 	getData.partners().then(function(data){
 		$scope.partners = data.data;
 	}).then(function(){

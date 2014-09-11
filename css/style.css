@@ -299,7 +299,10 @@ body{
 #playerSound{
 	position: fixed;
 	bottom: 0;
+	margin: 0;
+	padding: 0;
 	left: 0;
+	z-index: 3;
 }
 
 .btn_soundcloud{
@@ -331,7 +334,7 @@ body{
 .weekly_badge{
 	/* border: 1px solid green; */
 	position: absolute;
-	z-index: 999;
+	z-index: 1;
 	margin-top: -31px;
 	/*background: rgba(255, 255, 255, 0.5);*/
 	/* background: wheat; */
@@ -413,28 +416,43 @@ body{
 	display: block;
 }
 
-
-.page{
-	-moz-transition: all 1s;
-	-webkit-transition: all 1s; 
-	-o-transition: all 1s; 
-	transition: all 1s;
+#fs-wrapper{
+	position: fixed;
+	top: 0;
+	left: 0px;
+	height: 100%;
+	width: 100vw;
+	background: rgba(0, 0, 0, 0.77);
+	z-index: 9999;
 }
 
-.page-home.ng-leave         {
-    -webkit-transform-origin: 0% 0%;
-	-webkit-animation: rotateFall 1s both ease-in;
-	-moz-transform-origin: 0% 0%;
-	-moz-animation: rotateFall 1s both ease-in;
-	transform-origin: 0% 0%;
-	animation: rotateFall 1s both ease-in;
+.fs-vid iframe{
+	height: 80% !important;
+	width: 80% !important;
+	margin-left: 10% !important;
+	margin-top: 10% !important;
 }
-.page-home.ng-enter 		{  
-    -webkit-animation:scaleUp 0.5s both ease-in;
-	-moz-animation:scaleUp 0.5s both ease-in;
-	animation:scaleUp 0.5s both ease-in;    
+.close {
+	position: relative;
+	float: right;
+	margin-right: 9%;
+	margin-top: 9%;
+	z-index: 2;
 }
 
+.mt10{
+	margin-top: 10% !important;
+}
+
+
+.btn-soundcloud{
+	border: none !important;
+}
+
+.btn-soundcloud:hover{
+	color: rgb(228, 90, 63) !important;
+	background: white !important;
+}
 
 	/*MEDIA QUERYS*/
 
@@ -463,88 +481,3 @@ body{
 	}
 }
 
-
-
-/* rotate and fall */
-@-webkit-keyframes rotateFall {
-	0% { -webkit-transform: rotateZ(0deg); }
-	20% { -webkit-transform: rotateZ(10deg); -webkit-animation-timing-function: ease-out; }
-	40% { -webkit-transform: rotateZ(17deg); }
-	60% { -webkit-transform: rotateZ(16deg); }
-	100% { -webkit-transform: translateY(100%) rotateZ(17deg); }
-}
-@-moz-keyframes rotateFall {
-	0% { -moz-transform: rotateZ(0deg); }
-	20% { -moz-transform: rotateZ(10deg); -moz-animation-timing-function: ease-out; }
-	40% { -moz-transform: rotateZ(17deg); }
-	60% { -moz-transform: rotateZ(16deg); }
-	100% { -moz-transform: translateY(100%) rotateZ(17deg); }
-}
-@keyframes rotateFall {
-	0% { transform: rotateZ(0deg); }
-	20% { transform: rotateZ(10deg); animation-timing-function: ease-out; }
-	40% { transform: rotateZ(17deg); }
-	60% { transform: rotateZ(16deg); }
-	100% { transform: translateY(100%) rotateZ(17deg); }
-}
-
-/* scale up */
-@keyframes scaleUp {
-	from 		{ opacity: 0.3; transform: scale(0.8); }
-}
-@-moz-keyframes scaleUp {
-	from 		{ opacity: 0.3; -moz-transform: scale(0.8); }
-}
-@-webkit-keyframes scaleUp {
-	from 		{ opacity: 0.3; -webkit-transform: scale(0.8); }
-}
-
-/* slide in from the right */
-@keyframes slideInRight {
-	from 	{ transform:translateX(100%); }
-	to 		{ transform: translateX(0); }
-}
-@-moz-keyframes slideInRight {
-	from 	{ -moz-transform:translateX(100%); }
-	to 		{ -moz-transform: translateX(0); }
-}
-@-webkit-keyframes slideInRight {
-	from 	{ -webkit-transform:translateX(100%); }
-	to 		{ -webkit-transform: translateX(0); }
-}
-
-/* slide in from the bottom */
-@keyframes slideInUp {
-	from 	{ transform:translateY(100%); }
-	to 		{ transform: translateY(0); }
-}
-@-moz-keyframes slideInUp {
-	from 	{ -moz-transform:translateY(100%); }
-	to 		{ -moz-transform: translateY(0); }
-}
-@-webkit-keyframes slideInUp {
-	from 	{ -webkit-transform:translateY(100%); }
-	to 		{ -webkit-transform: translateY(0); }
-}
-
-/* slide in from the bottom */
-@keyframes slideOutLeft {
-	to 		{ transform: translateX(-100%); }
-}
-@-moz-keyframes slideOutLeft {	
-	to 		{ -moz-transform: translateX(-100%); }
-}
-@-webkit-keyframes slideOutLeft {
-	to 		{ -webkit-transform: translateX(-100%); }
-}
-
-/* rotate out newspaper */
-@-webkit-keyframes rotateOutNewspaper {
-	to { -webkit-transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
-}
-@-moz-keyframes rotateOutNewspaper {
-	to { -moz-transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
-}
-@keyframes rotateOutNewspaper {
-	to { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
-}

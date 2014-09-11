@@ -37,19 +37,19 @@
 	<div class="container container-fluid" id="top_bar">
 		<ul>
 			<li>
-				<a href="#" alt="facebook"><img src="img/headers/facebook.png" title="facebook" alt="icon"></a>
+				<a href="https://www.facebook.com/toulouseacoustics" alt="facebook"><img src="img/headers/facebook.png" title="facebook" alt="icon"></a>
 			</li>
 			<li>
-				<a href="#" alt="soundcloud"><img src="img/headers/soundcloud.png" title="soundcloud" alt="icon"></a>
+				<a href="https://soundcloud.com/toulouse-acoustics" alt="soundcloud"><img src="img/headers/soundcloud.png" title="soundcloud" alt="icon"></a>
 			</li>
 			<li>
-				<a href="#" alt="vimeo"><img src="img/headers/vimeo.png" title="vimeo" alt="icon"></a>
+				<a href="http://vimeo.com/toulouseacoustics" alt="vimeo"><img src="img/headers/vimeo.png" title="vimeo" alt="icon"></a>
 			</li>
 			<li>
-				<a href="#" alt="You Tube"><img src="img/headers/youtube.png" title="youtube" alt="icon"></a>
+				<a href="https://www.youtube.com/channel/UCDYM7BgufabluMT01YmnK9g" alt="You Tube"><img src="img/headers/youtube.png" title="youtube" alt="icon"></a>
 			</li>
 			<li>
-				<a href="#" alt="instagram"><img src="img/headers/instagram.png" title="instagram" alt="icon"></a>
+				<a href="http://instagram.com/toulouseacoustics" alt="instagram"><img src="img/headers/instagram.png" title="instagram" alt="icon"></a>
 			</li>
 		</ul>
 	</div>
@@ -97,22 +97,10 @@
 		</div>
 	</div>
 </nav>
-<nav class="navbar navbar-default col-md-2" role="navigation" style="display: none;">
-	<ul class="list-group">
-		<li class="list-group-item">
-			<a href="">fb</a>
-		</li>
-		<li class="list-group-item">
-			<a href="">tw</a>
-		</li>
-		<li class="list-group-item">
-			<a href="sound">sound</a>
-		</li>
-	</ul>
-</nav>
+
 <div class="container container-fluid">
 
-<div ng-view  class="page {{ pageClass }}"></div>
+<div ng-view ></div>
 
 
 <!-- <div id="container-fluid" >
@@ -120,7 +108,7 @@
 </div> -->
 
 	<div id="sound">
-		<button  class="btn_soundcloud btn btn-default">Show soundcloud!</button>
+		<button  class="btn_soundcloud btn btn-default btn-soundcloud">Notre playlist</button>
 		<div id="playerSound"></div>
 	</div>
 
@@ -128,6 +116,7 @@
   <script src="components/angular.min.js"></script>
   <script src="components/angular-route.min.js"></script>
   <script src="components/angular-animate.min.js"></script>
+  <script src="components/angular-cookies.min.js"></script>
   <script src="components/jquery.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>

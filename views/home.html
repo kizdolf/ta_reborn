@@ -1,4 +1,13 @@
 <div ng-controller="headCtrl" style="height:100%;">
+
+<div ng-if="fs == 1">
+	<div id="fs-wrapper">
+		<span class="close glyphicon glyphicon-remove" title="fermer (Echap)"></span>
+		<img ng-show="weekly.video.weekly == 1" src="img/badges/weekly.png" alt="logo weekly" class='weekly_badge badge-g mt10'>
+		<div id="weekly_video" class="fs-vid" ng-bind-html="weekly.video.frame"></div>
+	</div>
+</div>
+
 	<div class='team-text'>
 		<div ng-bind-html="weekly.video.text"></div>
 		<img src="img/badges/team.png" alt="logo team" class='team_badge badge-g'>
@@ -12,7 +21,7 @@
 	<div class="container container-fluid block_titre" id="wrapper" >
 		<div class="div_grid" >
 			<a href="#/artistes/{{ weekly.artiste.name }}" ><div class="arrow-right"></div></a>
-			<span ng-if="weekly.artiste.path_vignette == ''">
+			<span ng-if="weekly.artiste.path_vignette == '' ">
 				<img src="img/badges/weekly.png" class="img_grid">
 			</span>
 			<span ng-if="weekly.artiste.path_vignette != ''">

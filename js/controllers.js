@@ -1,9 +1,13 @@
 'use strict';
 
-angular.module('myApp.controllers', [])
+angular.module('myApp.controllers', ['ngCookies'])
+.run(function($cookieStore){
+	// $cookieStore.remove("visited");
+	$cookieStore.put("visited", "first");
+})
 
-.controller('headCtrl', ['pics', 'filterFilter', '$scope', '$http', '$sce', 'getData', 'tools'
-	,function(pics, filterFilter, $scope, $http, $sce, getData, tools){
+.controller('headCtrl', ['pics', 'filterFilter', '$scope', '$http', '$sce', 'getData', 'tools',  '$cookies', '$cookieStore', '$log'
+	,function(pics, filterFilter, $scope, $http, $sce, getData, tools,  $cookies, $cookieStore, $log){
 
 	$scope.title = "Welcome at Toulouse Acoustics";
 
@@ -20,6 +24,12 @@ angular.module('myApp.controllers', [])
 			$scope.truc = data.data;
 		});
 	});
+	// .then(function(){
+	// 		$scope.first = $cookieStore.get("visited");
+	// 		if ($scope.first == "first") {
+	// 			$scope.fs = "1";
+	// 		}
+	// });
 
 	$scope.change_video = function(choice){
 		var id = parseInt($scope.weekly.video.id);
@@ -29,7 +39,6 @@ angular.module('myApp.controllers', [])
 			$scope.weekly.video.text = $sce.trustAsHtml($scope.weekly.video.text);
 		})
 		.then(function(){
-			console.log($scope.weekly.video);
 			var ids =  $scope.weekly.video.id_artiste + "," +  $scope.weekly.video.id_quartier;
 			getData.related('video', 'id', ids).then(function(data){
 				$scope.weekly.artiste = data.data.artiste;
@@ -40,6 +49,16 @@ angular.module('myApp.controllers', [])
 
 	$('body').click(function(){
 		$('.sous_menu').hide();
+	});
+
+	$('.close').click(function(){
+		$("#fs-wrapper").fadeOut("slow");
+	});
+
+		$(document).keyup(function(e) {
+		if (e.keyCode == 27) {
+			$("#fs-wrapper").fadeOut("slow");
+		}
 	});
 
 }])

@@ -11,6 +11,11 @@
 <h1 ng-click="name_click('../portfolio/team')">Team</h1>
 <h1 ng-click="name_click('../portfolio/off')">off</h1>
 <div id="pics_viewer">
-<span class="pic_close glyphicon glyphicon-remove" title="fermer (Echap)"></span>
-<span class="prev_pic"  ng-click="prev_pic()"></span><img src="{{ pic }}"><span class="next_pic"  ng-click="next_pic()"></span></div>
+	<span class="pic_close glyphicon glyphicon-remove" title="fermer (Echap)"></span>
+	<span class="prev_pic"  ng-click="prev_pic()"></span><img src="{{ pic }}"><span class="next_pic"  ng-click="next_pic()"></span>
+</div>
+<div id="wall_pics">
+	<span ng-repeat="img in back">
+		<img src="{{img}}" class="img_wall"> 
+	</span>
 </div>

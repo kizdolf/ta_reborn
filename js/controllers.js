@@ -13,9 +13,12 @@ angular.module('myApp.controllers', ['ngCookies'])
 
 	$scope.pageClass = 'page-home';
 
+	$scope.load = "ok";
+
 	getData.weekly().then(function(data){
 		$scope.weekly = data.data;
 		$scope.weekly.video.frame = tools.iframe($scope.weekly.video.url);
+		$scope.load = "";
 		$scope.weekly.video.text = $sce.trustAsHtml($scope.weekly.video.text);
 		$scope.weekly.artiste.text = $sce.trustAsHtml($scope.weekly.artiste.text);
 		$scope.weekly.quartier.text = $sce.trustAsHtml($scope.weekly.quartier.text);
@@ -43,6 +46,8 @@ angular.module('myApp.controllers', ['ngCookies'])
 			getData.related('video', 'id', ids).then(function(data){
 				$scope.weekly.artiste = data.data.artiste;
 				$scope.weekly.quartier = data.data.quartier;
+				$scope.weekly.artiste.text = $sce.trustAsHtml($scope.weekly.artiste.text);
+				$scope.weekly.quartier.text = $sce.trustAsHtml($scope.weekly.quartier.text);
 			});
 		});
 	}
@@ -63,7 +68,7 @@ angular.module('myApp.controllers', ['ngCookies'])
 
 }])
 
-.controller('artisteCtrl', ['tools', 'getData', '$scope', '$routeParams', '$http', '$sce', function(tools, getData, $scope, $routeParams, $http, $sce){
+.controller('artisteCtrl', ['pics', 'tools', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, tools, getData, $scope, $routeParams, $http, $sce){
 
 	$scope.pageClass = 'page-artiste';
 
@@ -74,6 +79,11 @@ angular.module('myApp.controllers', ['ngCookies'])
 			$scope.artiste.videos[i].frame = tools.iframe($scope.artiste.videos[i].url);
 		}
 		tools.soundcloud(data.data.artiste.itw, "lol");
+	})
+	.then(function(){
+		pics.list_minpics($scope.artiste.artiste.path_pics).then(function(data){
+			$scope.pics = data.data;
+		});
 	});
 }])
 
@@ -140,14 +150,44 @@ angular.module('myApp.controllers', ['ngCookies'])
 
 	$scope.pageClass = 'page-pics';
 	$('#pics_viewer').hide();
+	$scope.back = [];
+
+	function shuffle(o){ //v1.0
+		for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+		return o;
+	};
 
 	getData.artistes('').then(function(data){
 		$scope.artistes = data.data;
+	})
+	.then(function(){
+		for (var i in $scope.artistes){
+			pics.list_minpics($scope.artistes[i].path_pics).then(function(data){
+				for (var j in data.data){
+					$scope.back.push(data.data[j]);
+				}
+			}).then(function(){
+				$scope.back = shuffle($scope.back);
+			});
+		}
 	});
 
 	getData.quartiers('').then(function(data){
 		$scope.quartiers = data.data;
+	})
+	.then(function(){
+		for (var i in $scope.quartiers){
+			pics.list_minpics($scope.quartiers[i].path_pics).then(function(data){
+				for (var j in data.data){
+					$scope.back.push(data.data[j]);
+				}
+			}).then(function(){
+				$scope.back = shuffle($scope.back);
+			});
+		}
 	});
+
+	console.log($scope.back);
 
 	$scope.name_click = function(path){
 		$scope.index = 0;
@@ -158,6 +198,10 @@ angular.module('myApp.controllers', ['ngCookies'])
 			$('#pics_viewer').show();
 		});
 	};
+
+	if(angular.isDefined($routeParams.path)){
+		$scope.name_click($routeParams.path);
+	}
 
 	$scope.next_pic = function(){
 		$scope.index = $scope.index + 1;

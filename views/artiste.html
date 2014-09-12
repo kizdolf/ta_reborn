@@ -5,11 +5,17 @@
 <h2 ng-show="artiste.videos[0].category == 0">Local!</h2>
 <div class='txt'  ng-bind-html="artiste.artiste.text"></div>
 <h3><a href="{{artiste.artiste.url}}">Site web</a></h3>
-<div cid="videos">
+<div id="videos">
 	<div ng-repeat="video in artiste.videos">
 		<img ng-show="video.weekly == 1" src="img/badges/weekly.png" alt="logo weekly" class='weekly_badge badge-g'>
 		<div id="weekly_video" ng-bind-html="video.frame"></div>
 	</div>
+</div>
+<a href="#/portfolio?path={{ artiste.artiste.path_pics }}">Portfolio! </a>
+<div id="wall_pics">
+	<span ng-repeat="img in pics">
+		<img src="{{img}}" class="img_wall"> 
+	</span>
 </div>
 <div id="lol"></div>
 </div>

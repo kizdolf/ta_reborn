@@ -60,7 +60,7 @@ if (!$log->is_logued()) {
 	<div id="wrapper">
 		<?php echo $html; ?>
 		<form action="styles.php" method="post">
-			<div id="float_form" class="input-group input-group-lg">
+			<div id="float_form" class="input-group input-group-lg" style="clear:both;">
 			<div class='page-header'>
 				<h2>Style</h2>
 			</div>

@@ -78,6 +78,24 @@ Helpers
 		print_r(json_encode($files));
 	}
 
+	function get_minpics($path)
+	{
+		$imgpaths = explode("../", $path);
+		$imgpath = $imgpaths[1];
+		// print_r($imgpaths);
+		if(!is_dir($path))
+			die("T");
+		$handle = opendir($path."/min");
+		$files = array();
+		// $path = explode("../", $path);
+		// $path= $path[0];
+		while ($entry = readdir($handle)){
+			if($entry!= "." && $entry != ".." )
+				$files[] = $imgpath . "/min/" . $entry;
+		}
+		print_r(json_encode($files));
+	}
+
 	function captcha_verif($rep, $chal)
 	{
 		$priv = "6LejkfkSAAAAADadlGUDzGJp4kFnIY3GTLjQHcrx";
@@ -129,6 +147,12 @@ Inputs.
 				echo "Wrong request";
 			else
 				get_pics($_GET['path']);
+			break;
+		case 'minpics':
+			if(!isset($_GET['path']))
+				echo "Wrong request";
+			else
+				get_minpics($_GET['path']);
 			break;
 		case 'about':
 			print_r(json_encode($bdd->get_about()));

@@ -8,7 +8,7 @@ body{
 }
 
 #playerSound{
-	width: 50%;
+	width: 100%;
 }
 
 #wrapper{
@@ -230,9 +230,10 @@ body{
 
 #pics_viewer{
 	position: fixed;
-	top: 24px;
+	top: 0;
 	left: 0;
 	width: 100%;
+	height: 100%;
 	/* margin-left: 5%; */
 	padding: 15px;
 	background: rgba(0, 0, 0, 0.49);
@@ -243,7 +244,6 @@ body{
 
 #pics_viewer img {
 	display: block;
-	max-width: 90%;
 	max-height: 100%;
 	margin: auto;
 	padding: 2px;
@@ -260,7 +260,7 @@ body{
 #pics_viewer .pic_close{
 	position: absolute;
 	right: 2px;
-	top: 4px;
+	top: 30px;
 	height: 35px;
 	width: 35px;
 	padding: 10px;
@@ -454,6 +454,62 @@ body{
 	background: white !important;
 }
 
+
+
+#loader{
+	position: absolute;
+	margin-left: 25%;
+}
+
+#loader img {
+	margin: auto;
+}
+
+#wall_pics{
+	position: absolute;
+	top: 400px;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	width: 99vw;
+	z-index: -999999;
+}
+
+#wall_pics span {
+	margin: 0;
+	padding: 0;
+}
+
+#wall_pics span img {
+	opacity: 0.20;
+	width: 32vw;
+	margin:0;
+	padding: 0;
+	height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/*MEDIA QUERYS*/
 
 @media (max-width: 793px) {
@@ -480,4 +536,3 @@ body{
 		display: inline-block;
 	}
 }
-

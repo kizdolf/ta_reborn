@@ -55,7 +55,7 @@
 			"quartier_nb" : "UPDATE `quartier` SET `nb_videos`= :new_nb WHERE `id` = :id_quartier"
 			,"video_week" : "UPDATE `video` SET `weekly` = '0' WHERE `weekly` = 1"
 			,"one_video_by_id" : "UPDATE `video` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`category`=:category,`name`=:name,`url`=:url,`id_artiste`=:id_artiste,`id_quartier`=:id_quartier,`text`=:text,`weekly`=:weekly WHERE `id`=:id_where"
-			,"one_quartier_by_id" : "UPDATE `quartier` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`name`=:name,`path_pics`=:path_pics,`text`=:text,`nb_videos`=:nb_videos,`url`=:url WHERE `id`=:id_where"
+			,"one_quartier_by_id" : "UPDATE `quartier` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`name`=:name,`path_pics`=:path_pics,`text`=:text,`nb_videos`=:nb_videos,`url`=:url, `path_vignette`= :path_vignette WHERE `id`=:id_where"
 			,"one_artiste_by_id" : "UPDATE `artiste` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update, `name`=:name,`path_pics`=:path_pics,`text`=:text,`url`=:url,`itw`=:itw, `path_vignette`= :path_vignette,  `id_style` = :id_style WHERE `id`=:id_where"
 			,"one_user_by_id" : "UPDATE `user` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update, `date_last_visit`=:date_last_visit, `ta_login`=:ta_login,`ta_password`=:ta_password,`mail`=:mail,`rights`=:rights,`nb_visits`=:nb_visits WHERE `id`=:id_where"
 			,"user_nb_visits" : "UPDATE `user` SET `nb_visits`= ?, `date_last_visit`= ? WHERE `ta_login`= ?"

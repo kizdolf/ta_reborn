@@ -4,14 +4,30 @@ spl_autoload_register(function ($class) {
 });
 //constantes.
 $mainDir = __DIR__."/../data";
-$ext_ok = array("jpg", "png", "gif");
-
-function save_file($file, $ext, $dest){
-	if (!in_array($ext, $GLOBALS["ext_ok"]))
+$ext_ok = array("jpg", "png", "gif", "jpeg");
+ini_set('upload_max_filesize', '15M');
+ini_set('post_max_size', '15M');
+ini_set('max_input_time', 300);
+ini_set('max_execution_time', 300);
+function save_file($file, $ext, $dest, $v = null){
+	if (!in_array(strtolower($ext), $GLOBALS["ext_ok"]))
 		return false;
-	if (!move_uploaded_file($file['tmp_name'], $dest."/".$file['name']))
-	 	return false;
-	chmod($dest."/".$file['name'], 0777);
+
+	if (!is_dir($dest."/min")) {
+		mkdir($dest."/min");
+	}
+	$img = new SimpleImage();
+	$img->load($file['tmp_name']);
+	if ($v !== null)
+		$img->resize(220, 220);
+	else
+		$img->best_fit(1000, 1000);
+	$img->save($dest."/".$file['name']);
+	$img->fit_to_width(320);
+	$img->save($dest."/min/".$file['name']);
+	// if (!move_uploaded_file($file['tmp_name'], $dest."/".$file['name']))
+	//  	return false;
+	// chmod($dest."/".$file['name'], 0777);
 	return $dest."/".$file['name'];
 }
 
@@ -43,7 +59,7 @@ function reArrayFiles(&$file_post) {
 			$files[$key]["name"] = $name_pic."_$i.".$ext;
 			$i++;
 			if(!($url = save_file($files[$key], $ext, $path))) {
-				echo "<h4> An error has occur saving the file '".$files[$key]["name"]."'. Contact admin please </h4>";
+				echo "<h4> An error has occur saving the file '".$files[$key]["name"]."'. Contact admin please ". $url ." </h4>";
 			}
 		}
 	}
@@ -57,7 +73,7 @@ function reArrayFiles(&$file_post) {
 		$ext = explode(".", $pic["name"]);
 		$ext = strtolower($ext[1]);
 		$pic['name'] = $name_pic.".".$ext;
-		return save_file($pic, $ext, $path);
+		return save_file($pic, $ext, $path, "yes");
 		
 	}
 	return false;
@@ -86,6 +102,7 @@ function html_edit($entry, $id, $type) {
 	}
 	if (isset($type) && !strstr($type, 'video')) {
 		echo "<div id='upload' class='jumbotron'>
+				<input type='hidden' name='MAX_FILE_SIZE' value='104857600' />
 				<a class='btn_pics btn btn-default btn-lg'>Voir les photos.</a>
 				<div class='gal_pic'></div><hr style='clear:both;'>
 				<h3>Ajouter des photos</h3>

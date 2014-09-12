@@ -10,6 +10,10 @@ if (!$log->is_logued()) {
 if (!isset($_GET['type']) || !isset($_GET['id'])) {
 	header('Location: index.php?wrong=edition');
 }
+ini_set('upload_max_filesize', '10M');
+ini_set('post_max_size', '10M');
+ini_set('max_input_time', 300);
+ini_set('max_execution_time', 300);
 $bdd = new tapdo();
 $type = $_GET['type'];
 $id = $_GET['id'];
@@ -48,6 +52,7 @@ if ($_GET['type'] == "valid_edit") {
 	$entry['date_update'] = date("Y-m-d H:i:s");
 	$bdd->$update($_GET['table'], 'id', $id, $entry);
 	header('Location: index.php?done=edit');
+}
 
 ?>
 <!DOCTYPE html>
@@ -68,11 +73,9 @@ if ($_GET['type'] == "valid_edit") {
 	<?php include('menu.php'); ?>
 	<div id="wrapper">
 <?php
-}
-else{
+
 	$get = "get_one_".$type;
 	html_edit($bdd->$get('id', $id), $id, $type);
-}
  ?>
 </div>
 </body>

@@ -95,6 +95,10 @@
 			this.list_pics = function(path){
 				return $http.get('API/api.php?get=pics&path=' + path);
 			};
+
+			this.list_minpics = function(path){
+				return $http.get('API/api.php?get=minpics&path=' + path);
+			};
 		}]);
 
 })();

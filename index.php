@@ -113,6 +113,7 @@
 	</div>
 
   <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+  <script src="components/purl.js"></script>
   <script src="components/angular.min.js"></script>
   <script src="components/angular-route.min.js"></script>
   <script src="components/angular-animate.min.js"></script>

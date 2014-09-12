@@ -86,6 +86,11 @@ $timeout = function(){
 		$("#header img").css("-moz-transform", "translateY(" + (st/2) + "px)");
 		$("#header img").css("-o-transform", "translateY(" + (st/2) + "px)");
 		$("#header img").css("-ms-transform", "translateY(" + (st/2) + "px)");
+		$(".img_wall").css("-webkit-transform", "translateY(" + (st/2) + "px)");
+		$(".img_wall").css("transform", "translateY(" + (st/2) + "px)");
+		$(".img_wall").css("-moz-transform", "translateY(" + (st/2) + "px)");
+		$(".img_wall").css("-o-transform", "translateY(" + (st/2) + "px)");
+		$(".img_wall").css("-ms-transform", "translateY(" + (st/2) + "px)");
 	});
 
 	$(document).ready(function(){

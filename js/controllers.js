@@ -218,6 +218,12 @@ angular.module('myApp.controllers', ['ngCookies'])
 		$scope.pic = $scope.pics[$scope.index];
 	}
 
+	$scope.change = function(i){
+		// console.log("changed!!" + i);
+		$scope.pic = $scope.pics[$scope.index];
+		console.log($scope.pic);
+	}
+
 	$('.pic_close').click(function(){
 		$('#pics_viewer').hide();
 		$scope.index = 0;
@@ -226,6 +232,18 @@ angular.module('myApp.controllers', ['ngCookies'])
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27) {
 			$('#pics_viewer').hide();
+		}
+		if (e.keyCode == 39) {
+			$scope.index = $scope.index + 1;
+			if($scope.index < 0)
+				$scope.index = 0;
+			$scope.change($scope.index);
+		}
+		if (e.keyCode == 37) {
+			$scope.index = $scope.index - 1;
+			if($scope.index < 0)
+				$scope.index = $scope.pics.length - 1;
+			$scope.change($scope.index);
 		}
 	});
 }])

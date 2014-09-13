@@ -1,8 +1,31 @@
 <div class="container">
-	{{quartier}}
-	<ul>
+<h1>{{ quartier.quartier.name }}</h1>
+<img src="{{quartier.quartier.path_vignette}}" alt="vignette quartier" class="img_grid">
+<span class="ext_link"><a href="{{quartier.quartier.url}}">Want more?</a></span>
+<span class="pics_link"><a href="#/portfolio?path={{ quartier.quartier.path_pics }}">Portfolio</a></span>
+<div class='txt'  ng-bind-html="quartier.quartier.text"></div>
+	<ul id="blck">
 		<li ng-repeat="video in quartier.videos">
+			<h3>{{ video.name }}</h3>
+			<img ng-show="video.weekly == 1" src="img/badges/weekly.png" alt="logo weekly" class='weekly_badge badge-g'>
 			<span ng-bind-html="video.frame"></span>
+			<h2 ng-show="video.category == 1">Visiteur!</h2>
+			<h2 ng-show="video.category == 0">Local!</h2>
+		</li>
+	</ul>
+	<ul id="blck">
+		<li ng-repeat="art in quartier.artistes">
+			<h3>{{art.name}}</h3>
+			<div class="div_grid" >
+			<a href="#/artistes/{{ art.name }}" ><div class="arrow-right"></div></a>
+			<span ng-if="art.path_vignette == '' ">
+				<img src="img/badges/weekly.png" class="img_grid">
+			</span>
+			<span ng-if="art.path_vignette != ''">
+				<img src="{{art.path_vignette}}" class="img_grid">
+			</span>
+			<!-- <hr class="huge-hr"> -->
+		</div>
 		</li>
 	</ul>
 </div>

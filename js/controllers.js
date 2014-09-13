@@ -116,6 +116,7 @@ angular.module('myApp.controllers', ['ngCookies'])
 
 	getData.related('quartier', 'name', $routeParams.id).then(function(data){
 		$scope.quartier = data.data;
+		$scope.quartier.quartier.text = $sce.trustAsHtml($scope.quartier.quartier.text);
 		for (var i in $scope.quartier.videos){
 			$scope.quartier.videos[i].frame = tools.iframe($scope.quartier.videos[i].url);
 		}

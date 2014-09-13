@@ -488,10 +488,21 @@ body{
 	height: auto;
 }
 
+#blck{
+	width: 45%;
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style-type: none;
+}
 
+#blck li{
+	height: 300px;
+}
 
-
-
+#blck li h3{
+	margin-bottom: 30px;
+}
 
 
 

@@ -68,8 +68,8 @@ if ($rights > 2) {
 			<div id="collapseTwo" class="panel-collapse collapse">
 				<div class="panel-body">
 					<form method="post" action="edit_texts.php">
-						<textarea id="ck_b" name="team" rows="5" cols="30" class="form-control"></textarea>
-							<script>CKEDITOR.replace( 'ck_b' );</script>
+						<textarea id="ck_team" name="team" rows="5" cols="30" class="form-control"></textarea>
+							<script>CKEDITOR.replace( 'ck_team' );</script>
 							<input type="submit" name="submit_text" class="btn btn-success" value="Valider">
 					</form>
 				</div>

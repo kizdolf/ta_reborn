@@ -72,7 +72,7 @@ Helpers
 		// $path = explode("../", $path);
 		// $path= $path[0];
 		while ($entry = readdir($handle)){
-			if($entry!= "." && $entry != "..")
+			if($entry!= "." && $entry != ".." && !is_dir($entry) && $entry != "min")
 				$files[] = $imgpath . "/" . $entry;
 		}
 		print_r(json_encode($files));
@@ -90,7 +90,7 @@ Helpers
 		// $path = explode("../", $path);
 		// $path= $path[0];
 		while ($entry = readdir($handle)){
-			if($entry!= "." && $entry != ".." )
+			if($entry!= "." && $entry != ".." && !is_dir($entry) && $entry != "min")
 				$files[] = $imgpath . "/min/" . $entry;
 		}
 		print_r(json_encode($files));

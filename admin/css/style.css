@@ -190,7 +190,8 @@ body {
 }
 
 .wra_img{
-    display: -webkit-inline-box;
+    width: 32%;
+    float: left;
 }
 
 .gal_pic2 img{

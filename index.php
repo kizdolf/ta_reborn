@@ -1,8 +1,9 @@
- 
+ <?php  header("Cache-Control: max-age=315360000"); ?>
 <!DOCTYPE html>
 <html  ng-app="myApp">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="Cache-control" content="public">
 	<title>Toulouse Acoustics </title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css">
@@ -10,6 +11,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 	<base href="/public/adminta/">
+	<!-- <base href="/projects/admin/adminta/"> -->
 </head>
 <!-- Piwik -->
 <script type="text/javascript">

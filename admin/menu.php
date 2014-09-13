@@ -29,16 +29,6 @@ $alls = $bdd->get_all_names_id();
 			<li><a href="pics.php?show=off">Galerie 'off'</a></li>
 		</ul>
 		<hr>
-		<h3>Dev</h3>
-		<div class="dropdown">
-			<a  class='btn btn-default btn-md'  data-toggle="dropdown" href="#">quartiers</a>
-			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-				<li><a href="http://localhost/phpmyadmin/"> Local PhpMyadmin</a></li>
-  				<li><a href="https://vmheb62064.ikoula.com:8443/domains/databases/phpMyAdmin/import.php">Dk phpMyAdmin</a></li>
-  				<li><a href="../ta.sql">Dump SQL install</a></li>
-  			</ul>
-		</div>
-		<hr>
 		<h3>Edition rapide</h3>
 		<div class="dropdown">
 			<a  class='btn btn-default btn-md' data-toggle="dropdown" href="#">artistes</a>
@@ -68,6 +58,17 @@ $alls = $bdd->get_all_names_id();
 		<div>
 			<button class="btn btn-default draft">Notes publiques</button>
 		</div>
+		<hr>
+		<h3>Dev</h3>
+		<div class="dropdown">
+			<a  class='btn btn-default btn-md'  data-toggle="dropdown" href="#">Dev links</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+				<li><a href="http://localhost/phpmyadmin/"> Local PhpMyadmin</a></li>
+  				<li><a href="https://vmheb62064.ikoula.com:8443/domains/databases/phpMyAdmin/import.php">Dk phpMyAdmin</a></li>
+  				<li><a href="../ta.sql">Dump SQL install</a></li>
+  			</ul>
+		</div>
+		<a href="docTA-Admin.odt">Documentation admin.</a>
 </div>
 <div id="drafts" style="display:none;">
 	<button class="btn btn-default btn-xs add_draft">Ajouter une note</button>

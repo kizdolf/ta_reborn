@@ -9,3 +9,8 @@ Remettre le bon script de tracking : index.php > head > script < body
 
 importer ta.sql dans phpmyadmin
 
+lesbgma45277com14634_toulouseAcoustics
+
+lesbg_ta
+
+public65taENEMY

@@ -35,7 +35,8 @@
   	</a>
   </div>
   <!-- Nouveau Menu responsive: -->
-<nav ng-controller="headCtrl" class="navbar navbar-default" role="navigation" id="resp_menu">
+  <div ng-controller="headCtrl">
+<nav  class="navbar navbar-default" role="navigation" id="resp_menu">
 	<div class="container container-fluid" id="top_bar">
 		<ul>
 			<li>
@@ -95,10 +96,47 @@
 				<li>
 					<a href="#/partners">partenaires</a>
 				</li>
+				<li>
+					<input id="search" ng-model="str" ng-change="search()" >
+				</li>
 			</ul>
 		</div>
 	</div>
 </nav>
+
+<div id="res">
+	<div ng-repeat="a in res.artistes">
+		<div class="div_grid" >
+			<a href="#/artistes/{{ a.name }}" >{{a.name}}<div class="arrow-right"></div></a>
+			<span ng-if="a.path_vignette == '' ">
+				<img src="img/badges/weekly.png" class="img_grid">
+			</span>
+			<span ng-if="a.path_vignette != ''">
+				<img src="{{a.path_vignette}}" class="img_grid">
+			</span>
+			<!-- <hr class="huge-hr"> -->
+		</div>
+	</div>
+	<div ng-repeat="a in res.quartiers">
+		<div class="div_grid" >
+			<a href="#/quartiers/{{ a.name }}" >{{a.name}}<div class="arrow-right"></div></a>
+			<span ng-if="a.path_vignette == '' ">
+				<img src="img/badges/weekly.png" class="img_grid">
+			</span>
+			<span ng-if="a.path_vignette != ''">
+				<img src="{{a.path_vignette}}" class="img_grid">
+			</span>
+			<!-- <hr class="huge-hr"> -->
+		</div>
+	</div>
+	<div ng-repeat="a in res.videos">
+		<h2>{{a.name}}</h2>
+		<div id="loader"><img  src ="img/badges/loadta.gif"></div>
+		<img ng-show="a.weekly == 1" src="img/badges/weekly.png" alt="logo weekly" class='weekly_badge badge-g'>
+		<div ng-bind-html="a.frame"></div>
+	</div>
+</div>
+</div>
 
 <div class="container container-fluid">
 

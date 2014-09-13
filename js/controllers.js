@@ -60,12 +60,27 @@ angular.module('myApp.controllers', ['ngCookies'])
 		$("#fs-wrapper").fadeOut("slow");
 	});
 
-		$(document).keyup(function(e) {
+	$(document).keyup(function(e) {
 		if (e.keyCode == 27) {
 			$("#fs-wrapper").fadeOut("slow");
 		}
 	});
 
+	$scope.search = function(){
+		if ($scope.str.length >= 3){
+			console.log($scope.str);
+			getData.searcha($scope.str).then(function(data){
+				if (data.data != $scope.res) {
+					$scope.res = data.data;
+					for (var i in $scope.res.videos){
+						$scope.res.videos[i].frame =  tools.iframe($scope.res.videos[i].url);
+					}
+				}
+			});
+		}else{
+			$scope.res = "";
+		}
+	};
 }])
 
 .controller('artisteCtrl', ['pics', 'tools', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, tools, getData, $scope, $routeParams, $http, $sce){

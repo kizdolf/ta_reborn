@@ -117,6 +117,13 @@ Helpers
 			echo "false";
 		}
 	}
+
+	function reslove_search($str, $bdd){
+		$artistes = $bdd->get_all_aprox($str, "artistes");
+		$quartiers = $bdd->get_all_aprox($str, "quartiers");
+		$videos = $bdd->get_all_aprox($str, "videos");
+		print_r(json_encode(array("artistes" => $artistes, "quartiers" => $quartiers, "videos" => $videos)));
+	}
 /*
 Inputs.
 */
@@ -223,6 +230,11 @@ Inputs.
 			break;
 		case 'partners':
 			print_r(json_encode($bdd->get_all_partners()));
+			break;
+		case 'search':
+			if (isset($_GET['str'])) {
+				reslove_search($_GET['str'], $bdd);
+			}
 			break;
 		default:
 			echo "Wrong request";

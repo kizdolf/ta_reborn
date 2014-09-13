@@ -631,13 +631,20 @@ class tapdo
 
 	public function update_vign_name($path, $name)
 	{
-		echo "<pre>";
-		print_r($path);
-		print_r($name);
-		echo "</pre>";
 		$this->_con->beginTransaction();
 		$this->run_q($this->_querys->update->path_vign, array("path" => $path, "name" => $name));	
 		$this->_con->commit();
+	}
+
+	public function get_all_aprox($str, $table)
+	{
+		$q = "approx_".$table;
+		$str = "%".$str."%";
+		$q = $this->_querys->get->$q;
+		$this->_con->beginTransaction();
+		$res = $this->fetch_res($this->run_q($q, array($str)));
+		$this->_con->commit();
+		return $res;
 	}
 
 	/*	PRIVATE FUNCTIONS 	*/

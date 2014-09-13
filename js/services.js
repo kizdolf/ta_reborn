@@ -5,6 +5,10 @@
 
 		.service('getData', ['$http', function($http){
 
+			this.searcha = function(str){
+				return $http.get('API/api.php?get=search&str='+str);
+			};
+
 			this.quartiers = function(param){
 				if(param == '')
 					return $http.get('API/api.php?get=quartiers');

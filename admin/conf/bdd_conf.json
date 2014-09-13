@@ -50,6 +50,9 @@
 			,"style_by_name": "SELECT `id` FROM `style` WHERE `name` = ?"
 			,"partner_by_name": "SELECT `id` FROM `partner` WHERE `name` = ?"
 			,"one_style_by_id" : "SELECT * FROM `style` WHERE `id` = ?"
+			,"approx_artistes" : "SELECT * FROM `artiste` WHERE `name` LIKE ? "
+			,"approx_quartiers" : "SELECT * FROM `quartier` WHERE `name` LIKE ? "
+			,"approx_videos" : "SELECT * FROM `video` WHERE `name` LIKE ? "
 		},
 		"update":{
 			"quartier_nb" : "UPDATE `quartier` SET `nb_videos`= :new_nb WHERE `id` = :id_quartier"

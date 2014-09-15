@@ -349,19 +349,22 @@ body{
 
 .arr_pn{
 	display: block;
-	position: absolute;
+	/*position: absolute;*/
 	margin: 0;
 	padding: 0;
 	cursor: pointer;
 	height: 80px;
+	margin-top: 25%;
 }
 
 .prev_vid{
-	left:0;
+	float: left;
+	margin-left: -50px;
 }
 
 .next_vid{
-	right :0;
+	float: right;
+	margin-right: -50px;
 	-webkit-transform: rotate(180deg);
 	   -moz-transform: rotate(180deg);
 	    -ms-transform: rotate(180deg);
@@ -457,11 +460,15 @@ body{
 
 
 #loader{
-	position: absolute;
-	margin-left: 25%;
+	display: none;
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 25px;
+	height: 0px;
 }
 
 #loader img {
+	display: block;
 	margin: auto;
 }
 
@@ -562,7 +569,21 @@ body{
 	color: black;
 }
 
+.icn-search{
+	margin:0;
+	padding:0;
+	position: absolute !important;
+}
 
+#search:focus{
+}
+
+#res{
+	display: none;
+	width: 60%;
+	margin: auto;
+	min-height: 240px;
+}
 
 
 

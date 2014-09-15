@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('myApp.controllers', ['ngCookies'])
+angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 .run(function($cookieStore){
 	// $cookieStore.remove("visited");
 	$cookieStore.put("visited", "first");
 })
 
-.controller('headCtrl', ['pics', 'filterFilter', '$scope', '$http', '$sce', 'getData', 'tools',  '$cookies', '$cookieStore', '$log'
-	,function(pics, filterFilter, $scope, $http, $sce, getData, tools,  $cookies, $cookieStore, $log){
+.controller('headCtrl', ['pics', 'filterFilter', '$scope', '$http', '$sce', 'getData', 'tools',  '$cookies', '$cookieStore', '$log', '$animate'
+	,function(pics, filterFilter, $scope, $http, $sce, getData, tools,  $cookies, $cookieStore, $log, $animate){
 
 	$scope.title = "Welcome at Toulouse Acoustics";
 
@@ -27,15 +27,11 @@ angular.module('myApp.controllers', ['ngCookies'])
 			$scope.truc = data.data;
 		});
 	});
-	// .then(function(){
-	// 		$scope.first = $cookieStore.get("visited");
-	// 		if ($scope.first == "first") {
-	// 			$scope.fs = "1";
-	// 		}
-	// });
-
 	$scope.change_video = function(choice){
+		$('#loader').show(0);
 		var id = parseInt($scope.weekly.video.id);
+		$("#weekly_video").fadeOut("slow");
+		$(".arr_pn").fadeOut("slow");
 		getData.one_video(id, choice).then(function(data){
 			$scope.weekly.video = data.data;
 			$scope.weekly.video.frame = tools.iframe($scope.weekly.video.url);
@@ -49,6 +45,13 @@ angular.module('myApp.controllers', ['ngCookies'])
 				$scope.weekly.artiste.text = $sce.trustAsHtml($scope.weekly.artiste.text);
 				$scope.weekly.quartier.text = $sce.trustAsHtml($scope.weekly.quartier.text);
 			});
+		})
+		.then(function(){
+			setTimeout(function(){
+				$('#loader').hide("slow");
+				$("#weekly_video").fadeIn("slow");
+				$(".arr_pn").fadeIn("slow");
+			}, 1500);
 		});
 	}
 
@@ -107,7 +110,12 @@ angular.module('myApp.controllers', ['ngCookies'])
 	$scope.pageClass = 'page-artistes';
 	getData.artistes_by('style').then(function(data){
 		$scope.artistes = data.data;
-	});
+	}).then(function(){
+		for (var i in $scope.artistes){
+			if($scope.artistes[i].artistes.length == 0)
+				$scope.artistes[i].name = "";
+		}
+	})
 }])
 
 .controller('locauxCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
@@ -312,7 +320,6 @@ angular.module('myApp.controllers', ['ngCookies'])
 						$("#message").html(" ");
 						$('.btn_send').html("Message envoyé!");
 					}
-				
 				});
 			}else{
 				$scope.message = "Vérification échouée. Veuillez entrer le code à nouveau.";
@@ -333,7 +340,6 @@ angular.module('myApp.controllers', ['ngCookies'])
 		$scope.partners.forEach(function(one){
 			one.desc= $sce.trustAsHtml(one.desc);
 		});
-		console.log($scope.partners);
 	});
 
 }]);

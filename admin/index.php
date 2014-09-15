@@ -87,7 +87,7 @@ if (isset($_COOKIE['session'])) {
    				echo "<h3>".$p['artiste']['name'];
 				echo "<br><small>".$p['video']['name']."</small>";
 				echo "</h3>".$p['video']['date']."</div>";
-				echo "Quartier : ".$p['quartier']['name'];
+				echo "<h4>Quartier : ".$p['quartier']['name']."</h4>";
 				echo "<button class='btn btn-default btn-xs get_vid'>Récupérer la vidéo</button><div class='frame'>".$p['video']['url']."</div>";
 				if ($rights < 3) {
 					echo "<br><a id='edit_btn' href='edit.php?type=video&id=".$p['video']['id']."' class='btn btn-info'><span class='glyphicon glyphicon-th'></span>Modifier la vidéo</a>";

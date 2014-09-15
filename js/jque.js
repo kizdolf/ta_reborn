@@ -21,7 +21,7 @@ $(document).on('click', "#send_msg", function(){
 $('.sous_menu').hide();
 
 $('.menu_header').on('mouseenter', function(){
-	$('.sous_menu').show("1000");
+	$('.sous_menu').show("400");
 });
 
 $('.sous_menu li a').click(function(){
@@ -93,8 +93,26 @@ $timeout = function(){
 		$(".img_wall").css("-ms-transform", "translateY(" + (st/2) + "px)");
 	});
 
+	$("#res").hide(0);
+	$("#search").hide(0);
+
 	$(document).ready(function(){
 		 setTimeout(function() {
 			$('#playerSound').html("<iframe width='100%' height='100%' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/49488549&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false'></iframe>")
-		}, 2000);
+		}, 3000);
+
+		$('.icn-search').click(function(){
+			$("#res").show(0);
+			$("#search").show("slow");
+		});
+
+		$("#search").keypress(function(){
+			$("#res").show("slow");
+		});
+
+		$('#res').click(function(){
+			$("#search").val("");
+			$("#res").hide(0);
+			$("#search").hide(0);
+		});
 	});

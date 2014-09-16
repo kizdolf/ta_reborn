@@ -20,8 +20,11 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 		$scope.weekly.video.frame = tools.iframe($scope.weekly.video.url);
 		$scope.load = "";
 		$scope.weekly.video.text = $sce.trustAsHtml($scope.weekly.video.text);
+		$scope.weekly.video.name = $sce.trustAsHtml($scope.weekly.video.name);
+		$scope.weekly.artiste.name = $sce.trustAsHtml($scope.weekly.artiste.name);
 		$scope.weekly.artiste.text = $sce.trustAsHtml($scope.weekly.artiste.text);
 		$scope.weekly.quartier.text = $sce.trustAsHtml($scope.weekly.quartier.text);
+		$scope.weekly.quartier.name = $sce.trustAsHtml($scope.weekly.quartier.name);
 	}).then(function(){
 		pics.list_pics($scope.weekly.artiste.path_pics).then(function(data){
 			$scope.truc = data.data;
@@ -93,7 +96,9 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 	getData.related('artiste', 'name', $routeParams.id).then(function(data){
 		$scope.artiste = data.data;
 		$scope.artiste.artiste.text = $sce.trustAsHtml($scope.artiste.artiste.text);
+		$scope.artiste.artiste.name = $sce.trustAsHtml($scope.artiste.artiste.name);
 		for (var i in $scope.artiste.videos){
+			$scope.artiste.videos[i].name = $sce.trustAsHtml($scope.artiste.videos[i].name);
 			$scope.artiste.videos[i].frame = tools.iframe($scope.artiste.videos[i].url);
 		}
 		tools.soundcloud(data.data.artiste.itw, "lol");
@@ -114,6 +119,11 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 		for (var i in $scope.artistes){
 			if($scope.artistes[i].artistes.length == 0)
 				$scope.artistes[i].name = "";
+			else{
+				for (var j in $scope.artistes[i].artistes){
+					$scope.artistes[i].artistes[j].name = $sce.trustAsHtml($scope.artistes[i].artistes[j].name);
+				}
+			}
 		}
 	})
 }])
@@ -156,11 +166,12 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 	}).then(function(){
 
 	$scope.quartiers.forEach(function(i){
+		i.name = $sce.trustAsHtml(i.name);
 		pics.list_pics(i.path_pics).then(function(data){
 			$scope.truc = data.data;
 		}).then(function(){
 			if ($scope.truc == "T") {
-				i.imgs = ["img/badges/weekly.png"];
+				i.imgs = ["img/badges/visiteur.jpg"];
 			}
 			else{
 				i.imgs = $scope.truc;
@@ -186,6 +197,7 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 	})
 	.then(function(){
 		for (var i in $scope.artistes){
+			$scope.artistes[i].name = $sce.trustAsHtml($scope.artistes[i].name);
 			pics.list_minpics($scope.artistes[i].path_pics).then(function(data){
 				for (var j in data.data){
 					$scope.back.push(data.data[j]);
@@ -201,6 +213,7 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 	})
 	.then(function(){
 		for (var i in $scope.quartiers){
+			$scope.quartiers[i].name = $sce.trustAsHtml($scope.quartiers[i].name);
 			pics.list_minpics($scope.quartiers[i].path_pics).then(function(data){
 				for (var j in data.data){
 					$scope.back.push(data.data[j]);

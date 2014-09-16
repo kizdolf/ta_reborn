@@ -1,17 +1,17 @@
 <div ng-keyup="change()">
 <div ng-repeat="art in artistes" class="div_grid non-abs pull-left">
-	<a ng-click="name_click(art.path_pics)" >{{ art.name }}<div class="arrow-right"></div></a>
+	<a ng-click="name_click(art.path_pics)" ><span ng-bind-html="art.name"></span><div class="arrow-right"></div></a>
 	<span ng-if="art.path_vignette == ''">
-		<img src="img/badges/weekly.png" class="img_grid">
+		<img src="img/badges/visiteur.jpg" class="img_grid">
 	</span>
 	<span ng-if="art.path_vignette != ''">
 		<img src="{{art.path_vignette}}" class="img_grid">
 	</span>
 </div>
 <div ng-repeat="art in quartiers" class="div_grid non-abs pull-left">
-	<a ng-click="name_click(art.path_pics)" >{{ art.name }}<div class="arrow-right"></div></a>
+	<a ng-click="name_click(art.path_pics)" ><span ng-bind-html="art.name"></span><div class="arrow-right"></div></a>
 	<span ng-if="art.path_vignette == ''">
-		<img src="img/badges/weekly.png" class="img_grid">
+		<img src="img/badges/visiteur.jpg" class="img_grid">
 	</span>
 	<span ng-if="art.path_vignette != ''">
 		<img src="{{art.path_vignette}}" class="img_grid">

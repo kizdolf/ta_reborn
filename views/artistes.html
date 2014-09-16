@@ -5,7 +5,7 @@
 		</div>
 		<div class="block_titre">
 			<div ng-repeat="art in style.artistes" class="div_grid non-abs pull-left">
-				<a href="#/artistes/{{ art.name }}" >{{ art.name }}<div class="arrow-right"></div></a>
+				<a href="#/artistes/{{ art.name }}"><span ng-bind-html="art.name"></span><div class="arrow-right"></div></a>
 				<span ng-if="art.path_vignette == ''">
 					<img src="img/badges/weekly.png" class="img_grid">
 				</span>

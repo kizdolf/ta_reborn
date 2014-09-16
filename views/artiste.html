@@ -1,5 +1,5 @@
 <div class="container">
-	<h1>{{artiste.artiste.name}}</h1>
+	<h1 ng-bind-html="artiste.artiste.name"></h1>
 	<img src="{{artiste.artiste.path_vignette}}" alt="vignette artiste" class="img_grid">
 	<h2 ng-show="artiste.videos[0].category == 1">Visiteur!</h2>
 	<div class='txt'  ng-bind-html="artiste.artiste.text"></div>
@@ -11,6 +11,7 @@
 	Portfolio</a>
 	<div id="videos">
 		<div ng-repeat="video in artiste.videos">
+			<h2 ng-bind-html="video.name"></h2>
 			<img ng-show="video.weekly == 1" src="img/badges/weekly.png" alt="logo weekly" class='weekly_badge badge-g'>
 			<div id="weekly_video" ng-bind-html="video.frame"></div>
 		</div>

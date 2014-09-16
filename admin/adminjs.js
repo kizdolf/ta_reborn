@@ -46,3 +46,49 @@ $(document).on('click', ".valid", function(){
 	$(this).html("<img src='img/miniloader.gif>");
 
 });
+
+$check = function(){
+		$('.inputc').each(function(){
+			if($(this).val() == ''){
+				$(this).addClass('missing');
+				$('.valid').hide();
+				$('.alert').show();
+			}
+			else{
+				$(this).removeClass('missing');
+			}
+		});
+	};
+
+	$check();
+
+	$(".quartier_choix").click(function(){
+		$val = $(this).val();
+		$('.quartier_choix').each(function(){
+			$(this).removeClass('btn-success')
+		})
+		$(this).addClass('btn-success');
+		$("#quartier_id").val($val);
+	});
+
+	$(".style_choix").click(function(){
+		$('#new_style').hide();
+		$val = $(this).val();
+		$('.style_choix').each(function(){
+			$(this).removeClass('btn-success')
+		})
+		$(this).addClass('btn-success');
+		$("#style_id").val($val);
+	});
+
+	$('input').keypress(function(){
+		$('.valid').show();
+		$('.alert').hide();
+		$check();
+	});
+
+	$('#new_style').hide();
+
+	$('.new_style_btn').click(function(){
+		$('#new_style').show();
+	})

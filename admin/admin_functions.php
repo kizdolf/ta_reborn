@@ -79,6 +79,45 @@ function reArrayFiles(&$file_post) {
 	return false;
 }
 function html_edit($entry, $id, $type) {
+
+	$bdd = new tapdo();
+	$styles = $bdd->get_all_styles();
+	$quartiers = $bdd->get_all_quartiers_name();
+	$stylehtml = "";
+
+	if (isset($entry['id_style'])) {
+		foreach ($styles as $style) {
+			if ($style['id'] == $entry['id_style']) {
+				$stylehtml .= "<button value='" .  $style['id'] . "' class='btn btn-success style_choix'>" . $style['name'] . "</button>";
+			}else
+				$stylehtml .= "<button value='" .  $style['id'] . "' class='btn btn-default style_choix'>" . $style['name'] . "</button>";
+		}
+		echo '<div class="btn-group">';
+		echo "<button class='btn btn-warning new_style_btn'>nouveau</button>";
+		echo $stylehtml;
+		echo "</div>";
+		$hidden_id = "style_id";
+		$hidden_name = "id_style";
+		$hidden_val = $entry['id_style'];
+	}
+
+	if (isset($entry["id_quartier"])) {
+		$html = "";
+		foreach ($quartiers as $q) {
+			if ($q['id'] == $entry['id_quartier']) {
+				$html .= "<button value='" .  $q['id'] . "' class='quartier_choix btn btn-success'>" . $q['name'] . "</button>";
+			}else
+				$html .= "<button value='" .  $q['id'] . "' class='quartier_choix btn btn-default'>" . $q['name'] . "</button>";
+		}
+		echo "<div class='btn-group'>";
+		echo "	<a class='btn btn-warning' href='new_quartier.php'>nouveau</a>";
+		echo $html;
+		echo "	</div>";
+		$hidden_id = "quartier_id";
+		$hidden_name = "quartier_id";
+		$hidden_val = $entry['id_quartier'];
+	}
+
 	echo "<form action='edit.php?type=valid_edit&id=$id&table=$type' method='post' enctype='multipart/form-data'>";
 	foreach ($entry as $col => $val) {
 		if(!strstr($col, "id") && !strstr($col, "date") && !strstr($col, "path")) {
@@ -110,6 +149,11 @@ function html_edit($entry, $id, $type) {
 				<h3>Changer la vignette  : 220px / 220px</h3>
 				<input type='file' name='vignette' id='vignette'> <br>
 			</div>";
+			if (isset($hidden_name)) {
+				echo "<input type='hidden' class='input-large' name='$hidden_name' value='$hidden_val' id='$hidden_id'>";
+			}
+	}else{
+		echo "<input type='hidden' class='input-large' name='$hidden_name' value='$hidden_val' id='$hidden_id'>";
 	}
 	echo "<br><input type='submit' value='valider'>";
 	echo "</form>";
@@ -117,6 +161,9 @@ function html_edit($entry, $id, $type) {
 
 function handler_new_entry($bdd, $post, $files)
 {
+	foreach ($post as $key => $value) {
+		$post[$key] = htmlspecialchars($value, ENT_QUOTES);
+	}
 	$message = "";
 	if (isset($post['new_quartier'])) {
 		$path = "../portfolio/quartiers/".$post['quartier_name'];
@@ -182,6 +229,9 @@ function handler_message($get)
 
 function handler_new_partner($post, $files, $bdd)
 {
+	foreach ($post as $key => $value) {
+		$post[$key] = htmlspecialchars($value, ENT_QUOTES);
+	}
 	if (isset($files['partner_logo']) && $files['partner_logo']['name'] != '') {
 		$ext = explode(".", $files['partner_logo']["name"]);
 		$ext = strtolower($ext[1]);

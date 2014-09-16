@@ -664,6 +664,29 @@ class tapdo
 		return $prep;
 	}
 
+	/*		Classics helpers		*/
+
+	public function begin()
+	{
+		$this->_con->beginTransaction();
+	}
+
+	public function prep($q)
+	{
+		$prep = $this->_con->prepare($q);
+		return $prep;
+	}
+
+	public function id()
+	{
+		return $this->_con->lastInsertId();
+	}
+	
+	public function commit()
+	{
+		$this->_con->commit();
+	}
+	
 	public function count_videos()
 	{
 		$q = "SELECT `id` FROM `video` WHERE 1";

@@ -78,6 +78,9 @@ if ($_GET['type'] == "valid_edit") {
 	html_edit($bdd->$get('id', $id), $id, $type);
  ?>
 </div>
+	<script src="../components/jquery.js"></script>
+	<script src="../components/purl.js"></script>
+	<script src="adminjs.js" type="text/javascript"></script>
 </body>
 </html>
 <?php } ?>

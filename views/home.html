@@ -31,11 +31,11 @@
 			<!-- <hr class="huge-hr"> -->
 		</div>
 		<div class="header_titre">
-			<h2>{{ weekly.artiste.name }}</h2>
-			<h3>{{weekly.video.name}}</h3>
+			<h2 ng-bind-html="weekly.artiste.name"></h2>
+			<h3 ng-bind-html="weekly.video.name"></h3>
 		</div>
 		<div class="block_text">
-			<h3><a href="#/quartiers/{{weekly.quartier.name}}">{{weekly.quartier.name}}</a></h3>
+			<h3><a href="#/quartiers/{{weekly.quartier.name}}" ng-bind-html="weekly.quartier.name"></a></h3>
 			<span ng-if="weekly.video.category == 1 " id="badge_cat">
 				<img src="img/badges/visiteur.jpg">
 			</span>

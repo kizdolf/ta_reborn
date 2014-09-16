@@ -1,36 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Cache-control" content="public">
+	<title>Toulouse Acoustics </title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+	<!-- <base href="/projects/admin/adminta/"> -->
+</head>
+<body>
 <?php 
 spl_autoload_register(function ($class) {
 	include __DIR__.'/classes/' . $class . '_class.php';
 });
+require_once('admin/admin_functions.php');
+$log = new log();
+
+if (!$log->is_logued()) {
+	echo "<br><h1> C'est pas pour toi ici...</h1>";
+}else{
+?>
+	<a class="btn btn-danger btn-xs" href="admin/index.php" style="position: fixed; top: 15px; right: 15px;">Retourner sur l'admin.</a>
+	<h1>SCRIPT HAS STARTED. SCROLL DOWN TO SEE WHAT HAPPEN.</h1>
+	<h2>And don't quit the page...</h2>
+	<iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/4736449&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+
+<?php
+ob_flush();
+flush();
+ob_flush();
+flush();
+ob_flush();
+flush();
 $html = "\n\n début script php 't_q.php' ---------------- \n\n";
 
-$file_log = $argv[1];
+if (isset($argv[1]))
+	$file_log = $argv[1];
+else
+	$file_log = "log_vimeo.log";
 
 if (isset($argv[2])) {
 	$limit = $argv[2];
 }else
 	$limit = 0;
 
-if (isset($argv[3]) && $argv[3] == "del"){
-	$supr = true;
-	$html .= "effacement de la base de donées passé en paramètres.";
-}
-else
-	$supr = false;
-
+$supr = true;
+$url_base="http://vimeo.com/toulouseacoustics/videos/page:";
+$file_out="res_html";
+$file_log="log_vimeo.log";
 
 $times = array();
 $start_time = microtime(true);
+$nb_page = 6;
+$i = 1;
+while ($i <= $nb_page)
+{
+	$currenturl = $url_base.$i;
+	exec("wget -q ".$currenturl);
+	echo "<br>page $currenturl retrieved.<br>";
+	$i++;
+	ob_flush();
+	flush();
+	ob_flush();
+	flush();
+	ob_flush();
+	flush();
+	ob_flush();
+	flush();
+}
+exec("cat page* >> $file_out");
 
+$ol = file_get_contents($file_out);
 
-$ol = file_get_contents("res_html");
-
-echo "Découpage des pages web : ";
+echo "<br>Découpage des pages web : ";
 $html.= "Découpage des pages web : ";
 $lis = explode("</li>", $ol);
-echo "... Fait! \n";
+echo "<br>... Fait! \n";
 $html.= "... Fait! \n";
 $a = $lis[0];
+
+ob_flush();
+flush();
 
 $url = array();
 $post = array();
@@ -52,23 +105,23 @@ foreach ($lis as $li) {
 	if (isset($matches[2]) && !isset($matches[3])) {
 		$title = explode("-", $matches[2]);
 		if (isset($title[1]) && !isset($title[2]) && ($i < $limit || $limit == 0)) {
-			echo "\nVidéo trouvée! num: ".$i++;
+			echo "<br><hr><br><br>\nVidéo trouvée! num: ".$i++;
 			$html.= "\nVidéo trouvée! num: ".$i;
 			$name = explode("(", $title[1]);
 			$item["url"] = "http://vimeo.com".$matches[1];
 			$item["artiste"] =  strtolower(trim($title[0]));
 			$item["titre_video"] = strtolower(trim($name[0]));
-			echo "\nArtiste ".$item['artiste'];
+			echo "<br>\nArtiste: ".$item['artiste'];
 			$html.= "\nArtiste ".$item['artiste'];
 			if (true) {
-				echo "\nDownloading video page : ".$item['url']."\n\r";
+				echo "<br>\nDownloading video page : ".$item['url']."\n\r";
 				$html.= "\nDownloading video page : ".$item['url']."\n\r";
 				$t = microtime(true);
-				echo "Nom de la vidéo: ".$item['titre_video'];
+				echo "<br>Nom de la vidéo: ".$item['titre_video'];
 				$html.= "Nom de la vidéo: ".$item['titre_video'];
 				exec("wget -q -O page.tmp ".$item['url']);
 				$t = microtime(true) - $t;
-				echo "\nDownload fini en ".$t. "secondes.\n";
+				echo "<br>\nDownload fini en ".$t. "secondes.\n";
 				$html.= "\nDownload fini en ".$t. "secondes.\n";
 				$page = file_get_contents("page.tmp");
 				$result = preg_match($pattern_lieu, $page, $lieu);
@@ -84,12 +137,12 @@ foreach ($lis as $li) {
 				if (isset($matches_img[2])) {
 					$pic = array();
 					$pic["name"] = $item['artiste'];
-					echo "Downloading image ".$matches_img[2]. " ...\n";
+					echo "<br>Downloading image ".$matches_img[2]. " ...\n";
 					$html.= "Downloading image ".$matches_img[2]. " ...\n";
 					$t = microtime(true);
 					$pic['img'] = file_get_contents($matches_img[2]);
 					$t = microtime(true) - $t;
-					echo "Download fini en ".$t. "secondes.\n";
+					echo "<br>Download fini en ".$t. "secondes.\n";
 					$html.= "Download fini en ".$t. "secondes.\n";
 					if (!is_dir("portfolio/artistes/".$pic['name'])) {
 						mkdir("portfolio/artistes/".$pic['name']);
@@ -99,11 +152,13 @@ foreach ($lis as $li) {
 					}
 					file_put_contents("portfolio/artistes/".$pic['name']."/"."min/".$pic['name'].".jpg", $pic['img']);
 					$item['path_vignette'] = "portfolio/artistes/".$pic['name']."/"."min/".$pic['name'].".jpg";
-					echo "Image sauvegardé avec succée.\n\n\n";
+					echo "<br>Image sauvegardé avec succée.\n\n\n";
 					$html.= "Image sauvegardé avec succée.\n\n\n";
 				}
 			}
 			$post[] = $item;
+			ob_flush();
+			flush();
 		}
 	}
 }
@@ -177,22 +232,28 @@ $q = "UPDATE `video` SET `weekly` = '1' WHERE `id` = ".$last_id;
 $p = $bdd->prep($q);
 $p->execute();
 $bdd->commit();
+exec("rm page*");
+exec("rm $file_out");
 $end = microtime(true);
 $times['preparation'] = $start_dl - $start_time;
 $times['download'] = $end_dl - $start_dl;
 $times['bdd'] = $end - $sql_start;
 $times['full'] = $end - $start_time;
-echo "-- Temps Total --\n";
+echo "<br><br>-- Temps Total --\n";
 $html.= "-- Temps Total --\n";
-echo "-- ".$times['full']."\n";
+echo "<br>-- ".$times['full']."\n";
 $html.= "-- ".$times['full']."\n";
-echo "\n-- preparation : ".$times['preparation'];
+echo "<br>\n-- preparation : ".$times['preparation'];
 $html.= "\n-- preparation : ".$times['preparation'];
-echo "\n-- download : ".$times['download'];
+echo "<br>\n-- download : ".$times['download'];
 $html.= "\n-- download : ".$times['download'];
-echo "\n-- mise en bdd : ".$times['bdd'];
+echo "<br>\n-- mise en bdd : ".$times['bdd'];
 $html.= "\n-- mise en bdd : ".$times['bdd']."\n\n";
 
 file_put_contents($file_log, $html, FILE_APPEND);
 
+}
+
 ?>
+</body>
+</html>

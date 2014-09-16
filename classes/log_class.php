@@ -44,7 +44,7 @@ class log
 				,"hash" => hash('whirlpool', $password));
 		$to_save = serialize($to_save);
 		if ($trust) {
-			setcookie("session", $to_save, time()+(3600 * 24 * 7));
+			setcookie("session", $to_save, time()+(3600 * 24 * 7), "/");
 		}
 		else
 			setcookie("session", $to_save, time()+3600);

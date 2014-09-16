@@ -39,14 +39,17 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 			$scope.weekly.video = data.data;
 			$scope.weekly.video.frame = tools.iframe($scope.weekly.video.url);
 			$scope.weekly.video.text = $sce.trustAsHtml($scope.weekly.video.text);
+			$scope.weekly.video.name = $sce.trustAsHtml($scope.weekly.video.name);
 		})
 		.then(function(){
 			var ids =  $scope.weekly.video.id_artiste + "," +  $scope.weekly.video.id_quartier;
 			getData.related('video', 'id', ids).then(function(data){
 				$scope.weekly.artiste = data.data.artiste;
 				$scope.weekly.quartier = data.data.quartier;
+				$scope.weekly.artiste.name = $sce.trustAsHtml($scope.weekly.artiste.name);
 				$scope.weekly.artiste.text = $sce.trustAsHtml($scope.weekly.artiste.text);
 				$scope.weekly.quartier.text = $sce.trustAsHtml($scope.weekly.quartier.text);
+				$scope.weekly.quartier.name = $sce.trustAsHtml($scope.weekly.quartier.name);
 			});
 		})
 		.then(function(){
@@ -93,7 +96,7 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 
 	$scope.pageClass = 'page-artiste';
 
-	getData.related('artiste', 'name', $routeParams.id).then(function(data){
+	getData.related('artiste', 'id', $routeParams.id).then(function(data){
 		$scope.artiste = data.data;
 		$scope.artiste.artiste.text = $sce.trustAsHtml($scope.artiste.artiste.text);
 		$scope.artiste.artiste.name = $sce.trustAsHtml($scope.artiste.artiste.name);
@@ -147,11 +150,17 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 .controller('quartierCtrl', ['tools', 'getData', '$scope', '$routeParams', '$http', '$sce', function(tools, getData, $scope, $routeParams, $http, $sce){
 	$scope.pageClass = 'page-quartier';
 
-	getData.related('quartier', 'name', $routeParams.id).then(function(data){
+	getData.related('quartier', 'id', $routeParams.id).then(function(data){
 		$scope.quartier = data.data;
 		$scope.quartier.quartier.text = $sce.trustAsHtml($scope.quartier.quartier.text);
+		$scope.quartier.quartier.name = $sce.trustAsHtml($scope.quartier.quartier.name);
 		for (var i in $scope.quartier.videos){
 			$scope.quartier.videos[i].frame = tools.iframe($scope.quartier.videos[i].url);
+			$scope.quartier.videos[i].name = $sce.trustAsHtml($scope.quartier.videos[i].name);
+		}
+		for (var i in $scope.quartier.artistes)
+		{
+			$scope.quartier.artistes[i].name = $sce.trustAsHtml($scope.quartier.artistes[i].name);
 		}
 	});
 }])

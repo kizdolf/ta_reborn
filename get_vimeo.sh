@@ -30,36 +30,45 @@ done
 
 cat page* >> $file_out
 echo "Concaténation éffectuée."
-read -r -p "Voulez vous conserver la base de donnée existante? (be carful) [y/N] " response
-echo "Lançement du script php.\n\n"
-date >> $file_log
-echo "Lançement du script php.\n\n" >> $file_log
-case $response in
-    [yY][eE][sS]|[yY]) 
-	php t_q.php $file_log $1 
-        ;;
-    *)
-	php t_q.php $file_log $1 del
-        ;;
-esac
-
+if [[ $1 != "full" ]]; then
+	read -r -p "Voulez vous conserver la base de donnée existante? (be carful) [y/N] " response
+	echo "Lançement du script php.\n\n"
+	date >> $file_log
+	echo "Lançement du script php.\n\n" >> $file_log
+	case $response in
+	    [yY][eE][sS]|[yY]) 
+		php t_q.php $file_log $1 
+	        ;;
+	    *)
+		php t_q.php $file_log $1 del
+	        ;;
+	esac
+else
+	php t_q.php $file_log 0 del
+fi
 echo "Fin du script php."
 date >> $file_log
 echo "Fin du script php." >> $file_log
-
-read -r -p "Voulez vous supprimer les fichiers téléchargés? [y/N] " response
-case $response in
-    [yY][eE][sS]|[yY]) 
-  	rm $file_out
+if [[ $1 != "full" ]]; then
+	read -r -p "Voulez vous supprimer les fichiers téléchargés? [y/N] " response
+	case $response in
+	    [yY][eE][sS]|[yY]) 
+	  	rm $file_out
+		rm page*
+		echo "fichiers supprimés."
+		echo "suppression des fichiers " >> $file_log
+	        ;;
+	    *)
+	      	echo "fichiers conservés."
+		echo "conservation des fichiers " >> $file_log
+	        ;;
+	esac
+else
+	rm $file_out
 	rm page*
 	echo "fichiers supprimés."
 	echo "suppression des fichiers " >> $file_log
-        ;;
-    *)
-      	echo "fichiers conservés."
-	echo "conservation des fichiers " >> $file_log
-        ;;
-esac
+fi
 
 
 echo "Fin du script."

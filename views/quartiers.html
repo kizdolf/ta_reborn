@@ -1,7 +1,7 @@
 <div class="container">
 	<div ng-repeat="quartier in quartiers">
 		<div class="div_grid" ng-if="quartier.nb_videos > 0">
-			<a href="#/quartiers/{{ quartier.name }}" ><span ng-bind-html="quartier.name"></span><div class="arrow-right"></div></a>
+			<a href="#/quartiers/{{ quartier.id }}" ><span ng-bind-html="quartier.name"></span><div class="arrow-right"></div></a>
 		<span ng-if="quartier.path_vignette == ''">
 			<img src="{{quartier.imgs[0]}}" class="img_grid">
 		</span>

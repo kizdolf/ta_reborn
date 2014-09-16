@@ -107,7 +107,7 @@
 	<div id="res">
 		<div ng-repeat="a in res.artistes">
 			<div class="div_grid" >
-				<a href="#/artistes/{{ a.name }}" >{{a.name}}<div class="arrow-right"></div></a>
+				<a href="#/artistes/{{ a.id }}" >{{a.name}}<div class="arrow-right"></div></a>
 				<span ng-if="a.path_vignette == '' ">
 					<img src="img/badges/weekly.png" class="img_grid">
 				</span>
@@ -119,7 +119,7 @@
 		</div>
 		<div ng-repeat="a in res.quartiers">
 			<div class="div_grid" >
-				<a href="#/quartiers/{{ a.name }}" >{{a.name}}<div class="arrow-right"></div></a>
+				<a href="#/quartiers/{{ a.id }}" >{{a.name}}<div class="arrow-right"></div></a>
 				<span ng-if="a.path_vignette == '' ">
 					<img src="img/badges/weekly.png" class="img_grid">
 				</span>

@@ -1,5 +1,5 @@
 <div class="container">
-<h1>{{ quartier.quartier.name }}</h1>
+<h1 ng-bind-html="quartier.quartier.name"></h1>
 <img src="{{quartier.quartier.path_vignette}}" alt="vignette quartier" class="img_grid">
 <h3><a  class="btn btn-default btn-lg" href="{{quartier.quartier.url}}">Site web</a></h3>
 <a class="btn btn-default btn-lg" href="#/portfolio?path={{ quartier.quartier.path_pics }}" title="portfolio {{quartier.quartier.name}}" alt="portfolio {{quartier.quartier.name}}">
@@ -8,7 +8,7 @@ Portfolio</a>
 <div class='txt'  ng-bind-html="quartier.quartier.text"></div>
 	<ul id="blck">
 		<li ng-repeat="video in quartier.videos">
-			<h3>{{ video.name }}</h3>
+			<h3 ng-bind-html="video.name"></h3>
 			<img ng-show="video.weekly == 1" src="img/badges/weekly.png" alt="logo weekly" class='weekly_badge badge-g'>
 			<span ng-bind-html="video.frame"></span>
 			<h2 ng-show="video.category == 1">Visiteur!</h2>
@@ -16,9 +16,8 @@ Portfolio</a>
 	</ul>
 	<ul id="blck">
 		<li ng-repeat="art in quartier.artistes">
-			<h3>{{art.name}}</h3>
 			<div class="div_grid" >
-			<a href="#/artistes/{{ art.name }}" ><div class="arrow-right"></div></a>
+			<a href="#/artistes/{{ art.name }}" ><span ng-bind-html="art.name"></span><div class="arrow-right"></div></a>
 			<span ng-if="art.path_vignette == '' ">
 				<img src="img/badges/weekly.png" class="img_grid">
 			</span>

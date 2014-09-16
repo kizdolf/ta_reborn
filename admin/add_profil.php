@@ -3,6 +3,8 @@
 spl_autoload_register(function ($class) {
 	include __DIR__.'/../classes/' . $class . '_class.php';
 });
+require_once('admin_functions.php');
+
 $log = new log();
 $bdd = new tapdo();
 $message = "";

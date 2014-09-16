@@ -1,6 +1,7 @@
 <?php 
 if(!isset($bdd)){$bdd = new tapdo();}
 $alls = $bdd->get_all_names_id();
+$rights = rights($bdd);
 
  ?>
 <div id="conteneur-menu2">
@@ -66,6 +67,7 @@ $alls = $bdd->get_all_names_id();
 				<li><a href="http://localhost/phpmyadmin/"> Local PhpMyadmin</a></li>
   				<li><a href="https://vmheb62064.ikoula.com:8443/domains/databases/phpMyAdmin/import.php">Dk phpMyAdmin</a></li>
   				<li><a href="../ta.sql">Dump SQL install</a></li>
+  				<?php if($rights == 0){ ?><li><a href="../t_q.php" class="btn btn-danger">(danger) Run get_.sh.</a></li><?php } ?>
   			</ul>
 		</div>
 		<a href="docTA-Admin.odt">Documentation admin.</a>
@@ -157,5 +159,11 @@ $alls = $bdd->get_all_names_id();
 				$("#form_draft").hide(0);
 			});
 		}
+
+		$('.run_script').click(function(){
+			$.post('ajax.php', {run: "script"}).done(function(data){
+				console.log(data);
+			});
+		});
 	});
 </script>

@@ -21,7 +21,7 @@
 	</div>
 	<div class="container container-fluid block_titre" id="wrapper" >
 		<div class="div_grid" >
-			<a href="#/artistes/{{ weekly.artiste.name }}" ><div class="arrow-right"></div></a>
+			<a href="#/artistes/{{ weekly.artiste.id }}" ><div class="arrow-right"></div></a>
 			<span ng-if="weekly.artiste.path_vignette == '' ">
 				<img src="img/badges/weekly.png" class="img_grid">
 			</span>
@@ -35,7 +35,7 @@
 			<h3 ng-bind-html="weekly.video.name"></h3>
 		</div>
 		<div class="block_text">
-			<h3><a href="#/quartiers/{{weekly.quartier.name}}" ng-bind-html="weekly.quartier.name"></a></h3>
+			<h3><a href="#/quartiers/{{weekly.quartier.id}}" ng-bind-html="weekly.quartier.name"></a></h3>
 			<span ng-if="weekly.video.category == 1 " id="badge_cat">
 				<img src="img/badges/visiteur.jpg">
 			</span>

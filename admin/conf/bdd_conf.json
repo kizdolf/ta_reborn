@@ -43,7 +43,7 @@
 			,"team" : "SELECT `text` FROM `text` WHERE `name` = 'team'"
 			,"contact" : "SELECT `text` FROM `text` WHERE `name` = 'contact'"
 			,"videos_id_artistes_cat" : "SELECT `id_artiste` FROM `video` WHERE `category` = ?"
-			,"all_artistes_by_style" : "SELECT `name`, `path_vignette` FROM `artiste` WHERE `id_style` = ?"
+			,"all_artistes_by_style" : "SELECT `name`, `path_vignette`, `id` FROM `artiste` WHERE `id_style` = ?"
 			,"all_styles": "SELECT * FROM `style` WHERE 1"
 			,"all_partners": "SELECT * FROM `partner` WHERE 1"
 			,"all_drafts": "SELECT * FROM `draft` WHERE 1"

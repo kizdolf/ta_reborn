@@ -248,13 +248,14 @@ function handler_new_partner($post, $files, $bdd)
 }
 
 function rights($bdd){
-	if (isset($_COOKIE['session'])) {
-		$cookie = unserialize($_COOKIE['session']);
+	if (isset($_COOKIE['admin_session_toulouse_acoustics'])) {
+		$cookie = unserialize($_COOKIE['admin_session_toulouse_acoustics']);
 		$name = $cookie['user'];
 		$user = $bdd->get_one_user('ta_login', $name);
 		$rights = $user['rights'];
+		echo "RIGHTS IN FUNCTION!! ==".$rights;
 	}else
-		$rights = false;
+		$rights = 999;
 	return $rights;
 }
 
@@ -273,6 +274,5 @@ function html_header($title){
 	echo '	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>';
 	echo '</head>';
 }
-
 
 ?>

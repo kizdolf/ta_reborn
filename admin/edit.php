@@ -17,7 +17,7 @@ ini_set('max_execution_time', 3000);
 $bdd = new tapdo();
 $type = $_GET['type'];
 $id = $_GET['id'];
-$cookie = unserialize($_COOKIE['session']);
+$cookie = unserialize($_COOKIE['admin_session_toulouse_acoustics']);
 $name = $cookie['user'];
 $user = $bdd->get_one_user('ta_login', $name);
 $rights = $user['rights'];

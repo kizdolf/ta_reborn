@@ -47,7 +47,7 @@ $message .= handler_message($_GET);
 	USER
 */
 
-$rights = (isset($_COOKIE['session'])) ? rights($bdd) : $bdd->get_rights_user(array($id_admin));
+$rights = (isset($_COOKIE['admin_session_toulouse_acoustics'])) ? rights($bdd) : $bdd->get_rights_user(array($id_admin));
 
 	html_header("Home");
 

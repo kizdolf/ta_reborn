@@ -20,7 +20,7 @@ if (!$log->is_logued()) {
 	}elseif (!isset($_POST['name']) || !isset($_POST['txt'])) {
 		header('Location: index.php?wrong=params drafts ajax');
 	}else{
-		$cookie = unserialize($_COOKIE['session']);
+		$cookie = unserialize($_COOKIE['admin_session_toulouse_acoustics']);
 		$name = $cookie['user'];
 		$kwarg = array($name, $_POST['name'], $_POST['txt']);
 		$bdd->new_draft($kwarg);

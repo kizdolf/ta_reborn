@@ -28,14 +28,26 @@
 <noscript><p><img src="http://localhost/public/adminta/components/piwik/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 <body>
+<!-- FAcebook SDK -->
+<div id="fb-root"></div>
+ <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '359277744238959',
+          xfbml      : true,
+          version    : 'v2.1'
+        });
+      };
 
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- End Facebook SDK -->
 
   <div id="header">
   	<a href="#/home" id="img_header">
@@ -148,7 +160,7 @@
 </div>
 
 <div class="container container-fluid">
-
+<div class="fb-like" data-href="http://localhost/public/adminta/#/home" data-width="80" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
 <div ng-view ></div>
 
 </div>

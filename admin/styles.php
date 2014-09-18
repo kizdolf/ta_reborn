@@ -10,7 +10,7 @@ $message = "";
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
 }else{
-	$cookie = unserialize($_COOKIE['session']);
+	$cookie = unserialize($_COOKIE['admin_session_toulouse_acoustics']);
 	$name = $cookie['user'];
 	$user = $bdd->get_one_user('ta_login', $name);
 	$rights = $user['rights'];

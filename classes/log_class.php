@@ -17,9 +17,9 @@ class log
 
 	public function is_logued()
 	{
-		if (isset($_COOKIE['session']))
+		if (isset($_COOKIE['admin_session_toulouse_acoustics']))
 		{
-			$to_verif = unserialize($_COOKIE['session']);
+			$to_verif = unserialize($_COOKIE['admin_session_toulouse_acoustics']);
 			if ($to_verif['ip'] != $_SERVER["REMOTE_ADDR"])
 				return false;
 			if ($this->_bdd->user_exist($to_verif['user'], $to_verif['hash'])) {
@@ -44,16 +44,16 @@ class log
 				,"hash" => hash('whirlpool', $password));
 		$to_save = serialize($to_save);
 		if ($trust) {
-			setcookie("session", $to_save, time()+(3600 * 24 * 7), "/");
+			setcookie("admin_session_toulouse_acoustics", $to_save, time()+(3600 * 24 * 7), "/");
 		}
 		else
-			setcookie("session", $to_save, time()+3600);
+			setcookie("admin_session_toulouse_acoustics", $to_save, time()+3600);
 		return $this->_bdd->up_user_visit($login);
 	}
 
 	public function unset_session()
 	{
-		setcookie("session", "", time()-3600);
+		setcookie("admin_session_toulouse_acoustics", "", time()-3600);
 	}
 
 }

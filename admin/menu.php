@@ -66,10 +66,16 @@ $rights = rights($bdd);
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 				<li><a href="http://localhost/phpmyadmin/"> Local PhpMyadmin</a></li>
   				<li><a href="https://vmheb62064.ikoula.com:8443/domains/databases/phpMyAdmin/import.php">Dk phpMyAdmin</a></li>
-  				<li><a href="../ta.sql">Dump SQL install</a></li>
-  				<?php if($rights == 0){ ?><li><a href="../t_q.php" class="btn btn-danger">(danger) Run get_.sh.</a></li><?php } ?>
+  				<li><button class="get_dump">Dump SQL install</button></li>
+  				<?php if($rights == 0){ ?><li><button class="btn btn-danger run_s">(danger) Run get_.sh.</button></li><?php } ?>
   			</ul>
 		</div>
+		<div id="confirm" style="display:none;" class="alert alert-danger">
+			<h4>Attention! lancer ce script vas supprimer puis générer la totalité de la base de données. Voulez vous continuez?</h4>
+			<button class="btn btn-success btn-xs cancel">Annuler</button>
+			<a class="btn btn-warning btn-xs" href="../t_q.php">Shut UP and do it!</a>
+		</div>
+		<div id="links_ready" style="display:none;" class="alert alert-info"></div>
 		<a href="docTA-Admin.odt">Documentation admin.</a>
 </div>
 <div id="drafts" style="display:none;">
@@ -81,7 +87,7 @@ $rights = rights($bdd);
 			<textarea id="ck_b" name="draft" rows="5" cols="30"></textarea>
 			<script>CKEDITOR.replace( 'ck_b' );</script>
 			<div id="sub_form">
-				<button class="btn btn-success valid" type="submit" name="new_partner">Add it</button>
+				<button class="btn btn-success valid" type="submit" name="new_draft">Add it</button>
 			</div>
 		</form>
 	</div>
@@ -90,9 +96,29 @@ $rights = rights($bdd);
 </div>
 <script src="../components/jquery.js"></script>
 <script src="../css/bootstrap/js/bootstrap.min.js"></script>
- <script src="http://malsup.github.com/jquery.form.js"></script> 
+ <script src="../components/jquery.form.js"></script> 
 <script type="text/javascript">
+	
 	$( document ).ready(function(){
+
+		$('.get_dump').click(function(){
+			$('#links_ready').show();
+			$('#links_ready').html('Génération en cours... <img src="img/miniloader.gif"> ');
+			$.post('ajax.php', {dump: 'all'})
+			.done(function(){
+				$('#links_ready').html('<a class="btn btn-success" href="dump_data.json">Télécharger le dump en JSON</a>');
+			});
+		});
+
+		$('.run_s').on('click', function(){
+			console.log("qui c'est qui vas tout péter?");
+			$('#confirm').show(0);
+		});
+
+		$('.cancel').on('click', function(){
+			$('#confirm').hide(0);
+		});
+
 		$("#drafts").hide(0);
 
 		
@@ -132,11 +158,9 @@ $rights = rights($bdd);
 				$("#form_draft").show("slow");
 			}
 		});
-		$('#send_draft').submit(function( event ) { 
-			event.preventDefault();
+
+		$('#send_draft').on('submit', function( event ) { 
 			$name = $('input').val();
-			$txt = $('textarea').val();
-			$txt = $('textarea').val();
 			$txt = $('textarea').val();
 			$.post('drafts.php', {name: $name, txt: $txt}).done(function(data){
 				$("#drafts_list").html("");
@@ -144,6 +168,7 @@ $rights = rights($bdd);
 				$('.add_draft').html("Nouvelle note");
 				$("#form_draft").hide(0);
 			});
+			event.preventDefault();
 		}); 
 
 		$('.hide_drafts').click(function(){

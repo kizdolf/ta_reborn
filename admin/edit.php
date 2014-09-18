@@ -52,22 +52,10 @@ if ($_GET['type'] == "valid_edit") {
 	$entry['date_update'] = date("Y-m-d H:i:s");
 	$bdd->$update($_GET['table'], 'id', $id, $entry);
 	header('Location: index.php?done=edit');
-}
+}else{
+	html_header("Edition ".$type);
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Edit</title>
-	<meta charset="utf-8">
-	<script src="../components/ckeditor/ckeditor.js"></script>
-	<script src="../components/jquery.js"></script>
-	<script src="../components/purl.js"></script>
-	<script src="adminjs.js"></script>
-  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-</head>
 <body>
  	<div id="img_div"></div>
 	<?php include('menu.php'); ?>
@@ -76,6 +64,7 @@ if ($_GET['type'] == "valid_edit") {
 
 	$get = "get_one_".$type;
 	html_edit($bdd->$get('id', $id), $id, $type);
+
  ?>
 </div>
 	<script src="../components/jquery.js"></script>
@@ -83,4 +72,4 @@ if ($_GET['type'] == "valid_edit") {
 	<script src="adminjs.js" type="text/javascript"></script>
 </body>
 </html>
-<?php } ?>
+<?php  } } ?>

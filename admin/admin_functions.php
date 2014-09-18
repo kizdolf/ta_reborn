@@ -92,7 +92,7 @@ function html_edit($entry, $id, $type) {
 			}else
 				$stylehtml .= "<button value='" .  $style['id'] . "' class='btn btn-default style_choix'>" . $style['name'] . "</button>";
 		}
-		echo '<div class="btn-group">';
+		echo '<div class="btn-group change-style">';
 		echo "<button class='btn btn-warning new_style_btn'>nouveau</button>";
 		echo $stylehtml;
 		echo "</div>";
@@ -107,14 +107,16 @@ function html_edit($entry, $id, $type) {
 			if ($q['id'] == $entry['id_quartier']) {
 				$html .= "<button value='" .  $q['id'] . "' class='quartier_choix btn btn-success'>" . $q['name'] . "</button>";
 			}else
-				$html .= "<button value='" .  $q['id'] . "' class='quartier_choix btn btn-default'>" . $q['name'] . "</button>";
+				$html .= "<button value='" .  $q['id'] . "' class='quartier_choix btn btn-default'  style='display:none'>" . $q['name'] . "</button>";
 		}
-		echo "<div class='btn-group'>";
+		echo "<input type='text' class='input-large' name='search' placeholder='rechercher un quartier' id='s_q'>";
+		echo "<input type='submit' value='ok' id='sub_q'><hr>";
+		echo "<div class='btn-group change-quartier'>";
 		echo "	<a class='btn btn-warning' href='new_quartier.php'>nouveau</a>";
 		echo $html;
 		echo "	</div>";
 		$hidden_id = "quartier_id";
-		$hidden_name = "quartier_id";
+		$hidden_name = "id_quartier";
 		$hidden_val = $entry['id_quartier'];
 	}
 
@@ -246,10 +248,31 @@ function handler_new_partner($post, $files, $bdd)
 }
 
 function rights($bdd){
-	$cookie = unserialize($_COOKIE['session']);
-	$name = $cookie['user'];
-	$profil = $bdd->get_one_user('ta_login', $name);
-	return $profil['rights'];
+	if (isset($_COOKIE['session'])) {
+		$cookie = unserialize($_COOKIE['session']);
+		$name = $cookie['user'];
+		$user = $bdd->get_one_user('ta_login', $name);
+		$rights = $user['rights'];
+	}else
+		$rights = false;
+	return $rights;
 }
+
+function html_header($title){
+	echo '	<!DOCTYPE html>';
+	echo '<html>';
+	echo '<head>';
+	echo '	<title>Admin | '.$title.'</title>';
+	echo '	<meta charset="utf-8">';
+	echo '	<script src="../components/ckeditor/ckeditor.js"></script>';
+	echo '	<script src="../components/jquery.js"></script>';
+	echo '	<script src="../components/purl.js"></script>';
+	echo '	<script src="adminjs.js"></script>';
+	echo '  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">';
+	echo '	<link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css">';
+	echo '	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>';
+	echo '</head>';
+}
+
 
 ?>

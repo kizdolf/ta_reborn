@@ -13,17 +13,11 @@ if (!$log->is_logued()) {
 		header('Location: index.php?no=fail');
 		exit();
 	}
+
+	html_header("Nouveau Quartier");
+
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Ajouter un quartier</title>
-	<script src="../components/ckeditor/ckeditor.js"></script>
-  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-</head>
+
 <body>
 	<?php include('menu.php'); ?>
 	<div id="wrapper">

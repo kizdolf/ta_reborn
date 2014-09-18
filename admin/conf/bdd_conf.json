@@ -27,6 +27,7 @@
 			,"one_video_id" : "SELECT * FROM `video` WHERE `id` = ?"
 			,"one_artiste_id" : "SELECT * FROM `artiste` WHERE `id` = ?"
 			,"one_artiste_name" : "SELECT * FROM `artiste` WHERE `name` = ?"
+			,"one_artiste_style" : "SELECT * FROM `video` LEFT  JOIN `artiste` ON video.id_artiste = artiste.id WHERE `category` = ? AND `id_style` = ?"
 			,"one_user_id" : "SELECT * FROM `user` WHERE `id` = ?"
 			,"one_user_ta_login" : "SELECT * FROM `user` WHERE `ta_login` = ?"
 			,"one_quartier_name" : "SELECT * FROM `quartier` WHERE `name` = ?"

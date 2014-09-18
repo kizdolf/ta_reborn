@@ -5,6 +5,9 @@ body {
 
 #conteneur-menu2 {
     display: inline-flex;
+    position: fixed;
+    left: 0;
+    z-index: 9999;
     background: #313131;
     font-family: 'Abel', arial, serif;
     padding-top: 14px;
@@ -133,6 +136,7 @@ body {
 }
 
 #wrapper{
+    margin-top: 120px;
     width: 80%;
     float: right;
     padding: 15px;
@@ -141,6 +145,7 @@ body {
 #sidebar{
     width: 19%;
     float: left;
+    margin-top:120px;
     padding: 5px;
     box-shadow: 2px 6px 9px 2px rgb(230, 230, 230);
 }

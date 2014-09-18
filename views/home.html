@@ -20,6 +20,7 @@
 		<div id="weekly_video" ng-bind-html="weekly.video.frame"></div>
 	</div>
 	<div class="container container-fluid block_titre" id="wrapper" >
+		<div class="fb-like" data-href="http://localhost/public/adminta/#/artistes/{{ weekly.artiste.id }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 		<div class="div_grid" >
 			<a href="#/artistes/{{ weekly.artiste.id }}" ><div class="arrow-right"></div></a>
 			<span ng-if="weekly.artiste.path_vignette == '' ">

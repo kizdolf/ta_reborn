@@ -17,7 +17,7 @@ Portfolio</a>
 	<ul id="blck">
 		<li ng-repeat="art in quartier.artistes">
 			<div class="div_grid" >
-			<a href="#/artistes/{{ art.name }}" ><span ng-bind-html="art.name"></span><div class="arrow-right"></div></a>
+			<a href="#/artistes/{{ art.id }}" ><span ng-bind-html="art.name"></span><div class="arrow-right"></div></a>
 			<span ng-if="art.path_vignette == '' ">
 				<img src="img/badges/weekly.png" class="img_grid">
 			</span>

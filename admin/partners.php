@@ -33,20 +33,9 @@ if (isset($_POST['new_partner'])) {
 		header('Location: index.php?del=partenaire&n='.$_GET['name']);
 	}
 }
+	html_header("Partenaires");
 
  ?>
- <!DOCTYPE html>
- <html>
- <head>
- 	<title>Partenaires - Admin</title>
- 	<meta charset="utf-8">
-	<script src="../css/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../components/ckeditor/ckeditor.js"></script>
-  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-	<script src="../components/jquery.js"></script>
- </head>
  <body>
  <?php include('menu.php'); ?>
 	<div id="wrapper">

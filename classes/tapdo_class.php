@@ -547,19 +547,19 @@ class tapdo
 
 	public function get_category($cat)
 	{
+		
+		$styles = self::get_all_styles();
 		$this->_con->beginTransaction(); 
-		$q = $this->_querys->get->videos_id_artistes_cat;
-		$prep = $this->_con->prepare($q);
-		$prep->execute(array($cat));
-		$res = $this->fetch_res($prep);
-		$this->_con->commit();
-		$arts = array();
-		foreach ($res as $id) {
-			$artiste = self::get_one_artiste("id", $id['id_artiste']);
-			$style = self::get_one_style("id", $artiste['id_style']);
-			$arts[] = array("artiste" => $artiste, "style" => $style[0] );
+
+		$res = array();
+		foreach ($styles as $style) {
+			$item = array();
+			$item['style'] = $style;
+			$item['artistes'] = $this->fetch_res($this->run_q($this->_querys->get->one_artiste_style, array($cat, $style['id'])));
+			$res[] = $item;
 		}
-		return $arts;
+		$this->_con->commit();
+		return $res;
 	}
 
 	public function get_one_style($col, $val)

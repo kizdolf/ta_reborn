@@ -22,16 +22,9 @@ if (!$log->is_logued()) {
 		$password = hash('whirlpool', $_POST['password']);
 		$bdd->new_user(array($_POST["ta_login"], $password, $_POST["mail"], $_POST["rights"]));
 	}
-?><!DOCTYPE html>
-<html>
-<head>
-	<title>Nouvel admin</title>
-	<meta charset="utf-8">
-	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-	<script src="../components/jquery.js"></script>
-</head>
+
+	html_header("gestion profils");
+?>
 <body>
 	<?php include('menu.php'); ?>
 	<div id="wrapper">

@@ -163,10 +163,15 @@ body{
 }
 
 .div_grid{
+	box-shadow: 0px 0px 9px 1px black;
 	width: 220px;
 	height: 220px;
 	float: left;
 	margin: 20px 5px 5px 5px;
+	-moz-transition: all .5s;
+	-webkit-transition: all .5s; 
+	-o-transition: all .5s; 
+	transition: all .5s;
 }
 
 .div_grid a{
@@ -181,13 +186,14 @@ body{
 	height: 220px;
 	text-shadow: 3px 2px 4px black;
 	text-overflow: ellipsis;
+	word-break: break-all;
 }
 
 .arrow-right {
-	-moz-transition: all .5s;
-	-webkit-transition: all .5s; 
-	-o-transition: all .5s; 
-	transition: all .5s;
+	-moz-transition: all .3s;
+	-webkit-transition: all .3s; 
+	-o-transition: all .3s; 
+	transition: all .3s;
 	width: 0;
 	height: 0;
 	border-style: solid;
@@ -213,6 +219,11 @@ body{
 .div_grid a:hover {
 	color: white;
 	text-decoration: none;
+}
+
+.div_grid:hover{
+	padding-left: 5px;
+	box-shadow: 0px 0px 4px 1px rgba(228, 90, 63, 0.5);
 }
 
 /*Partners*/
@@ -601,7 +612,7 @@ body{
 
 	/*MEDIA QUERYS*/
 
-@media (max-width: 793px) {
+@media (max-width: 800px) {
 
 	.sous_menu{
 		position: inherit;

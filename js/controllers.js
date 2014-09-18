@@ -6,14 +6,20 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 	$cookieStore.put("visited", "first");
 })
 
-.controller('headCtrl', ['pics', 'filterFilter', '$scope', '$http', '$sce', 'getData', 'tools',  '$cookies', '$cookieStore', '$log', '$animate'
-	,function(pics, filterFilter, $scope, $http, $sce, getData, tools,  $cookies, $cookieStore, $log, $animate){
+.controller('headCtrl', ['$location', 'pics', 'filterFilter', '$scope', '$http', '$sce', 'getData', 'tools',  '$cookies', '$cookieStore', '$log', '$animate'
+	,function($location, pics, filterFilter, $scope, $http, $sce, getData, tools,  $cookies, $cookieStore, $log, $animate){
 
 	$scope.title = "Welcome at Toulouse Acoustics";
 
-	$scope.pageClass = 'page-home';
 
-	$scope.load = "ok";
+	var url = $location.url().split('/');
+	url = url[1];
+	$('.menu_ul li a').each(function(){
+		if ($(this).attr('href').indexOf(url) != -1) {
+			$(".menu_ul").removeClass('active');
+			$(this).addClass('active');
+		}
+	})
 
 	getData.weekly().then(function(data){
 		$scope.weekly = data.data;
@@ -121,21 +127,32 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 	}).then(function(){
 		for (var i in $scope.artistes){
 			if($scope.artistes[i].artistes.length == 0)
-				$scope.artistes[i].name = "";
+				delete $scope.artistes[i];
 			else{
 				for (var j in $scope.artistes[i].artistes){
 					$scope.artistes[i].artistes[j].name = $sce.trustAsHtml($scope.artistes[i].artistes[j].name);
 				}
 			}
 		}
-	})
+	});
 }])
 
 .controller('locauxCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
 	$scope.pageClass = 'page-locaux';
 
 	getData.art_cat(0).then(function(data){
-		$scope.artistes = data.data;
+		$scope.styles = data.data;
+		console.log(data.data);
+	}).then(function(){
+		for (var i in $scope.styles){
+			if ($scope.styles[i].artistes.length == 0) {
+				delete $scope.styles[i];
+			}else{
+				for (var j in $scope.styles[i].artistes){
+					$scope.styles[i].artistes[j].name = $sce.trustAsHtml($scope.styles[i].artistes[j].name);
+				}
+			}
+		}
 	});
 }])
 
@@ -143,7 +160,18 @@ angular.module('myApp.controllers', ['ngCookies', 'ngAnimate'])
 	$scope.pageClass = 'page-visiteurs';
 
 	getData.art_cat(1).then(function(data){
-		$scope.artistes = data.data;
+		$scope.styles = data.data;
+		console.log(data.data);
+	}).then(function(){
+		for (var i in $scope.styles){
+			if ($scope.styles[i].artistes.length == 0) {
+				delete $scope.styles[i];
+			}else{
+				for (var j in $scope.styles[i].artistes){
+					$scope.styles[i].artistes[j].name = $sce.trustAsHtml($scope.styles[i].artistes[j].name);
+				}
+			}
+		}
 	});
 }])
 

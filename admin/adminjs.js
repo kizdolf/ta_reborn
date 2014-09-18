@@ -91,4 +91,24 @@ $check = function(){
 
 	$('.new_style_btn').click(function(){
 		$('#new_style').show();
-	})
+	});
+
+$(document).ready(function(){
+
+
+	if (typeof $('.change-quartier').html() != 'undefined'){
+		$(document).on('change', '#s_q' , function(){
+			$(".quartier_choix.btn-default").hide();
+			var str = $(this).val();
+			if (str.length >= 3) {
+				$(".quartier_choix").each(function(one){
+					if ($(this).html().indexOf(str) != -1) {
+						$(this).show();
+					}
+				});
+			}
+		});
+	}
+
+
+});

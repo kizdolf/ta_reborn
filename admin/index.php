@@ -46,27 +46,12 @@ $message .= handler_message($_GET);
 /*
 	USER
 */
-if (isset($_COOKIE['session'])) {
-	$cookie = unserialize($_COOKIE['session']);
-	$name = $cookie['user'];
-	$user = $bdd->get_one_user('ta_login', $name);
-	$rights = $user['rights'];
-}else{
-	$rights = $bdd->get_rights_user(array($id_admin));
-}
+
+$rights = (isset($_COOKIE['session'])) ? rights($bdd) : $bdd->get_rights_user(array($id_admin));
+
+	html_header("Home");
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>admin</title>
-	<meta charset="utf-8">
-	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-	<script src="../components/ckeditor/ckeditor.js"></script>
-	<script src="../components/jquery.js"></script>
-</head>
 <body>
 	<?php include('menu.php'); ?>	
 	<div id="wrapper">

@@ -1,12 +1,19 @@
 <div>
-	<div ng-repeat="art in artistes" class="div_grid">
-		<h3>{{art.style.name}}</h3>
-		<a href="#/artistes/{{ art.artiste.name }}" >{{ art.artiste.name }}<div class="arrow-right"></div></a>
-		<span ng-if="art.artiste.path_vignette == ''">
-			<img src="img/badges/weekly.png" class="img_grid">
-		</span>
-		<span ng-if="art.artiste.path_vignette != ''">
-			<img src="{{art.artiste.path_vignette}}" class="img_grid">
-		</span>
+	<div ng-repeat="style in styles" style="clear:both;" class="container container-fluid ">
+		<div>
+			<h2>{{style.style.name}}</h2>
+		</div>
+		<div class="block_titre">
+			<div ng-repeat="art in style.artistes" class="div_grid non-abs pull-left">
+				<a href="#/artistes/{{ art.id }}"><span ng-bind-html="art.name"></span><div class="arrow-right"></div></a>
+				<span ng-if="art.path_vignette == ''">
+					<img src="img/badges/weekly.png" class="img_grid">
+				</span>
+				<span ng-if="art.path_vignette != ''">
+					<img src="{{art.path_vignette}}" class="img_grid">
+				</span>
+			</div>
+		</div>
+		<hr>
 	</div>
 </div>

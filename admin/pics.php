@@ -21,17 +21,10 @@ if (!$log->is_logued()) {
 		header('Location: index.php?wrong=GET[show] in pics.php');
 	}
 	$galerie = ($_GET['show'] == 'off') ? 'off' :'team';
+
+	html_header("Galerie $galerie");
+
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Galerie <?php echo $_GET['show']; ?> | Admin</title>
-	<meta charset="utf-8">
-	<script src="../components/ckeditor/ckeditor.js"></script>
-  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-</head>
 <body>
 	 <?php include('menu.php'); ?>
 	<div id="img_div2" class="gal_pic2"></div>

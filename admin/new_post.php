@@ -25,18 +25,9 @@ foreach ($styles as $style) {
 	$stylehtml .= "<button value='" .  $style['id'] . "' class='btn btn-default style_choix'>" . $style['name'] . "</button>";
 }
 
-?>
+	html_header("Nouveau Post");
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Admin - Ajouter un post</title>
-	<script src="../components/ckeditor/ckeditor.js"></script>
-  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
-</head>
+?>
 <body>
 	<?php include('menu.php'); ?>
 	<div id="wrapper">

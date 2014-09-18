@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Cache-control" content="public">
 	<title>Toulouse Acoustics </title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
@@ -28,6 +28,15 @@
 <noscript><p><img src="http://localhost/public/adminta/components/piwik/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 <body>
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
   <div id="header">
   	<a href="#/home" id="img_header">
   		<img src="img/headers/home.jpg" id="img_header">
@@ -67,7 +76,7 @@
 			<div class="collapse navbar-collapse" id="list_items_menu">
 				<ul class="nav navbar-nav menu_ul">
 					<li>
-						<a href="#/home" class="active">accueil</a>
+						<a href="#/home" >accueil</a>
 					</li>
 					<li>
 						<a href="#/artistes" class='menu_header'>artistes</a>
@@ -95,10 +104,10 @@
 					<li>
 						<a href="#/partners">partenaires</a>
 					</li>
-					<li>
+					<!-- <li>
 						<span class="glyphicon glyphicon-search icn-search"></span>
 						<input id="search" ng-model="str" ng-change="search()" >
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>

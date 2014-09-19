@@ -67,9 +67,7 @@ if (!$log->is_logued()) {
 
  ?>
 </div>
-	<script src="../components/jquery.js"></script>
 	<script src="../components/purl.js"></script>
-	<script src="adminjs.js" type="text/javascript"></script>
 </body>
 </html>
 <?php  } } ?>

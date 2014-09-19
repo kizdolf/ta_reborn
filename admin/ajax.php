@@ -87,7 +87,7 @@ function get_all_data_bdd($bdd){
 function get_from_dir($handle, $path){
 	$files = array();
 	while ($entry = readdir($handle)){
-		if($entry!= "." && $entry != "..")
+		if($entry!= "." && $entry != ".." && strpos($entry, "min") === false)
 			$files[] = $path ."/" . $entry;
 	}
 	return $files;

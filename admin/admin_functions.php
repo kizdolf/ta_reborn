@@ -102,7 +102,7 @@ function html_edit($entry, $id, $type) {
 				$stylehtml .= "<button value='" .  $style['id'] . "' class='btn btn-default style_choix'>" . $style['name'] . "</button>";
 		}
 		echo '<div class="btn-group change-style">';
-		echo "<button class='btn btn-warning new_style_btn'>nouveau</button>";
+		echo "<a href='styles.php' class='btn btn-warning new_style_btn'>nouveau</a>";
 		echo $stylehtml;
 		echo "</div>";
 		$hidden_id = "style_id";
@@ -202,20 +202,20 @@ function handler_new_entry($bdd, $post, $files) {
 		$message .= "<div class='alert alert-success'>Quartier \"".$post['quartier_name']."\" sauvergardé!</div>";
 	}
 	elseif (isset($post['new_post'])) {
-		$path = "../portfolio/artistes/" . $post['artiste_name'];
-		if (!is_dir($path))
-			mkdir($path);
+		$id_a = $bdd->new_artiste($post['artiste_name'], "temp", $post['artiste_desc'], $post['artiste_url'], $post['itw'], "temp", $post['style_id']);
+		$path =$GLOBALS['pathpicA'].$id_a;
 		if (isset($files['vignette']) && $files['vignette']['name'] != '') {
 			$ext = explode(".", $files['vignette']["name"]);
 			$ext = strtolower($ext[1]);
-			$path_vignette = "img/uniques/artiste/".$post['artiste_name'].".".$ext;
+			$path_vignette = "img/uniques/artiste/".$id_a.".".$ext;
 		}else{
 			$path_vignette = "";
 		}
-	 	pics_handler($files, $path, $post['artiste_name']);
-		$id_a = $bdd->new_artiste($post['artiste_name'], $path, $post['artiste_desc'], $post['artiste_url'], $post['itw'], $path_vignette, $post['style_id']);
-		$weekly = (isset($post['weekly']) ? 1 : 0);
-		$category = (isset($post['visiteur']) ? 1 : 0);
+		$q = get_one_artiste('id', $id_a);
+		$q['path_pics'] = $path;
+		$q['path_vignette'] = $path_vignette;
+		$bdd->update_one('artiste', 'id', $id_a, $q);
+	 	pics_handler($files, $path, $id_a);
 		$bdd->new_video($post['video_name'], $post['video_desc'], $post['video_url'], $id_a, $post['quartier_id'], $weekly, $category);
 		$message .= "<div class='alert alert-success'><a href='index.php'>Sauvegarde effectuée. Cliquez ici pour actualiser et voir le post apparaitre.</a></div>";
 	}
@@ -265,8 +265,8 @@ function html_header($title){
 	echo '	<title>Admin | '.$title.'</title>';
 	echo '	<meta charset="utf-8">';
 	echo '	<script src="../components/ckeditor/ckeditor.js"></script>';
-	echo '	<script src="../components/jquery.js"></script>';
 	echo '	<script src="../components/purl.js"></script>';
+	echo '	<script src="../components/jquery.js"></script>';
 	echo '	<script src="adminjs.js"></script>';
 	echo '  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">';
 	echo '	<link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css">';

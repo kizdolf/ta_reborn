@@ -59,6 +59,7 @@
 		$start_time = microtime(true);
 		$nb_page = 6;
 		$i = 1;
+		exec("rm page*");
 		while ($i <= $nb_page)
 		{
 			$currenturl = $url_base.$i;
@@ -74,6 +75,8 @@
 			ob_flush();
 			flush();
 		}
+		if (file_exists($file_out))
+			unlink($file_out);
 		exec("cat page* >> $file_out");
 
 		$ol = file_get_contents($file_out);
@@ -108,7 +111,7 @@
 			if (isset($matches[2]) && !isset($matches[3])) {
 				$title = explode("-", $matches[2]);
 				if (isset($title[1]) && !isset($title[2]) && ($i < $limit || $limit == 0)) {
-					echo "<br><hr><br><br>\nVidéo trouvée! num: ".$i++;
+					echo "<br><hr><br><br>\nVidéo trouvée! num: ".$i;
 					ob_flush();
 					flush();
 					$html.= "\nVidéo trouvée! num: ".$i;
@@ -149,7 +152,7 @@
 						}
 						if (isset($matches_img[2])) {
 							$pic = array();
-							$pic["name"] = $item['artiste'];
+							$pic["name"] = $i;
 							echo "<br>Downloading image ".$matches_img[2]. " ...\n";
 							$html.= "Downloading image ".$matches_img[2]. " ...\n";
 							$t = microtime(true);
@@ -172,6 +175,7 @@
 					$post[] = $item;
 					ob_flush();
 					flush();
+					$i++;
 				}
 			}
 		}
@@ -188,7 +192,7 @@
 		$del = "DELETE FROM `artiste` WHERE 1";
 		$del1 = "DELETE FROM `video` WHERE 1";
 		$del2 =  "DELETE FROM `quartier` WHERE 1";
-		$id_style = "SELECT `id` FROM `style` WHERE 1 LIMIT 1";
+		$id_style = "SELECT `id` FROM `style` WHERE 1 LIMIT 3";
 		$s = $bdd->prep($id_style);
 		$s->execute();
 		$ret = array();
@@ -205,11 +209,11 @@
 			$p2->execute();
 			echo "base de donées supprimée\n";
 		}
-
+		$id = 1;
 		foreach ($post as $one) {
 			if (isset($one['artiste']) && isset($one['path_vignette']) && isset($one['lieu']) && isset($one['titre_video']) && isset($one['url'])) {
 				$a = array($one['artiste']
-						, "../portfolio/artistes/".$one['artiste']
+						, "../portfolio/artistes/".$id
 						,"Toulouse Acoustics vous présente ".$one['artiste']." !! :)"
 						,$one['path_vignette']
 						,$id_style);
@@ -217,7 +221,7 @@
 				$p->execute($a);
 				$id_a = $bdd->id();
 				$q = array($one['lieu']
-							, "../portfolio/quartiers/".$one['lieu']
+							, "../portfolio/quartiers/".$id
 							,1);
 				$verif_q = "SELECT `id` FROM `quartier` WHERE `name`='" . $one['lieu'] . "'";
 				$prep = $bdd->prep($verif_q);
@@ -239,6 +243,7 @@
 				$p->execute($v);
 				$last_id = $bdd->id();
 			}
+			$id++;
 		}
 		$q = "UPDATE `video` SET `weekly` = '1' WHERE `id` = ".$last_id;
 		$p = $bdd->prep($q);

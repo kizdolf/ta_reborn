@@ -3,12 +3,18 @@ spl_autoload_register(function ($class) {
 	include __DIR__.'/../classes/' . $class . '_class.php';
 });
 //constantes.
+
 $mainDir = __DIR__."/../data";
+$pathpicQ = "../portfolio/quartiers/";
+$pathpicA = "../portfolio/artistes/";
+
 $ext_ok = array("jpg", "png", "gif", "jpeg");
+
 ini_set('upload_max_filesize', '15M');
 ini_set('post_max_size', '15M');
 ini_set('max_input_time', 300);
 ini_set('max_execution_time', 300);
+
 function save_file($file, $ext, $dest, $v = null){
 	if (!in_array(strtolower($ext), $GLOBALS["ext_ok"]))
 		return false;
@@ -46,7 +52,9 @@ function reArrayFiles(&$file_post) {
 
 }
 
- function pics_handler($files, $path, $name_pic){
+function pics_handler($files, $path, $name_pic){
+	if (!is_dir($path))
+			mkdir($path);
 	$vign = $files;
 	$files = reArrayFiles($files["pics"]);
 	$i = 1;
@@ -78,6 +86,7 @@ function reArrayFiles(&$file_post) {
 	}
 	return false;
 }
+
 function html_edit($entry, $id, $type) {
 
 	$bdd = new tapdo();
@@ -161,25 +170,35 @@ function html_edit($entry, $id, $type) {
 	echo "</form>";
 }
 
-function handler_new_entry($bdd, $post, $files)
+
+function handler_new_quartier($bdd, $post, $files)
 {
+	$id = $bdd->new_quartier($post['quartier_name'], "temp", $post['quartier_desc'], $post['quartier_url'], "temp");
+	$path =$GLOBALS['pathpicQ'].$id;
+	if (isset($files['vignette']) && $files['vignette']['name'] != '') {
+		$ext = explode(".", $files['vignette']["name"]);
+		$ext = strtolower($ext[1]);
+		$path_vignette = "img/uniques/quartier/".$id.".".$ext;
+	}else{
+		$path_vignette = "";
+	}
+	$q = $bdd->get_one_quartier('id', $id);
+	$q['path_pics'] = $path;
+	$q['path_vignette'] = $path_vignette;
+	$bdd->update_one('quartier', 'id', $id, $q);
+	pics_handler($files, $path, $id);
+}
+
+
+function handler_new_entry($bdd, $post, $files) {
 	foreach ($post as $key => $value) {
-		$post[$key] = htmlspecialchars($value, ENT_QUOTES);
+		if (strpos($key, "desc") === false) {
+			$post[$key] = htmlspecialchars($value, ENT_QUOTES);
+		}
 	}
 	$message = "";
 	if (isset($post['new_quartier'])) {
-		$path = "../portfolio/quartiers/".$post['quartier_name'];
-		if (!is_dir($path))
-			mkdir($path);
-		if (isset($files['vignette']) && $files['vignette']['name'] != '') {
-			$ext = explode(".", $files['vignette']["name"]);
-			$ext = strtolower($ext[1]);
-			$path_vignette = "img/uniques/quartier/".$post['quartier_name'].".".$ext;
-		}else{
-			$path_vignette = "";
-		}
-	 	pics_handler($files, $path, $post['quartier_name']);
-		$id = $bdd->new_quartier($post['quartier_name'], $path, $post['quartier_desc'], $post['quartier_url'], $path_vignette);
+		handler_new_quartier($bdd, $post, $files);
 		$message .= "<div class='alert alert-success'>Quartier \"".$post['quartier_name']."\" sauvergardé!</div>";
 	}
 	elseif (isset($post['new_post'])) {
@@ -208,32 +227,13 @@ function handler_new_entry($bdd, $post, $files)
 	return $message;
 }
 
-function handler_message($get)
-{
-	$message = "";
-	if (isset($get['wrong'])) {
-		$message .= "<div class='alert alert-danger'>ERREUR!! Le programme recontre une erreur lors de : <p style='font-weight: bold'>".$get['wrong']."</p></div>";
-	}
-	if (isset($get['no'])) {
-		$message .= "<div class='alert alert-danger'>Vous n'avez pas les droits pour ça.</div>";
-	}
-	if (isset($get['done'])){
-		$message .= "<div class='alert alert-success'>".$get['done'] . " effectué! </div>";
-	}
-	if (isset($get['add'])) {
-		$message .= "<div class='alert alert-success'>".$get['add'] . " ". $get['n'] ." ajouté! </div>";
-	}
-	if (isset($get['del'])) {
-		$message .= "<div class='alert alert-info'>".$get['del'] . " ". $get['n'] ." supprimé </div>";
-	}
-	return $message;
-}
-
-function handler_new_partner($post, $files, $bdd)
-{
+function handler_new_partner($post, $files, $bdd) {
 	foreach ($post as $key => $value) {
-		$post[$key] = htmlspecialchars($value, ENT_QUOTES);
+		if (strpos($key, "desc") === false) {
+			$post[$key] = htmlspecialchars($value, ENT_QUOTES);
+		}
 	}
+
 	if (isset($files['partner_logo']) && $files['partner_logo']['name'] != '') {
 		$ext = explode(".", $files['partner_logo']["name"]);
 		$ext = strtolower($ext[1]);
@@ -253,7 +253,6 @@ function rights($bdd){
 		$name = $cookie['user'];
 		$user = $bdd->get_one_user('ta_login', $name);
 		$rights = $user['rights'];
-		echo "RIGHTS IN FUNCTION!! ==".$rights;
 	}else
 		$rights = 999;
 	return $rights;

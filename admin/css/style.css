@@ -151,10 +151,7 @@ body {
 }
 
 .get_vid{
-    position: relative;
-    left: 45%;
-    top: 45%;
-    z-index: 3;
+
 }
 
 .gal_pic img{
@@ -261,4 +258,31 @@ body {
 	position: absolute;
 	top: 5px;
 	right: 5px;
+}
+
+#links_ready{
+    display: none;
+}
+
+#confirm{
+    display:none;
+}
+
+.min-text{
+    border: 1px solid #000;
+    padding: 10px;
+    margin: 5px;
+    margin-left:10%;
+    width: 80%;
+    background: white;
+    max-height: 40px;
+    overflow: hidden;
+}
+
+.hide-txt {
+    /*position: absolute;*/
+}
+
+.min-text h5 {
+    text-align: center;
 }

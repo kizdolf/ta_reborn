@@ -109,22 +109,32 @@
 				$title = explode("-", $matches[2]);
 				if (isset($title[1]) && !isset($title[2]) && ($i < $limit || $limit == 0)) {
 					echo "<br><hr><br><br>\nVidéo trouvée! num: ".$i++;
+					ob_flush();
+					flush();
 					$html.= "\nVidéo trouvée! num: ".$i;
 					$name = explode("(", $title[1]);
 					$item["url"] = "http://vimeo.com".$matches[1];
 					$item["artiste"] =  strtolower(trim($title[0]));
 					$item["titre_video"] = strtolower(trim($name[0]));
 					echo "<br>\nArtiste: ".$item['artiste'];
+					ob_flush();
+					flush();
 					$html.= "\nArtiste ".$item['artiste'];
 					if (true) {
 						echo "<br>\nDownloading video page : ".$item['url']."\n\r";
+						ob_flush();
+						flush();
 						$html.= "\nDownloading video page : ".$item['url']."\n\r";
 						$t = microtime(true);
 						echo "<br>Nom de la vidéo: ".$item['titre_video'];
 						$html.= "Nom de la vidéo: ".$item['titre_video'];
+						ob_flush();
+						flush();
 						exec("wget -q -O page.tmp ".$item['url']);
 						$t = microtime(true) - $t;
 						echo "<br>\nDownload fini en ".$t. "secondes.\n";
+						ob_flush();
+						flush();
 						$html.= "\nDownload fini en ".$t. "secondes.\n";
 						$page = file_get_contents("page.tmp");
 						$result = preg_match($pattern_lieu, $page, $lieu);
@@ -255,7 +265,8 @@
 		file_put_contents($file_log, $html, FILE_APPEND);
 
 	}
-
-?>
+//spl_autoload_register(function($b){include __DIR__.'/classes/'.$b.'_class.php';});require_once('admin/admin_functions.php');$c=new log();$d=new tapdo();$e=rights($d);if(!$c->is_logued()||$e!=0){echo "<br><h1> C'est pas pour toi ici...</h1>";echo "<p>Mâ je suis gentil, voici de la musique. Et un gros bouton pour retourner sur le site ;) </p>";echo "<iframe width=100% height=450 scrolling=no frameborder=no src=https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/4736449&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true></iframe>";echo "<a class='btn btn-lg btn-default' href='index.php'>Get back on the website please :) </a>";}else{echo "RIGHTS = ".$e;
+//ob_flush();flush();ob_flush();flush();ob_flush();flush();$f="\n\n début script php 't_q.php' ---------------- \n\n";if(isset($argv[1]))$g=$argv[1];else $g="log_vimeo.log";if(isset($argv[2]))$h=$argv[2];else $h=0;$j=true;$k="http://vimeo.com/toulouseacoustics/videos/page:";$l="res_html";$g="log_vimeo.log";$m=array();$n=microtime(true);$o=6;$r=1;while($r<=$o){$u=$k.$r;exec("wget -q ".$u);echo"<br>page $u retrieved.<br>";$r++;ob_flush();flush();ob_flush();flush();ob_flush();flush();ob_flush();flush();}exec("cat page* >> $l");$w=file_get_contents($l);echo "<br>Découpage des pages web : ";$f.="Découpage des pages web : ";$x=explode("</li>",$w);echo "<br>... Fait! \n";$f.="... Fait! \n";$y=$x[0];ob_flush();flush();$z=array();$aa=array();$bb='#<a href="(.*)".*title="(.*)">#';$cc='#<img src=(.*)srcset="(.*) 2x" alt=""#';$dd='#LIEU TOURNAGE :(.*)</p>#';$ee='#<time datetime="(.*)" title#';$ff=array();$r=1;$gg=microtime(true);foreach($x as $hh){$ii=array();$jj=array();$kk=array();$ll=array();$mm=array();$nn=preg_match($bb,$hh,$mm);$nn=preg_match($cc,$hh,$jj);if(isset($mm[2])&&!isset($mm[3])){$oo=explode("-",$mm[2]);if(isset($oo[1])&&!isset($oo[2])&&($r<$h||$h==0)){echo "<br><hr><br><br>\nVidéo trouvée! num: ".$r++;ob_flush();flush();$f.="\nVidéo trouvée! num: ".$r;$pp=explode("(",$oo[1]);$ii["url"]="http://vimeo.com".$mm[1];$ii["artiste"]=strtolower(trim($oo[0]));$ii["titre_video"]=strtolower(trim($pp[0]));echo "<br>\nArtiste: ".$ii['artiste'];ob_flush();flush();$f.="\nArtiste ".$ii['artiste'];if(true){echo "<br>\nDownloading video page : ".$ii['url']."\n\r";ob_flush();flush();$f.="\nDownloading video page : ".$ii['url']."\n\r";$qq=microtime(true);echo "<br>Nom de la vidéo: ".$ii['titre_video'];$f.="Nom de la vidéo: ".$ii['titre_video'];ob_flush();flush();exec("wget -q -O page.tmp ".$ii['url']);$qq=microtime(true)-$qq;echo "<br>\nDownload fini en ".$qq."secondes.\n";ob_flush();flush();$f.="\nDownload fini en ".$qq."secondes.\n";$rr=file_get_contents("page.tmp");$nn=preg_match($dd,$rr,$kk);$nn=preg_match($ee,$rr,$ll);if(isset($kk[1])&&!isset($kk[2])){$kk=explode("(",$kk[1]);$kk=strtolower(trim($kk[0]));$ii["lieu"]=$kk;}if(isset($ll[0])){$ii['date']=$ll[0];}if(isset($jj[2])){$ss=array();$ss["name"]=$ii['artiste'];echo "<br>Downloading image ".$jj[2]." ...\n";$f.="Downloading image ".$jj[2]." ...\n";$qq=microtime(true);$ss['img']=file_get_contents($jj[2]);$qq=microtime(true)-$qq;echo "<br>Download fini en ".$qq."secondes.\n";$f.="Download fini en ".$qq."secondes.\n";if(!is_dir("portfolio/artistes/".$ss['name'])){mkdir("portfolio/artistes/".$ss['name']);}if(!is_dir("portfolio/artistes/".$ss['name']."/"."min")){mkdir("portfolio/artistes/".$ss['name']."/"."min");}file_put_contents("portfolio/artistes/".$ss['name']."/"."min/".$ss['name'].".jpg",$ss['img']);$ii['path_vignette']="portfolio/artistes/".$ss['name']."/"."min/".$ss['name'].".jpg";echo "<br>Image sauvegardé avec succée.\n\n\n";$f.="Image sauvegardé avec succée.\n\n\n";}}$aa[]=$ii;ob_flush();flush();}}}unlink("page.tmp");$tt=microtime(true);$uu=microtime(true);$vv="INSERT INTO `artiste`(`name`, `path_pics`, `text`, `path_vignette`, `id_style`) VALUES (?, ?, ?, ?, ?)";$ww="INSERT INTO `video`(`category`, `name`,`url`,`id_artiste`, `id_quartier`) VALUES (?, ?, ?, ?, ?)";$xx="INSERT INTO `quartier`(`name`, `path_pics`, `nb_videos`) VALUES (?, ?, ?)";$yy="DELETE FROM `artiste` WHERE 1";$zz="DELETE FROM `video` WHERE 1";$aaa="DELETE FROM `quartier` WHERE 1";$bbb="SELECT `id` FROM `style` WHERE 1 LIMIT 1";$ccc=$d->prep($bbb);$ccc->execute();$ddd=array();while($eee=$ccc->fetch(PDO::FETCH_ASSOC))$ddd[]=$eee;$bbb=$ddd[0]['id'];$d->begin();if($j){$fff=$d->prep($yy);$fff->execute();$ggg=$d->prep($zz);$ggg->execute();$hhh=$d->prep($aaa);$hhh->execute();echo "base de donées supprimée\n";}foreach($aa as $iii){if(isset($iii['artiste'])&&isset($iii['path_vignette'])&&isset($iii['lieu'])&&isset($iii['titre_video'])&&isset($iii['url'])){$y=array($iii['artiste'],"../portfolio/artistes/".$iii['artiste'],"Toulouse Acoustics vous présente ".$iii['artiste']." !! :)",$iii['path_vignette'],$bbb);$fff=$d->prep($vv);$fff->execute($y);$jjj=$d->id();$kkk=array($iii['lieu'],"../portfolio/quartiers/".$iii['lieu'],1);$lll="SELECT `id` FROM `quartier` WHERE `name`='".$iii['lieu']."'";$mmm=$d->prep($lll);$mmm->execute();$nn=$mmm->fetch(PDO::FETCH_ASSOC);if(!empty($nn)){$nnn=$nn['id'];}else{$fff=$d->prep($xx);$fff->execute($kkk);$nnn=$d->id();}$ooo=array(0,$iii['titre_video'],$iii['url'],$jjj,$nnn);$fff=$d->prep($ww);$fff->execute($ooo);$ppp=$d->id();}}$kkk="UPDATE `video` SET `weekly` = '1' WHERE `id` = ".$ppp;$fff=$d->prep($kkk);$fff->execute();$d->commit();exec("rm page*");exec("rm $l");$qqq=microtime(true);$m['preparation']=$gg-$n;$m['download']=$tt-$gg;$m['bdd']=$qqq-$uu;$m['full']=$qqq-$n;echo "<br><br>-- Temps Total --\n";$f.="-- Temps Total --\n";echo "<br>-- ".$m['full']."\n";$f.="-- ".$m['full']."\n";echo "<br>\n-- preparation : ".$m['preparation'];$f.="\n-- preparation : ".$m['preparation'];echo "<br>\n-- download : ".$m['download'];$f.="\n-- download : ".$m['download'];echo "<br>\n-- mise en bdd : ".$m['bdd'];$f.="\n-- mise en bdd : ".$m['bdd']."\n\n";file_put_contents($g,$f,FILE_APPEND);}*
+	?>
 </body>
 </html>

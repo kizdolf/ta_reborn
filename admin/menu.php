@@ -68,6 +68,7 @@ $rights = rights($bdd);
   				<li><a href="https://vmheb62064.ikoula.com:8443/domains/databases/phpMyAdmin/import.php">Dk phpMyAdmin</a></li>
   				<li><button class="get_dump">Dump SQL install</button></li>
   				<?php if($rights == 0){ ?><li><button class="btn btn-danger run_s">(danger) Run get_.sh.</button></li><?php } ?>
+  				<li><a href="test_admin_dev.php">tests.</a></li>
   			</ul>
 		</div>
 		<div id="confirm" style="display:none;" class="alert alert-danger">

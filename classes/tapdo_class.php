@@ -123,6 +123,7 @@ class tapdo
 		$prep->execute($vars);
 
 		$this->_con->commit();
+		return $this->_con->lastInsertId();
 	}
 
 	public function new_style($name)
@@ -300,63 +301,40 @@ class tapdo
 		return $ret;
 	}
 
-	public function get_one_artiste($col, $val)
-	{
-		$this->_con->beginTransaction();
-		$t = "one_artiste_".$col;
-		$q = $this->_querys->get->$t;
-		$prep = $this->_con->prepare($q);
-		$prep->execute(array($val));
-		$ret = array();
-		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
-			$ret[] = $res;
-		$this->_con->commit();
-		return($ret[0]);
+	public function get_one_artiste($col, $val) {
+		return $this->get_one('artiste', $col, $val);
 	}
 
-	public function get_one_quartier($col, $val)
-	{
-		$this->_con->beginTransaction();
-		$t = "one_quartier_".$col;
-		$q = $this->_querys->get->$t;
-		$prep = $this->_con->prepare($q);
-		$prep->execute(array($val));
-		$ret = array();
-		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
-			$ret[] = $res;
-		$this->_con->commit();
-		return($ret[0]);
+	public function get_one_quartier($col, $val) {
+		return $this->get_one('quartier', $col, $val);
 	}
 
-	public function get_one_video($col, $val)
-	{
-		$this->_con->beginTransaction();
-		$t = "one_video_".$col;
-		$q = $this->_querys->get->$t;
-		$prep = $this->_con->prepare($q);
-		$prep->execute(array($val));
-		$ret = array();
-		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
-			$ret[] = $res;
-		$this->_con->commit();
-		if (isset($ret[0])) {
-			return($ret[0]);
-		}
-		return false;
+	public function get_one_video($col, $val){
+		return $this->get_one('video', $col, $val);
 	}
 
-	public function get_one_user($col, $val)
-	{
-		$this->_con->beginTransaction();
-		$t = "one_user_".$col;
-		$q = $this->_querys->get->$t;
-		$prep = $this->_con->prepare($q);
-		$prep->execute(array($val));
-		$ret = array();
-		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
-			$ret[] = $res;
-		$this->_con->commit();
-		return($ret[0]);
+	public function get_one_user($col, $val) {
+		return $this->get_one('user', $col, $val);
+	}
+
+	public function get_one_style($col, $val) {
+		return $this->get_one('style', $col, $val);
+	}
+
+		public function get_about() {
+		return $this->get_what("about");
+	}
+
+	public function get_team() {
+		return $this->get_what("team");
+	}
+
+	public function get_short_about() {
+		return $this->get_what("short_about");
+	}
+
+	public function get_contact() {
+		return $this->get_what("contact");
 	}
 
 	public function get_videos_related($col, $val)
@@ -435,8 +413,7 @@ class tapdo
 		$this->_con->commit();
 	}
 
-	public function get_all_users()
-	{
+	public function get_all_users() {
 		$this->_con->beginTransaction(); 
 		$q = $this->_querys->get->all_users;
 		$prep=$this->_con->prepare($q);
@@ -448,8 +425,7 @@ class tapdo
 		return $ret;
 	}
 
-	public function get_all_names_id()
-	{
+	public function get_all_names_id() {
 		$this->_con->beginTransaction(); 
 		$qa = $this->_querys->get->all_artistes_name;
 		$qq = $this->_querys->get->all_quartiers_name;
@@ -501,49 +477,7 @@ class tapdo
 		$this->_con->commit();
 	}
 
-	public function get_about()
-	{
-		$this->_con->beginTransaction(); 
-		$q = $this->_querys->get->about;
-		$prep = $this->_con->prepare($q);
-		$prep->execute();
-		$res = $this->fetch_res($prep);
-		$this->_con->commit();
-		return $res[0];
-	}
 
-	public function get_team()
-	{
-		$this->_con->beginTransaction(); 
-		$q = $this->_querys->get->team;
-		$prep = $this->_con->prepare($q);
-		$prep->execute();
-		$res = $this->fetch_res($prep);
-		$this->_con->commit();
-		return $res[0];
-	}
-
-	public function get_short_about()
-	{
-		$this->_con->beginTransaction(); 
-		$q = $this->_querys->get->short_about;
-		$prep = $this->_con->prepare($q);
-		$prep->execute();
-		$res = $this->fetch_res($prep);
-		$this->_con->commit();
-		return $res[0];
-	}
-
-	public function get_contact()
-	{
-		$this->_con->beginTransaction(); 
-		$q = $this->_querys->get->contact;
-		$prep = $this->_con->prepare($q);
-		$prep->execute();
-		$res = $this->fetch_res($prep);
-		$this->_con->commit();
-		return $res[0];
-	}
 
 	public function get_category($cat)
 	{
@@ -562,27 +496,16 @@ class tapdo
 		return $res;
 	}
 
-	public function get_one_style($col, $val)
-	{
-		$this->_con->beginTransaction(); 
-		$q = "one_style_by_".$col;
-		$q = $this->_querys->get->$q;
-		$p = $this->run_q($q, array($val));
-		$res = $this->fetch_res($p);
-		$this->_con->commit();
-		return $res;
-	}
 
-	public function get_all_styles()
-	{
+
+	public function get_all_styles() {
 		$this->_con->beginTransaction(); 	
 		$res = $this->fetch_res($this->run_q($this->_querys->get->all_styles));
 		$this->_con->commit();
 		return $res;
 	}
 
-	public function get_artistes_by_style()
-	{
+	public function get_artistes_by_style() {
 		$styles = self::get_all_styles();
 		$arts = array();
 		foreach ($styles as $style) {
@@ -600,8 +523,7 @@ class tapdo
 		return $res;
 	}
 
-	public function get_all_partners()
-	{
+	public function get_all_partners() {
 		$this->_con->beginTransaction(); 	
 		$res = $this->fetch_res($this->run_q($this->_querys->get->all_partners));
 		$this->_con->commit();
@@ -649,6 +571,22 @@ class tapdo
 
 	/*	PRIVATE FUNCTIONS 	*/
 
+	private function get_one($type, $col, $val){
+		$this->_con->beginTransaction();
+		$t = "one_".$type."_".$col;
+		$res = $this->fetch_res($this->run_q($this->_querys->get->$t, array($val)));
+		$this->_con->commit();
+		return (isset($res[0])) ? $res[0] : false;
+	}
+
+	private function get_what($table){
+		$this->_con->beginTransaction(); 
+		$q = $this->_querys->get->$table;
+		$res = $this->fetch_res($this->run_q($q));
+		$this->_con->commit();
+		return (isset($res[0])) ? $res[0] : false;
+	}
+
 	private function fetch_res($prep)
 	{
 		$ret = array();
@@ -666,8 +604,7 @@ class tapdo
 
 	/*		Classics helpers		*/
 
-	public function begin()
-	{
+	public function begin() {
 		$this->_con->beginTransaction();
 	}
 
@@ -677,18 +614,15 @@ class tapdo
 		return $prep;
 	}
 
-	public function id()
-	{
+	public function id() {
 		return $this->_con->lastInsertId();
 	}
 	
-	public function commit()
-	{
+	public function commit() {
 		$this->_con->commit();
 	}
 	
-	public function count_videos()
-	{
+	public function count_videos() {
 		$q = "SELECT `id` FROM `video` WHERE 1";
 		$p = $this->run_q($q);
 		return $this->fetch_res($p);

@@ -36,33 +36,13 @@ if (!$log->is_logued()) {
 foreach ($users as $user) {
  	echo "<div id='profil' class='container container-fluid'>";
  	echo "Login: ".$user['ta_login']."<br>";
- 	if ($user['ta_login'] == $profil['ta_login']) {
- 		echo "(C'est vous...)<br>";
- 	}
+ 	if ($user['ta_login'] == $profil['ta_login']) { echo "(C'est vous...)<br>"; 	}
  	echo "mail : ".$user['mail']."<br>";
  	echo "nombre de visites sur l'admin:".$user['nb_visits']."<br>";
  	echo "Dernière connexion: ".$user['date_last_visit']."<br>";
 	echo "Type de compte: ";
-	switch ($user['rights']) {
-		case '0':
-			echo "Full Admin";
-			break;
-		case '1':
-			echo "Admin Classique";
-			break;
-		case '2':
-			echo "Modificateur";
-			break;
-		case '3':
-			echo "Voyeur(useless)";
-			break;
-		default:
-			echo "Bug";
-			break;
-	}
-	if($profil['rights'] == 0){
-		echo "<br><a href='profil.php?id=".$user['id']."'>Modifier le profil</a>";
-	}
+	echo tables::int_to_rank($user['rights']);
+	if($profil['rights'] == 0) { echo "<br><a href='profil.php?id=".$user['id']."'>Modifier le profil</a>"; }
 	echo "</div><hr>";
  }
  echo "</div>";

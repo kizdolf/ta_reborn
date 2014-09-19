@@ -25,9 +25,18 @@ foreach ($styles as $style) {
 	$stylehtml .= "<button value='" .  $style['id'] . "' class='btn btn-default style_choix'>" . $style['name'] . "</button>";
 }
 
-	html_header("Nouveau Post");
 
 ?>
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin | Nouveau post</title>
+	<meta charset="utf-8">
+	<script src="../components/ckeditor/ckeditor.js"></script>
+  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
+	<link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+</head>
 <body>
 	<?php include('menu.php'); ?>
 	<div id="wrapper">
@@ -100,7 +109,7 @@ foreach ($styles as $style) {
 			<input type="checkbox" name="weekly" value="yes" checked> Vidéo de la semaine?<br>
 			<input type="checkbox" name="visiteur" value="yes" > Visiteur?<br>
 		</div>	
-		<div class="alert alert-danger" role="alert">Heu.. Je crois qu'il manque un truc. Faudrais vérifier!</div>
+		<div class="alert alert-danger missing" role="alert">Heu.. Je crois qu'il manque un truc. Faudrais vérifier!</div>
 		<div id="sub_form">
 			<button class="btn btn-lg btn-success valid" type="submit" name="new_post">Add it</button>
 		</div>	

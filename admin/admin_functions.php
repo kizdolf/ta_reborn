@@ -211,11 +211,13 @@ function handler_new_entry($bdd, $post, $files) {
 		}else{
 			$path_vignette = "";
 		}
-		$q = get_one_artiste('id', $id_a);
+		$q = $bdd->get_one_artiste('id', $id_a);
 		$q['path_pics'] = $path;
 		$q['path_vignette'] = $path_vignette;
 		$bdd->update_one('artiste', 'id', $id_a, $q);
 	 	pics_handler($files, $path, $id_a);
+	 	$weekly = ($post['weekly'] == 'yes') ? 1 : 0;
+	 	$category = ($post['visiteur'] == 'yes') ? 1 : 0;
 		$bdd->new_video($post['video_name'], $post['video_desc'], $post['video_url'], $id_a, $post['quartier_id'], $weekly, $category);
 		$message .= "<div class='alert alert-success'><a href='index.php'>Sauvegarde effectuée. Cliquez ici pour actualiser et voir le post apparaitre.</a></div>";
 	}

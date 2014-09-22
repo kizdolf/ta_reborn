@@ -4,7 +4,6 @@
 	angular.module('myApp.services',[])
 
 		.service('getData', ['$http', function($http){
-
 			this.searcha = function(str){
 				return $http.get('API/api.php?get=search&str='+str);
 			};
@@ -62,7 +61,6 @@
 			this.partners = function(){
 				return $http.get('API/api.php?get=partners');
 			}
-
 		}])
 
 		.service('tools',['$http', '$sce', function($http, $sce){

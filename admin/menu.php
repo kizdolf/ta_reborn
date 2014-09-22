@@ -106,7 +106,8 @@ $rights = rights($bdd);
 			$('#links_ready').show();
 			$('#links_ready').html('Génération en cours... <img src="img/miniloader.gif"> ');
 			$.post('ajax.php', {dump: 'all'})
-			.done(function(){
+			.done(function(data){
+				console.log(data);
 				$('#links_ready').html('<a class="btn btn-success" href="dump_data.json">Télécharger le dump en JSON</a>');
 			});
 		});

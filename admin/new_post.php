@@ -46,9 +46,16 @@ foreach ($styles as $style) {
 		<div>
 			<h3>Choisir un quartier</h3>
 			<div class="btn-group">
+			<input type='text' class='input-large' name='search' placeholder='rechercher un quartier' id='s_q'>
+			<input type='submit' value='ok' id='sub_q'>
+			<hr>
+			<button class="btn btn-default btn-xs see_all">Afficher tous</button>
+			<hr>
+			<div class='btn-group change-quartier'>
 			<a class='btn btn-warning' href="new_quartier.php">nouveau</a>
 			<?php echo $html; ?>
 			</div>
+			<hr style="clear:both;">
 			<h3>Choisir un style pour l'artiste</h3>
 			<div class="btn-group">
 				<button class='btn btn-warning new_style_btn'>nouveau</button>

@@ -1,16 +1,13 @@
 <?php 
 
 
-/**
-* Tables de transition bool/int => char/string
+/*
+ Tables de transition bool/int => char/string
 */
+
 class tables
 {
-	static private $_rights = array(
-		0 => "Full Admin"
-		,1 => "Admin Classique"
-		,2 => "Modificateur"
-		,3 => "Voyeur"	);
+	static private $_rights = array("Full Admin", "Admin Classique", "Modificateur", "Voyeur");
 
 	static private $_erros = array(
 		0 => "Rank integer does not exist. Error code : tables0");

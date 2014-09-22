@@ -112,6 +112,10 @@ $(document).ready(function(){
 		});
 	}
 
+	$(document).on('click', '.see_all', function(){
+		$(".quartier_choix").show(0);
+	});
+
 	$('.min-text').click(function(){
 		$(this).css('max-height', '300px');
 		$(this).css('overflow', 'auto');

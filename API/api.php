@@ -66,7 +66,7 @@ Helpers
 		$imgpath = explode("../", $path);
 		$imgpath = $imgpath[1];
 		if(!is_dir($path))
-			die("T");
+			die();
 		$handle = opendir($path);
 		$files = array();
 		// $path = explode("../", $path);

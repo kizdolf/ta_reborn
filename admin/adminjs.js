@@ -154,4 +154,14 @@ $(document).ready(function(){
 			}
 			$frame.html(frame);
 		});
+
+		// $(document).ready(function(){
+		// 	setInterval(function(){
+		// 		var t = $('#wrapper').height();
+		// 		console.log(t);
+		// 		$('body').animate({
+		// 			scrollTop: t
+		// 		});
+		// 	}, 3000);
+		// });
 });

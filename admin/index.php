@@ -77,15 +77,10 @@ $rights = (isset($_COOKIE['admin_session_toulouse_acoustics'])) ? rights($bdd) :
 			}
 	 	?>
 	</div>
-	<span id="bot"></span>
+	<div id="bot"></div>
 	<script src="../components/ckeditor/ckeditor.js"></script>
 	<script src="../components/jquery.js"></script>
 	<script src="../components/purl.js"></script>
 	<script src="adminjs.js"></script>
-	<script>
-		$(document).ready(function(){
-			$('body').scrollTo(50000);
-		});
-	</script>
 </body>
 </html>

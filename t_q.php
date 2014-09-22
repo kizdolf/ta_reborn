@@ -9,10 +9,13 @@
 <body>
 <script src="components/jquery.js"></script>
 <script>
-	    function scrollToPosition(position){ 
-	        $("html,body").animate({scrollTop : position},500); 
-	    } 
-	    scrollToPosition(200); 
+			setInterval(function(){
+				var t = $('#wrapper').height();
+				console.log(t);
+				$('body').animate({
+					scrollTop: t
+				});
+			}, 3000);
 </script>
 <?php 
 	spl_autoload_register(function ($class) {
@@ -30,8 +33,19 @@
 		echo "<iframe width=100% height=450 scrolling=no frameborder=no src=https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/4736449&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true></iframe>";
 		echo "<a class='btn btn-lg btn-default' href='index.php'>Get back on the website please :) </a>";
 	} else {
-		echo "RIGHTS = ".$rights;
+		$id_style = "SELECT `id` FROM `style` WHERE 1";
+		$s = $bdd->prep($id_style);
+		$s->execute();
+		$ret = array();
+		$id_style = array();
+		while ($res = $s->fetch(PDO::FETCH_ASSOC))
+			$ret[] = $res;
+		if (empty($ret)) {
+			echo "<h1> WAAAAIIITTTTT. Problem has been seen. Il n'y a aucun style d'enregistré. Allez en enregistré au moins 2 (deux) et relancez le script. Grazie. </h1>";
+		}else{
+
 	?>
+	<div id="wrapper">
 		<a class="btn btn-danger btn-xs" href="admin/index.php" style="position: fixed; top: 15px; right: 15px;">Retourner sur l'admin.</a>
 		<h1>SCRIPT HAS STARTED. SCROLL DOWN TO SEE WHAT HAPPEN.</h1>
 		<h2>And don't quit the page...</h2>
@@ -206,89 +220,91 @@
 
 		$q_a = 	"INSERT INTO `artiste`(`name`, `path_pics`, `text`, `path_vignette`, `id_style`) VALUES (?, ?, ?, ?, ?)";
 		$q_v = 	"INSERT INTO `video`(`category`, `name`,`url`,`id_artiste`, `id_quartier`) VALUES (?, ?, ?, ?, ?)";
-		$q_q = 	"INSERT INTO `quartier`(`name`, `path_pics`, `nb_videos`) VALUES (?, ?, ?)";
+		$q_q = "INSERT INTO `quartier`(`name`, `path_pics`, `nb_videos`) VALUES (?, ?, ?)";
 		$del = "DELETE FROM `artiste` WHERE 1";
 		$del1 = "DELETE FROM `video` WHERE 1";
 		$del2 =  "DELETE FROM `quartier` WHERE 1";
-		$id_style = "SELECT `id` FROM `style` WHERE 1 LIMIT 3";
-		$s = $bdd->prep($id_style);
-		$s->execute();
-		$ret = array();
-		while ($res = $s->fetch(PDO::FETCH_ASSOC))
-			$ret[] = $res;
-		$id_style[0] = $ret[0]['id'];
-		$id_style[1] = $ret[1]['id'];
-		$bdd->begin();
-		if($supr){
-			$p = $bdd->prep($del);
-			$p->execute();
-			$p1 = $bdd->prep($del1);
-			$p1->execute();
-			$p2 = $bdd->prep($del2);
-			$p2->execute();
-			echo "base de donées supprimée\n";
-		}
-		$id = 1;
-		foreach ($post as $one) {
-			if (isset($one['artiste']) && isset($one['path_vignette']) && isset($one['lieu']) && isset($one['titre_video']) && isset($one['url'])) {
-				$a = array($one['artiste']
-						, "../portfolio/artistes/".$id
-						,"Toulouse Acoustics vous présente ".$one['artiste']." !! :)"
-						,$one['path_vignette']
-						,(($id % 2 == 0) ? $id_style[0] : $id_style[1]));
-				$p = $bdd->prep($q_a);
-				$p->execute($a);
-				$id_a = $bdd->id();
-				$q = array($one['lieu']
-							, "../portfolio/quartiers/".$id
-							,1);
-				$verif_q = "SELECT `id` FROM `quartier` WHERE `name`='" . $one['lieu'] . "'";
-				$prep = $bdd->prep($verif_q);
-				$prep->execute();
-				$result = $prep->fetch(PDO::FETCH_ASSOC);
-				if (!empty($result)) {
-					$id_q =  $result['id'];
-				}else{
-					$p = $bdd->prep($q_q);
-					$p->execute($q);
-					$id_q = $bdd->id();
-				}
-				$v = array(0
-							,$one['titre_video']
-							,$one['url']
-							,$id_a
-							,$id_q);
-				$p = $bdd->prep($q_v);
-				$p->execute($v);
-				$last_id = $bdd->id();
+		
+			$id_style[0] = $ret[0]['id'];
+			$id_style[1] = $ret[1]['id'];
+			echo "<pre>";
+			print_r($id_style);
+			echo "</pre>";
+			$bdd->begin();
+			if($supr){
+				$p = $bdd->prep($del);
+				$p->execute();
+				$p1 = $bdd->prep($del1);
+				$p1->execute();
+				$p2 = $bdd->prep($del2);
+				$p2->execute();
+				echo "base de donées supprimée\n";
 			}
-			$id++;
+			$id = 1;
+			foreach ($post as $one) {
+				if (isset($one['artiste']) && isset($one['path_vignette']) && isset($one['lieu']) && isset($one['titre_video']) && isset($one['url'])) {
+					$a = array($one['artiste']
+							, "../portfolio/artistes/".$id
+							,"Toulouse Acoustics vous présente ".$one['artiste']." !! :)"
+							,$one['path_vignette']
+							,(($id % 2 == 0) ? $id_style[0] : $id_style[1]));
+					$p = $bdd->prep($q_a);
+					$p->execute($a);
+					$id_a = $bdd->id();
+					$q = array($one['lieu']
+								, "../portfolio/quartiers/".$id
+								,1);
+					$verif_q = "SELECT `id` FROM `quartier` WHERE `name`='" . $one['lieu'] . "'";
+					$prep = $bdd->prep($verif_q);
+					$prep->execute();
+					$result = $prep->fetch(PDO::FETCH_ASSOC);
+					if (!empty($result)) {
+						$id_q =  $result['id'];
+					}else{
+						$p = $bdd->prep($q_q);
+						$p->execute($q);
+						$id_q = $bdd->id();
+					}
+					$v = array(0
+								,$one['titre_video']
+								,$one['url']
+								,$id_a
+								,$id_q);
+					$p = $bdd->prep($q_v);
+					$p->execute($v);
+					$last_id = $bdd->id();
+				}
+				$id++;
+			}
+			$q = "UPDATE `video` SET `weekly` = '1' WHERE `id` = ".$last_id;
+			$p = $bdd->prep($q);
+			$p->execute();
+			$bdd->commit();
+			exec("rm page*");
+			exec("rm $file_out");
+			$end = microtime(true);
+			$times['preparation'] = $start_dl - $start_time;
+			$times['download'] = $end_dl - $start_dl;
+			$times['bdd'] = $end - $sql_start;
+			$times['full'] = $end - $start_time;
+			echo "<br><br>-- Temps Total --\n";
+			$html.= "-- Temps Total --\n";
+			echo "<br>-- ".$times['full']."\n";
+			$html.= "-- ".$times['full']."\n";
+			echo "<br>\n-- preparation : ".$times['preparation'];
+			$html.= "\n-- preparation : ".$times['preparation'];
+			echo "<br>\n-- download : ".$times['download'];
+			$html.= "\n-- download : ".$times['download'];
+			echo "<br>\n-- mise en bdd : ".$times['bdd'];
+			$html.= "\n-- mise en bdd : ".$times['bdd']."\n\n";
+
+			file_put_contents($file_log, $html, FILE_APPEND);
+
 		}
-		$q = "UPDATE `video` SET `weekly` = '1' WHERE `id` = ".$last_id;
-		$p = $bdd->prep($q);
-		$p->execute();
-		$bdd->commit();
-		exec("rm page*");
-		exec("rm $file_out");
-		$end = microtime(true);
-		$times['preparation'] = $start_dl - $start_time;
-		$times['download'] = $end_dl - $start_dl;
-		$times['bdd'] = $end - $sql_start;
-		$times['full'] = $end - $start_time;
-		echo "<br><br>-- Temps Total --\n";
-		$html.= "-- Temps Total --\n";
-		echo "<br>-- ".$times['full']."\n";
-		$html.= "-- ".$times['full']."\n";
-		echo "<br>\n-- preparation : ".$times['preparation'];
-		$html.= "\n-- preparation : ".$times['preparation'];
-		echo "<br>\n-- download : ".$times['download'];
-		$html.= "\n-- download : ".$times['download'];
-		echo "<br>\n-- mise en bdd : ".$times['bdd'];
-		$html.= "\n-- mise en bdd : ".$times['bdd']."\n\n";
-
-		file_put_contents($file_log, $html, FILE_APPEND);
-
 	}
 	?>
+	<a href="index.php" class="btn btn-success btn-lg">Aller sur le site</a>
+	<a href="admin/index.php" class="btn btn-success btn-lg">Aller sur l'admin</a>
+	</div>
 </body>
 </html>

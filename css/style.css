@@ -163,7 +163,7 @@ body{
 }
 
 .div_grid{
-	box-shadow: 0px 0px 9px 1px black;
+	box-shadow: 0px 0px 4px 1px rgba(228, 90, 63, 0.5);
 	width: 150px;
 	height: 150px;
 	float: left;
@@ -172,6 +172,11 @@ body{
 	-webkit-transition: all .5s; 
 	-o-transition: all .5s; 
 	transition: all .5s;
+}
+
+.div_grid:hover{
+	padding-left: 5px;
+	box-shadow: 0px 0px 9px 1px black;
 }
 
 .div_grid a{
@@ -221,10 +226,7 @@ body{
 	text-decoration: none;
 }
 
-.div_grid:hover{
-	padding-left: -5px;
-	box-shadow: 0px 0px 4px 1px rgba(228, 90, 63, 0.5);
-}
+
 
 /*Partners*/
 

@@ -1,9 +1,9 @@
 {
 	"init":{
 		"server": "127.0.0.1",
-		"user": "root",
-		"password": "kizdolf65",
-		"dbname": "toulouse_acoustics",
+		"user": "",
+		"password": "",
+		"dbname": "",
 		"port" : "3306"
 	},
 	"querys":{

@@ -27,14 +27,16 @@ if (!$log->is_logued()) {
 	if ($_GET['type'] == "valid_edit") {
 		$get = "get_one_".$_GET['table'];
 		$entry = $bdd->$get('id', $id);
+echo "\n<br> ";
+print_r($entry);
 		if(isset($entry['path_pics'])){
 			if (!is_dir($entry['path_pics']))
 				mkdir($entry['path_pics']);
-			$test = pics_handler($_FILES, $entry['path_pics'], $entry['name']);
+			$test = pics_handler($_FILES, $entry['path_pics'], $entry['id']);
 			if (isset($_FILES['vignette']) && $_FILES['vignette']['name'] != '') {
 				$ext = explode(".", $_FILES['vignette']["name"]);
 				$ext = strtolower($ext[1]);
-				$entry['path_vignette'] = "img/uniques/artiste/".$entry['name'].".".$ext;
+				$entry['path_vignette'] = "img/uniques/artiste/".$entry['id'].".".$ext;
 			}
 		}
 		foreach ($_POST as $key => $value) {

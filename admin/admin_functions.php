@@ -5,8 +5,8 @@ spl_autoload_register(function ($class) {
 //constantes.
 
 $mainDir = __DIR__."/../data";
-$pathpicQ = "../portfolio/quartiers/";
-$pathpicA = "../portfolio/artistes/";
+$pathpicQ = "../img/uniques/quartier/";
+$pathpicA = "../img/uniques/artiste/";
 
 $ext_ok = array("jpg", "png", "gif", "jpeg");
 
@@ -16,21 +16,29 @@ ini_set('max_input_time', 300);
 ini_set('max_execution_time', 300);
 
 function save_file($file, $ext, $dest, $v = null){
+	echo "la";
 	if (!in_array(strtolower($ext), $GLOBALS["ext_ok"]))
 		return false;
-
+	echo "ici";
 	if (!is_dir($dest."/min")) {
 		mkdir($dest."/min");
 	}
+	echo "loin";
 	$img = new SimpleImage();
 	$img->load($file['tmp_name']);
 	if ($v !== null)
 		$img->resize(220, 220);
 	else
 		$img->best_fit(1000, 1000);
+	echo "<br>save?<br>";
+	print_r($dest);
+	echo "<br>";
+	print_r($file);
 	$img->save($dest."/".$file['name']);
+	echo "?? ici! <br>";
 	$img->fit_to_width(320);
 	$img->save($dest."/min/".$file['name']);
+	echo "min";
 	// if (!move_uploaded_file($file['tmp_name'], $dest."/".$file['name']))
 	//  	return false;
 	// chmod($dest."/".$file['name'], 0777);
@@ -53,12 +61,18 @@ function reArrayFiles(&$file_post) {
 }
 
 function pics_handler($files, $path, $name_pic){
+	echo "pics_handler";
 	if (!is_dir($path))
 			mkdir($path);
+	print_r($name_pic);
+	echo "\n<br>";
 	$vign = $files;
 	$files = reArrayFiles($files["pics"]);
 	$i = 1;
+	print_r($files);
 	foreach ($files as $key => $value) {
+		echo "in foreach";
+		print_r($value);
 		if ($value["name"] != '') {
 			$ext = explode(".", $value["name"]);
 			$ext = strtolower($ext[1]);
@@ -72,6 +86,8 @@ function pics_handler($files, $path, $name_pic){
 		}
 	}
 	if (isset($vign['vignette']) && $vign['vignette']['name'] != '') {
+		echo "vign";
+		print_r($vign);
 		$pic = $vign['vignette'];
 		if (strstr($path, 'quartier')) {
 			$path = "../img/uniques/quartier";

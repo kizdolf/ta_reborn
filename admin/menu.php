@@ -56,10 +56,6 @@ $rights = rights($bdd);
   			</ul>
 		</div>
 		<hr>
-		<div>
-			<button class="btn btn-default draft">Notes publiques</button>
-		</div>
-		<hr>
 		<h3>Dev</h3>
 		<div class="dropdown">
 			<a  class='btn btn-default btn-md'  data-toggle="dropdown" href="#">Dev links</a>
@@ -78,22 +74,6 @@ $rights = rights($bdd);
 		</div>
 		<div id="links_ready" style="display:none;" class="alert alert-info"></div>
 		<a href="docTA-Admin.odt">Documentation admin.</a>
-</div>
-<div id="drafts" style="display:none;">
-	<button class="btn btn-default btn-xs add_draft">Ajouter une note</button>
-	<button class="btn btn-warning btn-xs hide_drafts">Fermer (Esc)</button>
-	<div id="form_draft">
-		<form method="post" action="./drafts.php" id="send_draft" style="width:50%; min-width: 350px;">
-			<input type="text" name="draft_name" placeholder="nom">
-			<textarea id="ck_b" name="draft" rows="5" cols="30"></textarea>
-			<script>CKEDITOR.replace( 'ck_b' );</script>
-			<div id="sub_form">
-				<button class="btn btn-success valid" type="submit" name="new_draft">Add it</button>
-			</div>
-		</form>
-	</div>
-	<div id="drafts_list">
-	</div>
 </div>
 <script src="../components/jquery.js"></script>
 <script src="../css/bootstrap/js/bootstrap.min.js"></script>

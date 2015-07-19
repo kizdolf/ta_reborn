@@ -159,9 +159,12 @@ if (!$log->is_logued()) {
 }else{
 
 	$bdd = new tapdo();
-
+	if(!isset($_POST['type']))
+		return true;
+	$type = $_POST['type'];
+	$func_name = 'get_one_'.$type;
 	if (isset($_POST['id'])) {
-		$artiste = $bdd->get_one_artiste("id", $_POST['id']);
+		$artiste = $bdd->$func_name("id", $_POST['id']);
 		$path = $artiste['path_pics'];
 		print_r(json_encode(get_from_dir(opendir($path), $path)));
 	}elseif (isset($_POST['del'])) {

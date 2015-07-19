@@ -9,14 +9,19 @@ $bdd = new tapdo();
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
 }else{
+	echo "1  ";
 	$cookie = unserialize($_COOKIE['admin_session_toulouse_acoustics']);
 	$name = $cookie['user'];
 	$profil = $bdd->get_one_user('ta_login', $name);
 	$rights = $profil['rights'];
+
+	echo "1  ";
 	$partners = $bdd->get_all_partners();
+	print_r($partners);
 	if ($rights > 2) {
 		$message = handler_message(array('no'));
 	}
+	echo "1  ";
 if (isset($_POST['new_partner'])) {
 	if (rights($bdd) >= 2) {
 		header('Location: index.php?no=fail');
@@ -33,7 +38,9 @@ if (isset($_POST['new_partner'])) {
 		header('Location: index.php?del=partenaire&n='.$_GET['name']);
 	}
 }
+	echo "1  ";
 	html_header("Partenaires");
+	echo "1  ";
 
  ?>
  <body>

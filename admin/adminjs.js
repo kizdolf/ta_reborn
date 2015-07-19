@@ -7,7 +7,6 @@ $(document).ready(function(){
 		$('#img_div').html("");
 		$.post('ajax.php', param).done(function(data){
 			$res = jQuery.parseJSON(data);
-			console.log($res);
 		}).then(function(){
 			for (var i = $res.length - 1; i >= 0; i--) {
 				$('#img_div').append("<img src='" + $res[i] + "'><span class='pic_del glyphicon glyphicon-remove'><span>");
@@ -16,9 +15,9 @@ $(document).ready(function(){
 		});
 	}
 
-	if (param.type == "artiste") {
+//	if (param.type == "artiste") {
 		$get_those_pics();		
-	};
+//	};
 
 	$(document).on('click', ".btn_pics", function(){
 		$('.gal_pic').hide(0);

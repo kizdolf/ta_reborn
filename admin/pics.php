@@ -14,8 +14,9 @@ if (!$log->is_logued()) {
 	// pics_handler($files, $path, $name_pic)
 
 	if (isset($_POST['galerie'])) {
+		print_r($_POST);
 		pics_handler($_FILES, $_POST['path'], $_POST['name']);
-		header('Location: index.php?add=images&n='.$_POST['name']);
+//		header('Location: index.php?add=images&n='.$_POST['name']);
 	}
 	elseif (!isset($_GET['show']) || ($_GET['show'] != 'off' && $_GET['show'] != 'team')) {
 		header('Location: index.php?wrong=GET[show] in pics.php');
@@ -30,7 +31,7 @@ if (!$log->is_logued()) {
 	<div id="img_div2" class="gal_pic2"></div>
 	<div id="wrapper">
 		<form method="post" action="pics.php" enctype="multipart/form-data">
-			<input type="hidden" name="path" value="<?php echo "../portfolio/".$_GET['show']; ?>">
+			<input type="hidden" name="path" value="<?php echo "../img/uniques/".$_GET['show']; ?>">
 			<input type="hidden" name="name" value="<?php echo $_GET['show']; ?>">
 			<div id="upload" class="jumbotron">
 				<h3>Photos "<?php echo $_GET['show']; ?>"</h3>
@@ -45,7 +46,7 @@ if (!$log->is_logued()) {
 	<script src="../components/purl.js"></script>
 	<script type="text/javascript">
 		$( document ).ready(function(){
-			var path_rel = "../portfolio/" + $.url().param().show;
+			var path_rel = "../img/uniques/" + $.url().param().show;
 			console.log(path_rel);
 			$.post('ajax.php',{galerie: path_rel}).done(function(data){
 				$res = jQuery.parseJSON(data);

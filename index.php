@@ -9,7 +9,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-	<base href="/public/adminta/">
+	<base href="/ta/">
 	<!-- <base href="/projects/admin/adminta/"> -->
 </head>
 <!-- Piwik -->

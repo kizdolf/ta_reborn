@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
+-- version 4.2.12deb2
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 01, 2014 at 04:22 PM
--- Server version: 5.5.38
--- PHP Version: 5.3.10-1ubuntu3.13
+-- Generation Time: Jul 19, 2015 at 05:31 PM
+-- Server version: 5.6.24-0ubuntu2
+-- PHP Version: 5.6.4-4ubuntu6.2
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `ta`
+-- Database: `toulouse_acoustics`
 --
 
 -- --------------------------------------------------------
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `artiste` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `name` varchar(255) NOT NULL,
@@ -35,20 +35,49 @@ CREATE TABLE IF NOT EXISTS `artiste` (
   `text` text NOT NULL,
   `url` varchar(512) NOT NULL,
   `itw` varchar(512) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `id_style` int(11) NOT NULL,
+  `path_vignette` varchar(512) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `artiste`
 --
 
-INSERT INTO `artiste` (`id`, `date_creation`, `date_update`, `name`, `path_pics`, `text`, `url`, `itw`) VALUES
-(9, '2014-08-27 09:59:59', '2014-09-01 14:01:20', 'Aloe Black', '../portfolio/artistes/Aloe Black', '<p>Official video for Aloe Blacc&#39;s &quot;I Need A Dollar&quot; from the album Good Things (Stones Throw) Director: Kahlil Joseph Photography: Matthew J.Lloyd Video Produced by WHat Matters Most and Funk Factory Films This video also contains a short section with a new track called &quot;So Hard&quot; from the album Good Things</p>\r\n', 'https://fr.wikipedia.org/wiki/Aloe_Blacc', 'https://soundcloud.com/toulouse-acoustics/toulouse-acoustics-present-i-me-mine'),
-(10, '2014-08-27 12:34:35', '2014-08-29 16:05:23', 'Smia', '../portfolio/artistes/Smia', '<p>smia to bacio, a lot.</p>\r\n', 'lol.com', ''),
-(11, '2014-08-27 14:54:15', '2014-08-28 10:04:48', 'test_itw', '../portfolio/artistes/test_itw', 'coucou sounclound!', 'youtube', 'https://soundcloud.com/toulouse-acoustics/toulouse-acoustics-present-i-me-mine'),
-(12, '2014-08-28 14:06:10', '2014-08-29 14:44:16', 'LOCAL ONE', '../portfolio/artistes/LOCAL ONE', '<p>Bla</p>\r\n', 'osef', 'osef aussi'),
-(13, '2014-08-28 16:22:19', '2014-08-29 16:01:12', 'aze', '../portfolio/artistes/aze', '', 'aze', 'aze'),
-(14, '2014-08-29 16:24:05', '0000-00-00 00:00:00', 'looooveee', '../portfolio/artistes/looooveee', '<p>tic tac</p>\r\n', 'blabla.vom', 'https://soundcloud.com/toulouse-acoustics/toulouse-acoustics-present-i-me-mine');
+INSERT INTO `artiste` (`id`, `date_creation`, `date_update`, `name`, `path_pics`, `text`, `url`, `itw`, `id_style`, `path_vignette`) VALUES
+(1, '2015-07-19 13:08:07', '2015-07-19 14:33:46', 'artiste1', '../img/uniques/artiste/1', '<p>coucou</p>\r\n', 'url2015', 'https://soundcloud.com/lowtemp-music/07-gramatik-swucca-chust', 1, 'img/uniques/artiste/1.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `draft`
+--
+
+CREATE TABLE IF NOT EXISTS `draft` (
+  `user` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `text` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `partner`
+--
+
+CREATE TABLE IF NOT EXISTS `partner` (
+`id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `desc` text NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `path_logo` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `partner`
+--
+
+INSERT INTO `partner` (`id`, `name`, `desc`, `url`, `path_logo`) VALUES
+(1, 'test', '<p>coucou</p>\r\n', 'https://www.facebook.com/', 'img/uniques/logo/test.jpg');
 
 -- --------------------------------------------------------
 
@@ -57,7 +86,7 @@ INSERT INTO `artiste` (`id`, `date_creation`, `date_update`, `name`, `path_pics`
 --
 
 CREATE TABLE IF NOT EXISTS `quartier` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `name` varchar(255) NOT NULL,
@@ -65,21 +94,34 @@ CREATE TABLE IF NOT EXISTS `quartier` (
   `text` text NOT NULL,
   `nb_videos` int(11) NOT NULL DEFAULT '0',
   `url` varchar(512) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `path_vignette` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quartier`
 --
 
-INSERT INTO `quartier` (`id`, `date_creation`, `date_update`, `name`, `path_pics`, `text`, `nb_videos`, `url`) VALUES
-(4, '2014-08-27 09:58:17', '0000-00-00 00:00:00', 'Capitole', '../portfolio/quartiers/Capitole', '\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 3, 'https://docs.angularjs.org/api/ng/function/angular.forEach'),
-(5, '2014-08-27 12:43:14', '2014-08-28 09:45:06', 'Jean Jaures', '../portfolio/quartiers/Jean Jaures', 'jean Jeaures cey bo ON SE CALME LAAAA', 1, 'https://docs.angularjs.org/api/ng/function/angular.forEach'),
-(7, '2014-08-28 15:28:40', '0000-00-00 00:00:00', 'for yours eyes', '../portfolio/quartiers/for yours eyes', '<p>easy hein?</p>\r\n', 2, 'https://docs.angularjs.org/api/ng/function/angular.forEach'),
-(8, '2014-08-29 14:31:42', '0000-00-00 00:00:00', 'quartier sans vidÃ©os', '../portfolio/quartiers/quartier sans vidÃ©os', '<p>y&#39;a rien &agrave; voir circulez.</p>\r\n', 0, ''),
-(9, '2014-08-29 15:47:17', '0000-00-00 00:00:00', 'des photos!', '../portfolio/quartiers/des photos!', '<p>tof tof tof</p>\r\n', 0, 'https://docs.angularjs.org/api/ng/function/angular.forEach'),
-(10, '2014-08-29 16:25:29', '0000-00-00 00:00:00', 'say what?', '../portfolio/quartiers/say what?', '<p>test</p>\r\n', 0, 'huhu'),
-(11, '2014-08-29 17:31:18', '0000-00-00 00:00:00', 'Bisous', '../portfolio/quartiers/Bisous', '<p>lol</p>\r\n', 0, 'non');
+INSERT INTO `quartier` (`id`, `date_creation`, `date_update`, `name`, `path_pics`, `text`, `nb_videos`, `url`, `path_vignette`) VALUES
+(2, '2015-07-19 13:06:24', '2015-07-19 14:49:19', 'lieu 2015!', '../img/uniques/quartier/2', '<p>coucou</p>\r\n', 1, 'aze', 'img/uniques/quartier/2.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `style`
+--
+
+CREATE TABLE IF NOT EXISTS `style` (
+`id` int(11) NOT NULL,
+  `name` varchar(248) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `style`
+--
+
+INSERT INTO `style` (`id`, `name`) VALUES
+(2, '2015'),
+(1, '2016');
 
 -- --------------------------------------------------------
 
@@ -88,20 +130,19 @@ INSERT INTO `quartier` (`id`, `date_creation`, `date_update`, `name`, `path_pics
 --
 
 CREATE TABLE IF NOT EXISTS `text` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
   `date_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `text` longtext NOT NULL,
-  `name_admin` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `name_admin` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `text`
 --
 
 INSERT INTO `text` (`id`, `name`, `date_update`, `text`, `name_admin`) VALUES
-(3, 'about', '2014-08-29 12:58:03', 'about', 'roo'),
+(3, 'about', '2015-07-19 14:13:49', '<p>Ceci et le A propos.&nbsp;</p>\r\n\r\n<p>Et pi c&#39;est tout.&nbsp;</p>\r\n\r\n<p>faut &eacute;crire un truc bien par l&agrave;!</p>\r\n', ''),
 (4, 'short_about', '2014-08-29 12:58:33', 'short about', 'root'),
 (5, 'team', '2014-08-29 12:59:01', 'ici la team!', 'root'),
 (6, 'contact', '2014-08-29 12:59:52', 'contact text', 'root');
@@ -113,7 +154,7 @@ INSERT INTO `text` (`id`, `name`, `date_update`, `text`, `name_admin`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `date_last_visit` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -121,19 +162,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   `ta_password` text NOT NULL,
   `mail` varchar(255) NOT NULL,
   `rights` int(11) NOT NULL,
-  `nb_visits` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `nb_visits` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `date_creation`, `date_update`, `date_last_visit`, `ta_login`, `ta_password`, `mail`, `rights`, `nb_visits`) VALUES
-(1, '2014-08-28 07:49:04', '2014-08-29 10:18:03', '2014-09-01 08:41:33', 'smio', 'b9be3c1558ec0a007212388ff055bf4a958769279832dedee15c04f8c8e514f33bda053348f69887b9304191aa1d914533c23ffa581c7720582c27d0d063df73', 'kiz', 0, 33),
+(1, '2014-08-28 07:49:04', '2014-08-29 10:18:03', '2015-07-19 11:49:36', 'smio', 'b9be3c1558ec0a007212388ff055bf4a958769279832dedee15c04f8c8e514f33bda053348f69887b9304191aa1d914533c23ffa581c7720582c27d0d063df73', 'kiz', 0, 35),
 (2, '2014-08-29 10:06:26', '2014-08-29 12:35:59', '0000-00-00 00:00:00', 're', '344907e89b981caf221d05f597eb57a6af408f15f4dd7895bbd1b96a2938ec24a7dcf23acb94ece0b6d7b0640358bc56bdb448194b9305311aff038a834a079f', 'bof', 1, 0),
 (3, '2014-08-29 10:11:29', '2014-08-29 15:52:36', '2014-08-29 17:34:19', 'test2', '344907e89b981caf221d05f597eb57a6af408f15f4dd7895bbd1b96a2938ec24a7dcf23acb94ece0b6d7b0640358bc56bdb448194b9305311aff038a834a079f', 'nonon', 3, 9),
-(4, '2014-08-29 10:13:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'rofl', '344907e89b981caf221d05f597eb57a6af408f15f4dd7895bbd1b96a2938ec24a7dcf23acb94ece0b6d7b0640358bc56bdb448194b9305311aff038a834a079f', 'coucou', 0, 0);
+(4, '2014-08-29 10:13:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'rofl', '344907e89b981caf221d05f597eb57a6af408f15f4dd7895bbd1b96a2938ec24a7dcf23acb94ece0b6d7b0640358bc56bdb448194b9305311aff038a834a079f', 'coucou', 0, 0),
+(5, '2015-07-19 13:12:12', '0000-00-00 00:00:00', '2015-07-19 13:12:26', 'test', '344907e89b981caf221d05f597eb57a6af408f15f4dd7895bbd1b96a2938ec24a7dcf23acb94ece0b6d7b0640358bc56bdb448194b9305311aff038a834a079f', 'osef', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -142,7 +183,7 @@ INSERT INTO `user` (`id`, `date_creation`, `date_update`, `date_last_visit`, `ta
 --
 
 CREATE TABLE IF NOT EXISTS `video` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `category` int(11) NOT NULL,
@@ -151,22 +192,101 @@ CREATE TABLE IF NOT EXISTS `video` (
   `id_artiste` int(11) NOT NULL,
   `id_quartier` int(11) NOT NULL,
   `text` text NOT NULL,
-  `weekly` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+  `weekly` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `video`
 --
 
 INSERT INTO `video` (`id`, `date_creation`, `date_update`, `category`, `name`, `url`, `id_artiste`, `id_quartier`, `text`, `weekly`) VALUES
-(21, '2014-08-27 09:59:59', '2014-09-01 08:41:41', 1, 'I Need A Dollar', 'https://www.youtube.com/watch?v=iR6oYX1D-0w', 9, 4, '<p>Aloe Blacc est un chanteur soul, rappeur et musicien am&eacute;ricain. Son premier album solo, intitul&eacute; Shine Through a &eacute;t&eacute; &eacute;dit&eacute; par Stones Throw Records en 2006, et son second album Good Things en 2010. Il a commenc&eacute; sa carri&egrave;re en 1995 dans le groupe Emanon, mais les m&eacute;dias s&#39;int&eacute;ressent &agrave; lui &agrave; partir de la chanson I Need a Dollar.</p>\r\n', 1),
-(22, '2014-08-27 12:34:35', '2014-08-28 13:23:32', 0, 'nomVideoTESTUPDATE', 'https://www.youtube.com/watch?v=iR6oYX1D-0w', 10, 4, '<p>ya plus rien cette semaine!!</p>\r\n', 0),
-(23, '2014-08-27 14:54:15', '2014-08-29 07:58:17', 0, 'weekly is this one now :) ', 'https://www.youtube.com/watch?v=ew_cIyRP0UI&list=PL-THY7w0kcYTeVb_BF3arlFlu5dKn_HNe&shuffle=364', 11, 5, '<p>aze</p>\r\n', 0),
-(24, '2014-08-28 14:06:10', '2014-08-28 14:34:35', 1, 'LOCAL VID', 'https://www.youtube.com/watch?v=iR6oYX1D-0w', 12, 4, '<p>bla</p>\r\n', 0),
-(25, '2014-08-28 16:22:19', '2014-08-29 15:55:16', 0, 'aze', 'http://vimeo.com/103959209', 13, 7, '<p>avec du texte c&#39;est &ugrave;ieux...</p>\r\n', 0),
-(26, '2014-08-29 16:24:05', '0000-00-00 00:00:00', 1, 'puttaaaaiiinnn', 'https://www.youtube.com/watch?v=iR6oYX1D-0w', 14, 7, '<p>loul</p>\r\n', 0);
+(1, '2015-07-19 13:08:07', '2015-07-19 14:33:06', 0, 'video 2015', 'https://www.youtube.com/watch?v=2J96pMBGYSQ', 1, 2, '<p>coucou</p>\r\n\r\n<p>Viiid&eacute;&eacute;&eacute;&eacute;&eacute;ooooooooo</p>\r\n', 1);
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `artiste`
+--
+ALTER TABLE `artiste`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `partner`
+--
+ALTER TABLE `partner`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `quartier`
+--
+ALTER TABLE `quartier`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `style`
+--
+ALTER TABLE `style`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `text`
+--
+ALTER TABLE `text`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `video`
+--
+ALTER TABLE `video`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `artiste`
+--
+ALTER TABLE `artiste`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `partner`
+--
+ALTER TABLE `partner`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `quartier`
+--
+ALTER TABLE `quartier`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `style`
+--
+ALTER TABLE `style`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `text`
+--
+ALTER TABLE `text`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `video`
+--
+ALTER TABLE `video`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

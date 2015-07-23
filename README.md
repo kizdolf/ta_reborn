@@ -8,6 +8,14 @@ Le site se découpe en trois parties:
 * Le back-end (l'admin du site, pour publier de nouvelles vidéos)
 * L'API, qui fait le lien entre le front-end et la base de donées.
 
+-------
+
+###__technologies à maitrisier pour reprendre le site sans trop de problèmes:__
+* AngularJS
+* Bootstrap
+* PHP (POO et !POO)
+* Javascript
+* Mysql (PDO)
 
 -------
 ### Technologies utilisés

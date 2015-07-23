@@ -60,3 +60,13 @@ sur des requètes GET (nope, c'est pas du REST) et ce n'est finalement qu'un gro
 __Fichiers :__
  * api.php : Point d'entrée de l'API, c'est là que doivent arriver les requètes.
  * contact.php : Vérifie en temps réel l'état d'envoi de message via l'onglet 'contact'. Envoie le mail quand c'est bon.
+ 
+-------
+### Base de donées
+
+La base de données est sous MySQL, l'ensemble des tables nécéssaire étant présente dans le fichier `ta.sql` présent sur le repos. Y sont inclus par défaut des utilisateurs, (login: test, mdp: test) et un post. Il suffit d'envoyer ce fichier au serveur mysql pour préparer l'ensemble de la base de donées. La configuration Mysql se fait dans le fichier `admin/conf/bdd_conf.json` , la partie __"init"__ contenant les champs à remplir.
+
+
+> Le fichier __t_q.php__ à la racine du projet permet normalement de récupérer directement depuis viméo toutes les vidéos publiés, d'en extraire les infos importantes et de créer les posts relatif. En gros il est supposé tout faire tout seul. Mais après plusieurs modifications cela ne marche pas réelement comme prévu. __Se serait donc à refaire__. Viméo fourni maintenant une API pour récupérer directement toute une chaine : [Lien API viméo](https://developer.vimeo.com/api/start).
+
+

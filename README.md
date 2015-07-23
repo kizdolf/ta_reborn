@@ -100,3 +100,9 @@ Sur l'admin il n'est pas possible pour le moment de programer une publication su
 Sur le Front-end il y à, je pense, tout le style à revoir. Chaque vue étant bien définie et le layout principal plutôt simple cela ne devrait pas être trop compliqué pour qui s'y connait un minimum. 
 
 Ensuite le Captcha comme mentionné plus haut.
+
+Finalement les résaux sociaux ne sont pas inclus de la meilleure manières, on en a jamais trop parler donc je ne sais pas ce qu'il y a à faire mais c'est une question à se poser.
+
+On est pas mal je pense, pour toute question : jules.buret@gmail.com
+
+__Bisettes!__

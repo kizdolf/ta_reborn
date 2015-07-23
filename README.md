@@ -7,6 +7,8 @@ Le site se découpe en trois parties:
 * Le front-end (le site visible par les utilisateurs)
 * Le back-end (l'admin du site, pour publier de nouvelles vidéos)
 * L'API, qui fait le lien entre le front-end et la base de donées.
+
+
 -------
 ### Technologies utilisés
 #### 1) __Front-end__

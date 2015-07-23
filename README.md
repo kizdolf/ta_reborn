@@ -12,6 +12,7 @@ Le site se découpe en trois parties:
 #### 1) __Front-end__
 > Le front-end se base sur du Javascript via le framework [AngularJS](http://angularjs.org) en version 1.2. 
 Il y a également du [jQuery](https://jquery.com/) pour palier certaines difficutés renconrtés avec Angular.
+Côté dépendance Bootstrap est également massivement utilisé pour gérer le CSS.
 
 __Fichiers :__ 
 * index.php : main file, contient le layout du site ainsi que les inclusions de script.
@@ -64,7 +65,7 @@ __Fichiers :__
 -------
 ### Base de donées
 
-La base de données est sous MySQL, l'ensemble des tables nécéssaire étant présente dans le fichier `ta.sql` présent sur le repos. Y sont inclus par défaut des utilisateurs, (login: test, mdp: test) et un post. Il suffit d'envoyer ce fichier au serveur mysql pour préparer l'ensemble de la base de donées. La configuration Mysql se fait dans le fichier `admin/conf/bdd_conf.json` , la partie __"init"__ contenant les champs à remplir.
+La base de données est sous MySQL, l'ensemble des tables nécéssaire étant présente dans le fichier `ta.sql` présent sur le repos. Y sont inclus par défaut des utilisateurs et un post. Il suffit d'envoyer ce fichier au serveur mysql pour préparer l'ensemble de la base de donées. La configuration Mysql se fait dans le fichier `admin/conf/bdd_conf.json` , la partie __"init"__ contenant les champs à remplir.
 
 
 > Le fichier __t_q.php__ à la racine du projet permet normalement de récupérer directement depuis viméo toutes les vidéos publiés, d'en extraire les infos importantes et de créer les posts relatif. En gros il est supposé tout faire tout seul. Mais après plusieurs modifications cela ne marche pas réelement comme prévu. __Se serait donc à refaire__. Viméo fourni maintenant une API pour récupérer directement toute une chaine : [Lien API viméo](https://developer.vimeo.com/api/start).
@@ -72,14 +73,28 @@ La base de données est sous MySQL, l'ensemble des tables nécéssaire étant pr
 -------
 ## Ce qui ne vas pas
 
-Normalement du côté de l'admin tout devrait bien se passer, j'ai pas vu de bugs, les fonctionalités marchent et il y a une documentation spécifique incluse. Sur mobile cela devrait pas être très joli mais c'est pas bien grave hein.
+####__Côté Back-end__
+Je viens de voir à l'instant un soucis d'éditeur de texte, l'admin utilise CKeditor pour pouvoir écrire/importer
+des textes mais il y a apparemment une erreur, un fichier non trouvé. J'y jetterais un coup d'oeuil.
+C'est tout pour l'admin, mais c'est plutôt sérieux comme problème..
 
 ####__Côté Front-end__
 Sur le front-end plusieurs problèmes:
+
 1) La page de contact se base sur ReCaptcha pour vérifier l'humanité de la personne voulant envoyer un message. ReCaptcha à évoluer depuis le temps, l'api à changée, du coup il vas falloir reprendre ça et regarder ce qui ne vas pas (ou enlever le captcha directement, mais on rique alors de voir pas mal de spam arrivé sur la boite de récéption...)
 
 2) __Le design.__
-Bon là j'aime pas trop ce que j'ai fait. Déjà c'est pas responsive, du coup sur mobile le site sort mal, c'est navigable mais c'est très loin des standards du web d'aujourd'hui. J'y connais pas grand chose en responsive ni en design ni en css, c'est vraiment pas ma tasse de thé, du coup là y'a un travail de fond à faire je pense,avec quelqu'un qui s'y connait plus que moi en intégration...
+Bon là j'aime pas trop ce que j'ai fait. Déjà c'est pas responsive, du coup sur mobile le site sort mal, c'est navigable mais c'est très loin des standards du web d'aujourd'hui. 
+
+J'y connais pas grand chose en responsive ni en design ni en css, c'est vraiment pas ma tasse de thé, du coup là y'a un travail de fond à faire je pense,avec quelqu'un qui s'y connait plus que moi en intégration...
 
 > Sinon ça marche plutôt bien. J'ai des erreurs javascript qui pètent dans la console mais elles sont liés à la version d'Angular utilisé, qui ne parse pas bien certaines chaînes, des images aparaissent comme 'Not found' sans qu'on est demandé à voir une image. en vrai ça marche bien.
 
+
+## A faire.
+
+Sur l'admin il n'est pas possible pour le moment de programer une publication sur une date donnée. C'est donc à mettre en place, l'uttilisation d'une date > now() en bdd avec un contrôle sur la date du jour pour la récupération des vidéos devrait faire le taff merveilleusement.
+
+Sur le Front-end il y à, je pense, tout le style à revoir. Chaque vue étant bien définie et le layout principal plutôt simple cela ne devrait pas être trop compliqué pour qui s'y connait un minimum. 
+
+Ensuite le Captcha comme mentionné plus haut.

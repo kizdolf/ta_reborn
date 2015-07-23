@@ -69,4 +69,17 @@ La base de données est sous MySQL, l'ensemble des tables nécéssaire étant pr
 
 > Le fichier __t_q.php__ à la racine du projet permet normalement de récupérer directement depuis viméo toutes les vidéos publiés, d'en extraire les infos importantes et de créer les posts relatif. En gros il est supposé tout faire tout seul. Mais après plusieurs modifications cela ne marche pas réelement comme prévu. __Se serait donc à refaire__. Viméo fourni maintenant une API pour récupérer directement toute une chaine : [Lien API viméo](https://developer.vimeo.com/api/start).
 
+-------
+## Ce qui ne vas pas
+
+Normalement du côté de l'admin tout devrait bien se passer, j'ai pas vu de bugs, les fonctionalités marchent et il y a une documentation spécifique incluse. Sur mobile cela devrait pas être très joli mais c'est pas bien grave hein.
+
+####__Côté Front-end__
+Sur le front-end plusieurs problèmes:
+1) La page de contact se base sur ReCaptcha pour vérifier l'humanité de la personne voulant envoyer un message. ReCaptcha à évoluer depuis le temps, l'api à changée, du coup il vas falloir reprendre ça et regarder ce qui ne vas pas (ou enlever le captcha directement, mais on rique alors de voir pas mal de spam arrivé sur la boite de récéption...)
+
+2) __Le design.__
+Bon là j'aime pas trop ce que j'ai fait. Déjà c'est pas responsive, du coup sur mobile le site sort mal, c'est navigable mais c'est très loin des standards du web d'aujourd'hui. J'y connais pas grand chose en responsive ni en design ni en css, c'est vraiment pas ma tasse de thé, du coup là y'a un travail de fond à faire je pense,avec quelqu'un qui s'y connait plus que moi en intégration...
+
+> Sinon ça marche plutôt bien. J'ai des erreurs javascript qui pètent dans la console mais elles sont liés à la version d'Angular utilisé, qui ne parse pas bien certaines chaînes, des images aparaissent comme 'Not found' sans qu'on est demandé à voir une image. en vrai ça marche bien.
 

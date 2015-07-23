@@ -1,7 +1,7 @@
 <?php 
 require(__DIR__."/../components/mailer/PHPMailerAutoload.php");
 $addr = "toulouse.acoustics@gmail.com";
-$addr = "jules.buret@gmail.com";
+//$addr = "jules.buret@gmail.com";
 if (!isset($_POST['mail']) || !isset($_POST['subject']) || !isset($_POST['txt']) 
 	|| empty($_POST['mail']) || empty($_POST['subject']) || empty($_POST['txt']) ) {
         	$data =  'Informations manquantes.';
